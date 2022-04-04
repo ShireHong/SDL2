@@ -1,0 +1,3 @@
+C:\cmake\bin\cmake.exe -E remove -f CMakeFiles\event.dir/objects.a
+C:\MinGW\bin\ar.exe cr CMakeFiles\event.dir/objects.a @CMakeFiles\event.dir\objects1.rsp
+C:\MinGW\bin\g++.exe  -Wall -Wextra -pedantic -std=c++11   -Wl,--whole-archive CMakeFiles\event.dir/objects.a -Wl,--no-whole-archive  -o event.exe -Wl,--out-implib,libevent.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\event.dir\linklibs.rsp

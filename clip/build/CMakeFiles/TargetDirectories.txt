@@ -1,0 +1,7 @@
+D:/git_hub/SDL2/clip/build/CMakeFiles/clip.dir
+D:/git_hub/SDL2/clip/build/CMakeFiles/install/local.dir
+D:/git_hub/SDL2/clip/build/CMakeFiles/install.dir
+D:/git_hub/SDL2/clip/build/CMakeFiles/edit_cache.dir
+D:/git_hub/SDL2/clip/build/CMakeFiles/rebuild_cache.dir
+D:/git_hub/SDL2/clip/build/CMakeFiles/list_install_components.dir
+D:/git_hub/SDL2/clip/build/CMakeFiles/install/strip.dir
