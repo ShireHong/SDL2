@@ -1,0 +1,1 @@
+这个demo主要是练习c++的封装，使用类来封装windows，并且使用unique_ptr智能指针。

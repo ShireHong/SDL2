@@ -1,0 +1,3 @@
+C:\cmake\bin\cmake.exe -E remove -f CMakeFiles\mixer.dir/objects.a
+C:\MinGW\bin\ar.exe cr CMakeFiles\mixer.dir/objects.a @CMakeFiles\mixer.dir\objects1.rsp
+C:\MinGW\bin\g++.exe  -Wall -Wextra -pedantic -std=c++11   -Wl,--whole-archive CMakeFiles\mixer.dir/objects.a -Wl,--no-whole-archive  -o mixer.exe -Wl,--out-implib,libmixer.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\mixer.dir\linklibs.rsp

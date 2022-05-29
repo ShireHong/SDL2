@@ -1,0 +1,7 @@
+D:/git_hub/SDL2/mixer/build/CMakeFiles/mixer.dir
+D:/git_hub/SDL2/mixer/build/CMakeFiles/install/local.dir
+D:/git_hub/SDL2/mixer/build/CMakeFiles/install.dir
+D:/git_hub/SDL2/mixer/build/CMakeFiles/edit_cache.dir
+D:/git_hub/SDL2/mixer/build/CMakeFiles/rebuild_cache.dir
+D:/git_hub/SDL2/mixer/build/CMakeFiles/list_install_components.dir
+D:/git_hub/SDL2/mixer/build/CMakeFiles/install/strip.dir

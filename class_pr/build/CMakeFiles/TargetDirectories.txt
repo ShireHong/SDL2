@@ -1,0 +1,7 @@
+D:/git_hub/SDL2/class_pr/build/CMakeFiles/list_install_components.dir
+D:/git_hub/SDL2/class_pr/build/CMakeFiles/class_pr.dir
+D:/git_hub/SDL2/class_pr/build/CMakeFiles/install/local.dir
+D:/git_hub/SDL2/class_pr/build/CMakeFiles/install.dir
+D:/git_hub/SDL2/class_pr/build/CMakeFiles/edit_cache.dir
+D:/git_hub/SDL2/class_pr/build/CMakeFiles/rebuild_cache.dir
+D:/git_hub/SDL2/class_pr/build/CMakeFiles/install/strip.dir
