@@ -1,0 +1,7 @@
+D:/git_hub/SDL2/libtmx/build/CMakeFiles/rebuild_cache.dir
+D:/git_hub/SDL2/libtmx/build/CMakeFiles/libtmx.dir
+D:/git_hub/SDL2/libtmx/build/CMakeFiles/install/local.dir
+D:/git_hub/SDL2/libtmx/build/CMakeFiles/install.dir
+D:/git_hub/SDL2/libtmx/build/CMakeFiles/edit_cache.dir
+D:/git_hub/SDL2/libtmx/build/CMakeFiles/list_install_components.dir
+D:/git_hub/SDL2/libtmx/build/CMakeFiles/install/strip.dir

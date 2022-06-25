@@ -1,0 +1,19 @@
+Determining if the include file pthread.h exists failed with the following output:
+Change Dir: D:/git_hub/SDL2/libtmx/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/MinGW/bin/mingw32-make.exe cmTC_fa4cb/fast && C:/MinGW/bin/mingw32-make.exe -f CMakeFiles\cmTC_fa4cb.dir\build.make CMakeFiles/cmTC_fa4cb.dir/build
+mingw32-make.exe[1]: Entering directory 'D:/git_hub/SDL2/libtmx/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_fa4cb.dir/CheckIncludeFile.c.obj
+C:\MinGW\bin\gcc.exe    -o CMakeFiles\cmTC_fa4cb.dir\CheckIncludeFile.c.obj   -c D:\git_hub\SDL2\libtmx\build\CMakeFiles\CMakeTmp\CheckIncludeFile.c
+D:\git_hub\SDL2\libtmx\build\CMakeFiles\CMakeTmp\CheckIncludeFile.c:1:21: fatal error: pthread.h: No such file or directory
+ #include <pthread.h>
+                     ^
+compilation terminated.
+CMakeFiles\cmTC_fa4cb.dir\build.make:64: recipe for target 'CMakeFiles/cmTC_fa4cb.dir/CheckIncludeFile.c.obj' failed
+mingw32-make.exe[1]: *** [CMakeFiles/cmTC_fa4cb.dir/CheckIncludeFile.c.obj] Error 1
+mingw32-make.exe[1]: Leaving directory 'D:/git_hub/SDL2/libtmx/build/CMakeFiles/CMakeTmp'
+Makefile:120: recipe for target 'cmTC_fa4cb/fast' failed
+mingw32-make.exe: *** [cmTC_fa4cb/fast] Error 2
+
+
+
