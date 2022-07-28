@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="72" height="72" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="3">
+ <tileset firstgid="1" source="tile.tsx"/>
+ <imagelayer id="3" name="bk">
+  <image source="48-1.jpg" width="1152" height="1152"/>
+ </imagelayer>
+ <layer id="4" name="bottom" width="72" height="72" opacity="0.98">
+  <properties>
+   <property name="colli" type="int" value="20"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzt08EOwzAIA9BO+5v9v9Tfm3bdgaTBYEC21FsTzFN7v6/rHvSgw96nuhF7l+pG7D06GE11Qoe9T3Uj9i7Vjdh7yEdGVZ9TgyijStae72P3vdM+bJtdn5OzqC6VbTzn5bM+/2Q/tHWUDdJ3Z8bT95k+6O8PmW422T6nHRn/FcvH0zXzu2H7ILrv7tHZ55fI/ln/bnaquVQ08iTSZ4JRtM8Epyyjrk6ZPjKa6cTwkdEsI5aPjOJ8Pi/c7rvpZsSKjNaR0TryWaebj2fO6Vn5YM7KRz4RfeQjH8+dFXyq3cOwydgLdY987HsYNv99nnb23Pl0lnzsWQwbb+fMWRVdVp0zZ1W1sTpnzpKPPYvlg5oZfQ/LSD5nfardwzLyzI3o7PGJMJrmgzaa6IM0muqDMprsgzCa7oP81ypEPnYifCYZRflMMZKPHfnYifSZYCQfO9E+3Y3kY0c+duRj5wt9cQsv
+  </data>
+ </layer>
+ <objectgroup id="5" name="obj">
+  <object id="1" name="guanyu" x="368" y="560" width="16" height="16" rotation="1.02915"/>
+ </objectgroup>
+</map>

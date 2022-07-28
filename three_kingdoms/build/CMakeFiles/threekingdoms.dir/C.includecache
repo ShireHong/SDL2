@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/tmx.h
+stddef.h
+-
+stdint.h
+-
+
+../include/tmx_utils.h
+tmx.h
+../include/tmx.h
+
+D:/git_hub/SDL2/three_kingdoms/src/tmx_utils.c
+stdlib.h
+-
+stdio.h
+-
+string.h
+-
+ctype.h
+-
+tmx_utils.h
+D:/git_hub/SDL2/three_kingdoms/src/tmx_utils.h
+zlib.h
+-
+
