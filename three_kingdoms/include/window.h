@@ -9,11 +9,8 @@
 #include <SDL_ttf.h>
 #include <glm/glm.hpp>
 #include <tmx.h>
-<<<<<<< HEAD
 #include "timer.h"
 #include "rect.h"
-=======
->>>>>>> 96f14378fc7d1e52705c499877fd97229aaff2f0
 
 /* window class*/
 class Window
@@ -43,19 +40,12 @@ public:
 	static void draw_image_layer(tmx_image *image);
 
 	static void draw_all_layers(tmx_map *map, tmx_layer *layers);
-<<<<<<< HEAD
 
 	static void DrawTexture(SDL_Texture *tex, const Rectf &dstRect, Recti *clip = NULL, float angle = 0.0, 
         					Vector2f pivot = Vector2f(0, 0), SDL_RendererFlip flip = SDL_FLIP_NONE);
 
 	static void DrawTexture_ex(SDL_Texture *tex, SDL_Rect *dstRect, SDL_Rect *clip,
                     float angle = 0.0, const SDL_Point *center = NULL, SDL_RendererFlip flip = SDL_FLIP_NONE);
-=======
-#if 1
-	static void DrawTexture(SDL_Texture *tex, const SDL_Rect &dstRect, const SDL_Rect *clip = NULL, double angle = 0.0, 
-        SDL_Point *point = NULL, SDL_RendererFlip flip = SDL_FLIP_NONE);
-#endif
->>>>>>> 96f14378fc7d1e52705c499877fd97229aaff2f0
 	/*static void Draw(Image *image, const Rectf &dstRect, Recti *clip = NULL,
 	    float angle = 0.0, Vector2f pivot = Vector2f(0, 0), int flip = SDL_FLIP_NONE);
 	*/
@@ -64,34 +54,22 @@ public:
     static SDL_Texture* RenderText(std::string message, std::string fontFile, SDL_Color color, int fontSize);
   
     static SDL_Texture* SurfaceToTexture(SDL_Surface *surf);
-<<<<<<< HEAD
 
 	static Recti Box();
     
     static void ShowAvgFps(bool log);
-=======
->>>>>>> 96f14378fc7d1e52705c499877fd97229aaff2f0
     
     static void Clear();
     
     static void Present();
 private:
 	static std::unique_ptr<SDL_Window, void (*)(SDL_Window*)> mWindow;
-<<<<<<< HEAD
 	static std::unique_ptr<SDL_Renderer, void(*)(SDL_Renderer*)> mRenderer;
 	static int ScrWidth;
 	static int ScrHeight;
 	static Timer mTimer;
     static int mFrame;
     static Recti mBox;
-=======
-
-	static std::unique_ptr<SDL_Renderer, void(*)(SDL_Renderer*)> mRenderer;
-
-	static int ScrWidth;
-
-	static int ScrHeight;
->>>>>>> 96f14378fc7d1e52705c499877fd97229aaff2f0
 };
 
 #endif

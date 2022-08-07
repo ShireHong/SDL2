@@ -3,11 +3,7 @@
 
 #include <string>
 #include <memory>
-<<<<<<< HEAD
 #include "camera.h"
-=======
-
->>>>>>> 96f14378fc7d1e52705c499877fd97229aaff2f0
 ///Base class for states
 /**
 *  The base class for our state machine, provides functions
@@ -54,11 +50,8 @@ protected:
 	virtual void Init();
 	///Free the memory used by the state
 	virtual void Free();
-<<<<<<< HEAD
 
 	std::shared_ptr<Camera> mCamera;
-=======
->>>>>>> 96f14378fc7d1e52705c499877fd97229aaff2f0
 	std::string mName;
 	//Should this be atomic?
 	bool mExit;
