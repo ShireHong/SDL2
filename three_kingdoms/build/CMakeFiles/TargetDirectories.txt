@@ -1,7 +1,0 @@
-D:/git_hub/SDL2/three_kingdoms/build/CMakeFiles/list_install_components.dir
-D:/git_hub/SDL2/three_kingdoms/build/CMakeFiles/three_kingdoms.dir
-D:/git_hub/SDL2/three_kingdoms/build/CMakeFiles/install/local.dir
-D:/git_hub/SDL2/three_kingdoms/build/CMakeFiles/install.dir
-D:/git_hub/SDL2/three_kingdoms/build/CMakeFiles/edit_cache.dir
-D:/git_hub/SDL2/three_kingdoms/build/CMakeFiles/rebuild_cache.dir
-D:/git_hub/SDL2/three_kingdoms/build/CMakeFiles/install/strip.dir

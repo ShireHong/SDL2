@@ -49,5 +49,9 @@ void StateManager::LoadState(std::string name)
         exit(1);
     }
     //Load the state
+<<<<<<< HEAD
     mActiveState->Load("./resource/tiles/three_kingdom.png");
+=======
+    mActiveState->Load("./resource/tiles/three_kingdom.tmx");
+>>>>>>> 96f14378fc7d1e52705c499877fd97229aaff2f0
 }
