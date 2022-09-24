@@ -43,19 +43,20 @@ void Map::Render()
 //void Map::Draw(std::string  file)
 void Map::Draw(std::weak_ptr<Camera> cam)
 {
-
 	if (mapTexture == nullptr)
     {
-        std::cout<<"33"<<std::endl;
 		RebuildMap();
         
 	}
-    SDL_Rect dst = {92, 0, 1052, 720};
-    SDL_Rect clip = {0, 0, 960, 720};
-   
-    Window::DrawTexture_ex(mapTexture, &dst, &clip);
+     
+	auto cameraShared = cam.lock();
 
-	//auto cameraShared = cam.lock();
+    Rectf dst = {92, 300, 1052, 1020};
+    Recti clip = {0, 0, 960, 720};
+    
+    Window::DrawTexture_ex(mapTexture, dst, &clip);
+
+
 
 	//Rectf pos(0, cameraShared->Centering().y, 960, 720);
     //std::cout<<cameraShared->Centering().x<<" "<<cameraShared->Centering().y<<" "<<cameraShared->Box().w<<" "<<cameraShared->Box().h<<std::endl;

@@ -4,6 +4,8 @@
 #include <string>
 #include <memory>
 #include "camera.h"
+#include "entitymanager.h"
+
 ///Base class for states
 /**
 *  The base class for our state machine, provides functions
@@ -51,6 +53,7 @@ protected:
 	///Free the memory used by the state
 	virtual void Free();
 
+	std::shared_ptr<EntityManager> mManager;
 	std::shared_ptr<Camera> mCamera;
 	std::string mName;
 	//Should this be atomic?

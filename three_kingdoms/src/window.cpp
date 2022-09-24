@@ -248,13 +248,25 @@ void Window::DrawTexture(SDL_Texture *tex, const Rectf &dstRect, Recti *clip,
     SDL_RenderCopyEx(mRenderer.get(), tex, &tempClip, &dst, angle, &p/*&(SDL_Point)pivot*/, flip);
 }
 
-void Window::DrawTexture_ex(SDL_Texture *tex, SDL_Rect *dstRect, SDL_Rect *clip,
-                    float angle, const SDL_Point *center, SDL_RendererFlip flip)
+void Window::DrawTexture_ex(SDL_Texture *tex, const Rectf &dstRect, Recti *clip,
+                    float angle, Vector2f pivot, SDL_RendererFlip flip)
 {
-	SDL_Point p ;
+	SDL_Point p = {0, 0} ;
 	p.x += clip->w / 2;
 	p.y += clip->h / 2;
-    SDL_RenderCopyEx(mRenderer.get(), tex, dstRect, clip, angle, &p, flip);
+
+	SDL_Rect dst;
+	dst.x = dstRect.pos.x;
+	dst.y = dstRect.pos.y;
+	dst.w = dstRect.w;
+	dst.h = dstRect.h;
+
+	SDL_Rect tempClip;
+	tempClip.x = clip->pos.x;
+	tempClip.y = clip->pos.y;
+	tempClip.w = clip->w;
+	tempClip.h = clip->h;
+    SDL_RenderCopyEx(mRenderer.get(), tex, &dst, &tempClip, angle, &p, flip);
 }
 
 SDL_Texture* Window::LoadTexture(std::string file){

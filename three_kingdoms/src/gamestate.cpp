@@ -1,11 +1,12 @@
 #include <string>
 #include <memory>
+#include <iostream>
 #include "window.h"
 #include "gamestate.h"
 #include "input.h"
 #include "timer.h"
 #include "map.h"
-#include <iostream>
+#include "entity.h"
 
 GameState::GameState()
 {
@@ -32,17 +33,27 @@ std::string GameState::Run()
 		//EVENT POLLING
 		Input::PollEvent();
 		if (Input::Quit())
+		{			
 			SetExit("quit");
+		}
 		if (Input::KeyDown(SDL_SCANCODE_ESCAPE))
+		{
 			SetExit("mIntro");
+		}
 
-		//logic
+		
+		//Logic
+		//mCamera->Update();
+		mManager->Update();
+		
+		//mManager->SetCollisionMaps(mMap.get());
 		//float deltaT = delta.Restart() / 1000.f;
 		//Rendering
 		Window::Clear();
-		//std::cout<<"run"<<std::endl;
+		std::cout<<"run"<<std::endl;
 		//mMap->Render();
 		mMap->Draw(mCamera);
+		mManager->Draw();
 		Window::Present();
 
 		Window::ShowAvgFps(false);
@@ -55,10 +66,20 @@ void GameState::Load(std::string file)
 	Init();
 	mMap->Load(file);
 	mCamera->SetSceneBox(Rectf(0, 0, mMap->Box().w, mMap->Box().h));
+
+	std::shared_ptr<Entity> e = std::make_shared<Entity>("./resource/tiles/cursor.png");
+	e->SetName("cursor");
+	Vector2f pos = {40, 40};
+	e->GetPhysics()->SetPosition(pos);
+	//e->GetPhysics()->SetBox();
+	mManager->Register(e);
+
 	
 }
 
-void GameState::Init(){
+void GameState::Init()
+{
 	mMap 	   = std::shared_ptr<Map>(new Map());
-	mCamera    = std::shared_ptr<Camera>(new Camera());
+	mCamera    = std::shared_ptr<Camera>(new Camera());	
+	mManager   = std::shared_ptr<EntityManager>(new EntityManager());
 }

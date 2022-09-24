@@ -44,8 +44,8 @@ public:
 	static void DrawTexture(SDL_Texture *tex, const Rectf &dstRect, Recti *clip = NULL, float angle = 0.0, 
         					Vector2f pivot = Vector2f(0, 0), SDL_RendererFlip flip = SDL_FLIP_NONE);
 
-	static void DrawTexture_ex(SDL_Texture *tex, SDL_Rect *dstRect, SDL_Rect *clip,
-                    float angle = 0.0, const SDL_Point *center = NULL, SDL_RendererFlip flip = SDL_FLIP_NONE);
+	static void DrawTexture_ex(SDL_Texture *tex, const Rectf &dstRect, Recti *clip = NULL, float angle = 0.0, 
+							Vector2f pivot = Vector2f(0, 0), SDL_RendererFlip flip = SDL_FLIP_NONE);
 	/*static void Draw(Image *image, const Rectf &dstRect, Recti *clip = NULL,
 	    float angle = 0.0, Vector2f pivot = Vector2f(0, 0), int flip = SDL_FLIP_NONE);
 	*/

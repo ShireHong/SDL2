@@ -1,0 +1,6 @@
+
+#文件
+*.obj
+
+#文件夹
+/three_kingdoms/build/CMakeFiles/
