@@ -103,7 +103,7 @@ public:
 
 	virtual void Load(std::string file);
 
-
+	bool mSelect;
 
 protected:
 	SDL_Texture* objTexture;

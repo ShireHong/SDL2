@@ -10,7 +10,6 @@ int main(int argc, char** argv)
 {
     
     Window::Init("Three_kingdoms", 960, 720);
-    
     Input::Init();
 
     StateManager::InitIntro();

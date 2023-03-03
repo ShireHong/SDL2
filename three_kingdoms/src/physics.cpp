@@ -148,7 +148,7 @@ bool Physics::CheckCollision(Rectf box)
 	return colliding;
 }
 
-Vector2f Physics::Position() const
+Vector2i Physics::Position() const
 {
 	return mBox.pos;
 }
@@ -163,7 +163,7 @@ Vector2f Physics::Acceleration() const
 	return mKinematic.Accel;
 }
 
-Rectf Physics::Box() const
+Recti Physics::Box() const
 {
 	return mBox;
 }
@@ -175,7 +175,8 @@ int Physics::State() const
 
 void Physics::SetPosition(Vector2f pos)
 {
-	mBox.pos = pos;
+    mBox.pos.x = (pos.x / mBox.w) * mBox.w;
+    mBox.pos.y = (pos.y / mBox.h) * mBox.h;
 }
 
 void Physics::SetVelocity(Vector2f vel)
@@ -267,7 +268,7 @@ void Physics::SetPhysConstants(PhysicalConstants physConstants)
 	mPhysConstants = physConstants;
 }
 
-void Physics::SetBox(Rectf box)
+void Physics::SetBox(Recti box)
 {
 	mBox = box;
 }

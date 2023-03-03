@@ -106,6 +106,8 @@ Rectf Math::ToSceneSpace(const std::weak_ptr<Camera> cam, const Rectf &r){
 Vector2f Math::FromSceneSpace(const std::weak_ptr<Camera> cam, const Vector2f &v){
 	if (!cam.expired()){
         auto c = cam.lock();
+		//std::cout<<v.x<<" "<<v.y<<std::endl;
+		//std::cout<<c->Offset().x<<" "<<c->Offset().y<<std::endl;
         return v - c->Offset();
     }
     //Debug::Log("Math::FromSceneSpace vector error: Camera expired");

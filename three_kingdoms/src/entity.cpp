@@ -1,7 +1,10 @@
+#include <iostream>
 #include <string>
 #include <fstream>
+#include <string.h>
 #include "math.h"
 #include "entity.h"
+#include "map.h"
 #include "window.h"
 
 Entity::Entity() : mPhysics(std::make_shared<Physics>()), mTag(""), mName(""), mConfigFile(""), 
@@ -9,7 +12,7 @@ Entity::Entity() : mPhysics(std::make_shared<Physics>()), mTag(""), mName(""), m
 {
 }
 Entity::Entity(std::string file) : mPhysics(std::make_shared<Physics>()), mTag(""), mName(""), mConfigFile(""),
-    mMouseOver(false), mClicked(false), mRender(true), mUiElement(false)
+    mMouseOver(false), mClicked(false), mRender(true), mUiElement(false),mSelect(false)
 {
     Load(file);
 }
@@ -23,10 +26,39 @@ void Entity::Free()
 {
 
 }
+
+
 void Entity::Update()
 {
-    
+    int gid;
+    //if(mMouseOver && !mClicked)
+    if(!mSelect)
+    {
+        if(mPhysics->selectpos.x != mPhysics->Position().x || mPhysics->selectpos.y != mPhysics->Position().y)
+        {
+            std::cout<<"x3:"<<mPhysics->selectpos.x<<" "<<"y3:"<<mPhysics->selectpos.y<<std::endl;
+            std::cout<<"x4:"<<mPhysics->Position().x<<" "<<"y4:"<<mPhysics->Position().y<<std::endl;
+            mPhysics->SetPosition(mPhysics->selectpos);
+        }
+    }
+    if(mSelect)
+    {
+        #if 0
+        /*显示边上的可移动范围*/
+        Tile tile = Map::GetTileInfo();
+        std::cout<<"map width:"<<tile.map_tile_width<<std::endl;
+        std::cout<<"map height:"<<tile.map_tile_height<<std::endl;
+        std::cout<<"tile width:"<<tile.tile_width<<std::endl;
+        std::cout<<"tile height:"<<tile.tile_height<<std::endl;
+        std::cout<<"pos:"<<mPhysics->selectpos.x<<"---"<<mPhysics->selectpos.y<<std::endl;
+        #endif
+        //std::cout<<mPhysics->Position().x<<"----"<<mPhysics->Position().y<<std::endl;
+        //bool isobstacle = Map::IsTileObstacle(mPhysics->Position().x,mPhysics->Position().y);
+        Map::MoveRangeUpdate(mPhysics->Position());
+    }
+
 }
+
 void Entity::Move(float deltaT)
 {
     //Move the object
@@ -35,7 +67,27 @@ void Entity::Move(float deltaT)
 
 void Entity::Draw(std::weak_ptr<Camera> camera)
 {
-    Window::renderTexture(objTexture, mPhysics->Position().x, mPhysics->Position().y, NULL);
+    if(strcmp(mName.c_str(),"guanyu_horse") == 0)
+    {
+        SDL_Rect clips[16];
+        //Since our clips our uniform in size we can generate a list of their
+        //positions using some math (the specifics of this are covered in the lesson)
+        for (int i = 0; i < 16; ++i){
+            clips[i].x = i / 2 * 48;
+            clips[i].y = i % 2 * 64;
+            clips[i].w = 48;
+            clips[i].h = 64;
+        }
+        //Specify a default clip to start with
+        int useClip = 7;
+        
+        Window::renderTexture(objTexture, mPhysics->Position().x, mPhysics->Position().y, &clips[useClip]);
+    }
+    else
+    { 
+        Window::renderTexture(objTexture, mPhysics->Position().x, mPhysics->Position().y, NULL);
+    }
+    
 }
 
 void Entity::OnMouseDown()

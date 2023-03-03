@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="24" height="18" tilewidth="48" tileheight="64" infinite="0" nextlayerid="4" nextobjectid="3">
+ <tileset firstgid="1" source="tile.tsx"/>
+ <imagelayer id="2" name="bk">
+  <image source="three_kingdom.png" width="1152" height="1152"/>
+ </imagelayer>
+ <layer id="1" name="bottom" width="24" height="18" visible="0" opacity="0.4">
+  <properties>
+   <property name="coli" type="int" value="20"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJy9lMEJACAMA7uQ+6/nX6hNvGDAT4kXqK2rqhY8kyhfyen8hH/WOu8rW+ndjU+9jhJzkMggOcmZpjnKXbX2wnfrzh52TIXviPwLLtPpT+J9J35i3yb+j52m2uXVIhs=
+  </data>
+ </layer>
+ <objectgroup id="3" name="obj" visible="0">
+  <object id="1" name="guanyu" x="336" y="384" width="48" height="64"/>
+ </objectgroup>
+</map>

@@ -28,10 +28,10 @@ public:
 	*/
 	void Move(float deltaT);
 	///Getters
-	Vector2f Position() const;
+	Vector2i Position() const;
 	Vector2f Velocity() const;
 	Vector2f Acceleration() const;
-	Rectf Box() const;
+	Recti Box() const;
 	int State() const;
 	///Setters
 	void SetPosition(Vector2f pos);
@@ -47,11 +47,13 @@ public:
     */
     void SetDirection(Vector2f v);
 	void SetPhysConstants(PhysicalConstants physConstants);
-	void SetBox(Rectf box);
+	void SetBox(Recti box);
 	void SetMap(CollisionMap map);
 
-	//void Load(Json::Value val);
-
+	//void Load(Json::Value val);	
+	
+	Vector2i selectpos;
+	Vector2i targetpos;
 private:
 	/**
 	*  Updates the velocity by running the various acceleration functions
@@ -82,7 +84,7 @@ private:
 	Kinematic mKinematic;
 	MotionState mMotionState;
 	PhysicalConstants mPhysConstants;
-	Rectf mBox;
+	Recti mBox;
 	CollisionMap mCollisionMap;
 	int mHorizDir, mVertDir;
     Vector2f mDir;
