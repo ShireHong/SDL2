@@ -10,46 +10,91 @@ Physics::Physics(){
 	mHorizDir = MOVE::STOP;
 	mVertDir  = MOVE::STOP;
     mDir = Vector2f(0, 0);
+    state  = MOVE::STOP;
+    step = 0;
 }
 Physics::~Physics()
 {
 
 }
 
+int velocity = 200;
+
 void Physics::Move(float deltaT)
 {
-    //Objects that shouldn't move are given accel = 0, so early out on those
-    if (mPhysConstants.hAccel == 0)
-	{
-        return;
-	}
-
-	//Update the velocity
-	UpdateVelocity(deltaT);
-	//test if the move is ok before applying changes
-	Vector2f testPos;
-	testPos = mBox.pos + (mKinematic.Vel * deltaT);
-
-	//Clamp the test position x & y
-	//TODO: Change these clamp ranges to be the map range, ie. map.x min map.x + map.w max
-	//map.y min map.y + map.h max. 
-	testPos.x = Math::Clamp(testPos.x, 0.0, 960.0 - 1);
-	testPos.y = Math::Clamp(testPos.y, 0.0, 720.0 - 1);
-
-	//x axis collision checks
-	if (CheckCollision(Rectf(testPos.x, mBox.pos.y, mBox.w, mBox.h))){
-        //Send on collision event?
-	}
-	else 
-		mBox.pos = Vector2f(testPos.x, mBox.pos.y);
-	//y axis collision checks
-	if (CheckCollision(Rectf(mBox.pos.x, testPos.y, mBox.w, mBox.h))){
-        //Send on collision event?
-	}
-	else
-		mBox.pos = Vector2f(mBox.pos.x, testPos.y);
-
-	mMotionState.UpdateState(mKinematic);
+    Vector2i pos;
+#if 1
+    if(state == MOVE::WALK)
+    {
+        // for(int i = 0; i < cnt; i++)
+        // {
+        //     std::cout<<Path[i].tilepos.x<<"----"<<Path[i].tilepos.y<<"-----"<<Path[i].NodeDir<<std::endl;
+        // }
+        // state = MOVE::ATK;
+        pos = Position();
+        if(pos == targetpos)
+        {
+            std::cout<<"pos "<<pos.x<<"---"<<pos.y<<std::endl;
+        }
+        else
+        {
+            if(pos == Path[step].tilepos)
+            {
+                std::cout<<deltaT<<std::endl;
+                step++;
+                if(step == cnt)
+                {
+                    std::cout<<"step "<<step<<"---"<<cnt<<std::endl;
+                    //state = MOVE::STOP;
+                    //step = 0;
+                }
+            }
+            else
+            {
+                // std::cout<<"Dir "<<Path[step].NodeDir<<std::endl;
+                
+                int offset = int(velocity *deltaT);
+                switch(Path[step].NodeDir)
+                {
+                    case D_RIGHT:
+                        pos.x += offset;
+                        if(pos.x >= Path[step].tilepos.x)
+                        {
+                            pos.x = Path[step].tilepos.x;
+                        }
+                        break;
+                    case D_DOWN:
+                        pos.y += offset;
+                        if(pos.y >= Path[step].tilepos.y)
+                        {
+                            pos.y = Path[step].tilepos.y;
+                        }
+                        break;
+                    case D_LEFT:
+                        pos.x -= offset;
+                        if(pos.x <= Path[step].tilepos.x)
+                        {
+                            pos.x = Path[step].tilepos.x;
+                        }
+                        break;
+                    case D_UP:
+                        pos.y -= offset;
+                        if(pos.y <= Path[step].tilepos.y)
+                        {
+                            pos.y = Path[step].tilepos.y;
+                        }
+                        break;
+                    default:
+                        std::cout<<"No direction!"<<std::endl;
+                        return;
+                }
+                //std::cout<<"offset "<<offset<<std::endl;
+                //std::cout<<"MOVE: "<<pos.x<<"----"<<pos.y<<std::endl;
+                SetPosition(pos);
+            }
+        }
+    }
+#endif
 }
 
 void Physics::UpdateVelocity(float deltaT)
@@ -122,35 +167,35 @@ void Physics::ApplyFriction()
 
 bool Physics::CheckCollision(Rectf box)
 {
-	//We wait to exit the loop until we've found the collision direction and
-	//checked it against our movement direction to set v to 0 if moving in direction of 
-	//the collision
-	bool colliding = false;
-	for (Recti i : mCollisionMap)
-	{
-		if (Math::CheckCollision(box, i))
-		{
-			colliding = true;
-			//Check collision direction against movement directions
-			int colDir = Math::RectNearRect(box, i, 15);
-			if (mHorizDir == colDir)
-			{
-				mKinematic.Vel.x = 0;
-				return colliding;
-			}
-			if (mVertDir == colDir)
-			{
-				mKinematic.Vel.y = 0;
-				return colliding;
-			}
-		}
-	}
-	return colliding;
+    //We wait to exit the loop until we've found the collision direction and
+    //checked it against our movement direction to set v to 0 if moving in direction of 
+    //the collision
+    bool colliding = false;
+    for (Recti i : mCollisionMap)
+    {
+        if (Math::CheckCollision(box, i))
+        {
+            colliding = true;
+            //Check collision direction against movement directions
+            int colDir = Math::RectNearRect(box, i, 15);
+            if (mHorizDir == colDir)
+            {
+                mKinematic.Vel.x = 0;
+                return colliding;
+            }
+            if (mVertDir == colDir)
+            {
+                mKinematic.Vel.y = 0;
+                return colliding;
+            }
+        }
+    }
+    return colliding;
 }
 
 Vector2i Physics::Position() const
 {
-	return mBox.pos;
+    return mBox.pos;
 }
 
 Vector2f Physics::Velocity() const

@@ -48,7 +48,8 @@ std::string GameState::Run()
         mManager->Update();
         
         //mManager->SetCollisionMaps(mMap.get());
-        //float deltaT = delta.Restart() / 1000.f;
+        float deltaT = delta.Restart() / 1000.f;
+        mManager->Move(deltaT);
         //Rendering
         Window::Clear();
         //mMap->Render();
@@ -71,11 +72,10 @@ void GameState::Load(std::string file)
     //std::cout<<mCamera->Scene()<<std::endl;
     std::shared_ptr<Entity> cursor = std::make_shared<Entity>("./resource/tiles/cursor.png");
     cursor->SetName("cursor");
-    Vector2i pos_1 = {40, 40};
-
+    Vector2i pos_1 = {96, 192};
     cursor->GetPhysics()->selectpos = pos_1;
     cursor->GetPhysics()->SetPosition(pos_1);
-    Recti box_1 = {pos_1,60,60};
+    Recti box_1 = {pos_1,48,64};
     cursor->GetPhysics()->SetBox(box_1);
     //e->GetPhysics()->SetBox();
     mManager->Register(cursor);
@@ -83,7 +83,7 @@ void GameState::Load(std::string file)
 
     std::shared_ptr<Entity> guanyu = std::make_shared<Entity>("./resource/image/guanyu_horse.png");
     guanyu->SetName("guanyu_horse");
-    Vector2i pos2 = {48, 128};
+    Vector2i pos2 = {240, 320};
     guanyu->GetPhysics()->selectpos = pos2;
     guanyu->GetPhysics()->SetPosition(pos2);
     Recti box_2 = {pos2,48,64};

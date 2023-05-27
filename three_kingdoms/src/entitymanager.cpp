@@ -141,7 +141,7 @@ CollisionMap EntityManager::GetEntityCollisionMap(const Rectf &target, int dista
             if (dist > 0 && dist <= distance)
             {
                 entityMap.push_back(e->Box());
-            }			
+            }
         }
     }
 	return entityMap;
@@ -173,36 +173,33 @@ void EntityManager::HandleMouseEvent(const SDL_MouseButtonEvent &mouseEvent)
     tempEvt.y = mouseEvent.y;
     HandleMouseEvent(tempEvt);
     //Find the object that was clicked
-    for (std::shared_ptr<Entity> e : mEntities)
+    switch (mouseEvent.type)
     {
-        if ((e->IsUiElement() || mCamera->InCamera(e->Box())) && e->GetMouseOver())
-        {
-            switch (mouseEvent.type)
+        case SDL_MOUSEBUTTONDOWN:
+            /*check the entities*/
+            for (std::shared_ptr<Entity> e : mEntities)
             {
-                case SDL_MOUSEBUTTONDOWN:
+                if ((e->IsUiElement() || mCamera->InCamera(e->Box())) && e->GetMouseOver())
+                {
                     e->OnMouseDown();
-                    break;
-                case SDL_MOUSEBUTTONUP:
-                    e->OnMouseUp();
-                    std::cout<<"SDL_MOUSEBUTTONUP"<<std::endl;
-                    e->mSelect = true;
-                    e->GetPhysics()->selectpos = e->GetPhysics()->Position();
-                    std::cout<<"x:"<<e->GetPhysics()->selectpos.x<<" "<<"y:"<<e->GetPhysics()->selectpos.y<<std::endl;
-                    break;
-                default:
-                    break;
+                }
             }
-        }
-        if (e->mSelect && !e->GetMouseOver())
-        {
-            //std::cout<<"x1:"<<tempEvt.x<<" "<<"y1:"<<tempEvt.y<<std::endl;
-            pos.x = (tempEvt.x / e->GetPhysics()->Box().w) * e->GetPhysics()->Box().w;
-            pos.y = (tempEvt.y / e->GetPhysics()->Box().h) * e->GetPhysics()->Box().h;
-            std::cout<<"x2:"<<pos.x<<" "<<"y2:"<<pos.y<<std::endl;
-            e->GetPhysics()->selectpos = pos;
-            e->mSelect = false;
-            std::cout<<"mselect out"<<std::endl;
-        }
+            /*no entities choiced*/
+            Map::SetCursorPos(tempEvt.x, tempEvt.y);
+            std::cout<<"x:"<<tempEvt.x<<" "<<"y:"<<tempEvt.y<<std::endl;
+            break;
+        case SDL_MOUSEBUTTONUP:
+            /*check the entities*/
+            for (std::shared_ptr<Entity> e : mEntities)
+            {
+                if ((e->IsUiElement() || mCamera->InCamera(e->Box())) && e->GetMouseOver())
+                {
+                    e->OnMouseUp();
+                }
+            }
+            break;
+        default:
+            break;
     }
 }
 

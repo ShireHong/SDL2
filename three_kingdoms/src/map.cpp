@@ -1,18 +1,29 @@
 #include <vector>
 #include <set>
 #include <string>
+#include <string.h>
 #include "map.h"
 #include "res_path.h"
 #include "window.h"
 #include "camera.h"
 #include "cleanup.h"
 
+#define OPPOSITE_DIR(x) ((x + 2) % 4)
+
 //Tile Map::mTile;
 tmx_map* Map::tilemap;
+Vector2i Map::maploc;
+
+
+DirPos ArrayDir[] = {
+                        {1,0},{0,1},{-1,0},{0,-1},/*right down left up*/
+                        {-1,-1},{-1,1},{1,-1},{1,1},{0,0}
+                   };
 
 Map::Map() : mapTexture(nullptr)
 {
 }
+
 Map::~Map()
 {
     cleanup(mapTexture);
@@ -21,7 +32,7 @@ Map::~Map()
 
 
 void show_map_info(tmx_map *map)
-{	
+{
 #if 0
     std::cout<<"map width:"<<map->width<<std::endl;
     std::cout<<"map height:"<<map->height<<std::endl;
@@ -44,12 +55,12 @@ void show_map_info(tmx_map *map)
 
 #if 1
 
-	tmx_layer *layer3 = tmx_find_layer_by_name(map,"bottom");
+    tmx_layer *layer3 = tmx_find_layer_by_name(map,"bottom");
 
-	tmx_property *prop;
+    tmx_property *prop;
 
-	prop = tmx_get_property(layer3->properties, "coli");
-	std::cout<<prop->value.integer<<std::endl;
+    prop = tmx_get_property(layer3->properties, "coli");
+    std::cout<<prop->value.integer<<std::endl;
     //int gid = 30 * player_y/map->tile_height + player_x/map->tile_width;
     #if 0
     for(int i = 0; i < 18; i++)
@@ -92,8 +103,8 @@ bool Map::IsTileObstacle(int x, int y)
     tmx_layer *layer3 = tmx_find_layer_by_name(tilemap,"bottom");
     tmx_property *prop = tmx_get_property(layer3->properties, "coli");
 
-    int gid = x / tilemap->tile_width + tilemap->width * y / tilemap->tile_height;
-    std::cout<<gid<<std::endl;
+    int gid = x  + tilemap->width * y ;
+    //std::cout<<gid<<std::endl;
     if(layer3->content.gids[gid] > 0)
     {
         if(prop->value.integer == 20)
@@ -112,81 +123,189 @@ Vector2i Map::GetTileCoord(int x, int y)
     return cur_coord;
 }
 
-Vector2i tilexy[50] = {{-1,-1}};
-int cnt = 0;
-int moverange = 2;
-void Map::MoveRangeUpdate(Vector2i pos)
+Vector2i Map::GetRealCoord(int x, int y)
 {
-    if(tilexy[0].x == -1 && tilexy[0].y == -1)
+    Vector2i real_coord;
+    real_coord.x = x * tilemap->tile_width;
+    real_coord.y = y * tilemap->tile_height;
+    return real_coord;
+}
+
+void Map::SetCursorPos(int x, int y)
+{
+    maploc.x = x / tilemap->tile_width * tilemap->tile_width;
+    maploc.y = y / tilemap->tile_height * tilemap->tile_height;
+}
+
+Vector2i Map::GetCursorPos()
+{
+    return maploc;
+}
+
+QuadTreeNode rangelist[50] ;
+int cnt = 0;
+int moverange = 3;
+int flag = 0;
+QuadTreeNode path[10] ;
+int cnt2 = 0;
+
+QuadTreeNode realpath[10] ;
+
+void Map::RangeScan(Vector2i pos, Direction dir, int cost)
+{
+    pos.x += ArrayDir[dir].x;
+    pos.y += ArrayDir[dir].y;
+    flag = 0;
+    if(pos.x < 0 || pos.y < 0 || pos.x > tilemap->width || pos.y > tilemap->height)
     {
-        Vector2i tile_coord = GetTileCoord(pos.x, pos.y);
-        std::cout<<tile_coord.x<<"----"<<tile_coord.y<<std::endl;
-        cnt = 0;
-        for(int i = tile_coord.x -moverange; i <= tile_coord.x + moverange; i++)
+        return;
+    }
+    if(cost > moverange)
+    {
+        return;
+    }
+    if(!IsTileObstacle(pos.x, pos.y))
+    {
+        for(int i = 0; i < cnt; i++)
         {
-            for(int j = tile_coord.y - moverange ; j <= tile_coord.y + moverange; j++)
+            if(rangelist[i].tilepos.x == pos.x && rangelist[i].tilepos.y == pos.y)
             {
-                if(i >= 0 && j >= 0)
+                if(cost < rangelist[i].cost)
                 {
-                    if((abs(i-tile_coord.x)+abs(j-tile_coord.y)) <= moverange)
-                    {
-                        tilexy[cnt].x = i;
-                        tilexy[cnt].y = j;
-                        cnt++;
-                    }
+                    rangelist[i].NodeDir = dir;
+                    rangelist[i].cost = cost;
+                    //cout<<rangelist[i].x<<"----"<<rangelist[i].y<<" "<<rangelist[i].dic_x<<" "<<rangelist[i].dic_y<<" "<<rangelist[i].lvl<<endl;
                 }
+                else
+                {
+                    
+                }
+                flag = 1;
+                break;
             }
         }
-        for(int i=0;i < cnt; i++)
+        if(!flag)
         {
-            std::cout<<"("<<tilexy[i].x<<","<<tilexy[i].y<<")"<<std::endl;
+            rangelist[cnt].tilepos= pos;
+            rangelist[cnt].NodeDir = dir;
+            rangelist[cnt].cost = cost;
+            //cout<<rangelist[cnt].x<<"----"<<rangelist[cnt].y<<" "<<rangelist[cnt].dic_x<<" "<<rangelist[cnt].dic_y<<" "<<level<<endl;
+            cnt++;
         }
+        
     }
+    else
+    {
+        return;
+    }
+    RangeScan(pos, D_LEFT, cost + 1);
+	RangeScan(pos, D_UP, cost + 1);
+	RangeScan(pos, D_DOWN, cost + 1);
+	RangeScan(pos, D_RIGHT, cost + 1);
+
 }
+
+void Map::MoveRangeUpdate(Vector2i pos)
+{
+    memset(rangelist, 0, 50 * sizeof(QuadTreeNode));
+    cnt = 0;
+    Vector2i tile_coord = GetTileCoord(pos.x, pos.y);
+    std::cout<<"coord "<<tile_coord.x<<"  "<<tile_coord.y<<std::endl;
+    RangeScan(tile_coord, D_CENTER, 0);
+    std::cout<<"cnt "<<cnt<<std::endl;
+}
+
+void Map::ClearMoveRange()
+{
+    memset(rangelist, 0, 50 * sizeof(QuadTreeNode));
+    cnt = 0;
+}
+
+void Map::ClearMovePath()
+{
+    memset(path, 0, 10 * sizeof(QuadTreeNode));
+    cnt2 = 0;
+}
+
 
 void Map::RenderMoveRange()
 {
-    int real_coord_x, real_coord_y;
+    Vector2i real_coord;
     //std::cout<<cnt<<std::endl;
     for(int i = 0; i < cnt; i++)
     {
-        tmx_layer *layer3 = tmx_find_layer_by_name(tilemap,"bottom");
-        tmx_property *prop = tmx_get_property(layer3->properties, "coli");
-        real_coord_x = tilexy[i].x * tilemap->tile_width;
-        real_coord_y = tilexy[i].y * tilemap->tile_height;
-        //std::cout<<"("<<real_coord_x<<","<<real_coord_y<<")"<<std::endl;
-        //bool obstacle = IsTileObstacle(real_coord_x, real_coord_y);
-
-        int gid = real_coord_x / tilemap->tile_width + tilemap->width * real_coord_y / tilemap->tile_height;
-        //std::cout<<gid<<std::endl;
-        if(layer3->content.gids[gid] > 0)
-        {
-            if(prop->value.integer == 20)
-            {
-                Window::renderTexture(immoveable, real_coord_x, real_coord_y, NULL);
-            }
-            else
-            {
-                Window::renderTexture(moveable, real_coord_x, real_coord_y, NULL);
-            }
-
-        }
-        else
-        {
-            Window::renderTexture(moveable, real_coord_x, real_coord_y, NULL);
-        }
-        
-        #if 0
-        if(obstacle)
-        {
-            Window::renderTexture(immoveable, real_coord_x, real_coord_y, NULL);
-        }
-        else
-        {
-            Window::renderTexture(moveable, real_coord_x, real_coord_y, NULL);
-        }
-        #endif
+        real_coord = GetRealCoord(rangelist[i].tilepos.x, rangelist[i].tilepos.y);
+        Window::renderTexture(moveable, real_coord.x, real_coord.y, NULL);
     }
+    for(int i = 0; i < cnt2; i++)
+    {
+        real_coord = GetRealCoord(path[i].tilepos.x, path[i].tilepos.y);
+        // std::cout<<real_coord_x<<"----"<<real_coord_y<<std::endl;
+        Window::renderTexture(immoveable, real_coord.x, real_coord.y, NULL);
+    }
+}
+
+static bool GetRangeNode(Vector2i pos, QuadTreeNode* node)
+{
+    bool ret = true;
+    int i;
+    for(i = 0; i < cnt; i++)
+    {
+        // std::cout<<rangelist[i].tilepos.x<<"----"<<rangelist[i].tilepos.y<<std::endl;
+        if(pos.x == rangelist[i].tilepos.x && pos.y == rangelist[i].tilepos.y)
+        {
+            *node = rangelist[i];
+            ret = true;
+            break;
+        }
+    }
+    if(i == cnt)
+    {
+        ret = false;
+    }
+    return ret;
+}
+
+bool Map::GetMovePath(Vector2i end_pos, Vector2i start_pos, QuadTreeNode** ppath, int* step)
+{
+    Vector2i end = GetTileCoord(end_pos.x, end_pos.y);
+    Vector2i start = GetTileCoord(start_pos.x, start_pos.y);
+    bool ret = true;
+    // std::cout<<"end "<<end.x<<"----"<<end.y<<std::endl;
+    // std::cout<<"start "<<start.x<<"----"<<start.y<<std::endl;
+    QuadTreeNode node;
+    node.tilepos = end;
+    node.NodeDir = D_CENTER;
+    memset(path, 0, 10 * sizeof(QuadTreeNode));
+    cnt2 = 0;
+
+    do
+    {
+        /*记录的是上一次的方向，因为最后的目的地不需要方向*/
+        ret = GetRangeNode(Vector2i(node.tilepos.x - ArrayDir[node.NodeDir].x, node.tilepos.y - ArrayDir[node.NodeDir].y), 
+                            &node);
+        if(ret)
+        {
+            path[cnt2].NodeDir = node.NodeDir;
+            path[cnt2].tilepos = node.tilepos;
+            std::cout<<" dir "<<node.NodeDir<<std::endl;
+            cnt2++;
+        }
+        else
+        {
+            return false;
+        }
+    }while(node.tilepos.x != start.x || node.tilepos.y != start.y);
+
+    for(int i = 0; i < cnt2; i++)
+    {
+        realpath[i].tilepos = GetRealCoord(path[cnt2-i-1].tilepos.x, path[cnt2-i-1].tilepos.y);
+        realpath[i].NodeDir = path[cnt2-i-1].NodeDir;
+        std::cout<<realpath[i].tilepos.x<<"----"<<realpath[i].tilepos.y<<"-----"<<realpath[i].NodeDir<<std::endl;
+    }
+    *ppath  = realpath;
+    *step = cnt2;
+    return true;
 }
 
 void Map::Load(std::string file)
@@ -220,7 +339,6 @@ void Map::Draw(std::weak_ptr<Camera> cam)
         RebuildMap();
         
     }
-        
     auto cameraShared = cam.lock();
 
     /*

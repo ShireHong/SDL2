@@ -6,6 +6,7 @@
 #include "entity.h"
 #include "map.h"
 #include "window.h"
+#include <vector>
 
 Entity::Entity() : mPhysics(std::make_shared<Physics>()), mTag(""), mName(""), mConfigFile(""), 
     mMouseOver(false), mClicked(false), mRender(true), mUiElement(false)
@@ -30,31 +31,92 @@ void Entity::Free()
 
 void Entity::Update()
 {
+    bool ret = true;
     int gid;
-    //if(mMouseOver && !mClicked)
-    if(!mSelect)
+    Vector2i cur_cursor_pos, obj_pos;
+    if(mMouseOver && mClicked)
     {
-        if(mPhysics->selectpos.x != mPhysics->Position().x || mPhysics->selectpos.y != mPhysics->Position().y)
+        if(!mSelect) 
         {
-            std::cout<<"x3:"<<mPhysics->selectpos.x<<" "<<"y3:"<<mPhysics->selectpos.y<<std::endl;
-            std::cout<<"x4:"<<mPhysics->Position().x<<" "<<"y4:"<<mPhysics->Position().y<<std::endl;
-            mPhysics->SetPosition(mPhysics->selectpos);
+            mSelect = true;
+            Map::MoveRangeUpdate(mPhysics->Position());
+            std::cout<<"(state):"<<mPhysics->state<<std::endl;
         }
     }
     if(mSelect)
     {
-        #if 0
-        /*显示边上的可移动范围*/
-        Tile tile = Map::GetTileInfo();
-        std::cout<<"map width:"<<tile.map_tile_width<<std::endl;
-        std::cout<<"map height:"<<tile.map_tile_height<<std::endl;
-        std::cout<<"tile width:"<<tile.tile_width<<std::endl;
-        std::cout<<"tile height:"<<tile.tile_height<<std::endl;
-        std::cout<<"pos:"<<mPhysics->selectpos.x<<"---"<<mPhysics->selectpos.y<<std::endl;
-        #endif
-        //std::cout<<mPhysics->Position().x<<"----"<<mPhysics->Position().y<<std::endl;
-        //bool isobstacle = Map::IsTileObstacle(mPhysics->Position().x,mPhysics->Position().y);
-        Map::MoveRangeUpdate(mPhysics->Position());
+        /*获取cursor的位置*/
+        cur_cursor_pos = Map::GetCursorPos();
+        /*获取obj的位置做对比*/
+        obj_pos = mPhysics->Position();
+        /*
+            1，选择obj并且点击后，显示可移动范围
+            2，当点击目标位置后，显示路径
+            3，到达路径后，路径清空。
+        */
+        if(cur_cursor_pos == obj_pos) /*相等了*/
+        {
+            /*todo*/
+            //std::cout<<"(equal):"<<std::endl;
+        }
+        else
+        {
+            std::cout<<"(name):"<<mName<<std::endl;
+            if(mPhysics->state == mPhysics->MOVE::STOP)
+            {
+                std::cout<<"(cur_cursor_pos):"<<cur_cursor_pos.x<<"---"<<cur_cursor_pos.y<<std::endl;
+                std::cout<<"(obj_pos):"<<obj_pos.x<<"---"<<obj_pos.y<<std::endl;
+                /*不相等，这个值cursor为obj目标地址，并将obj运行状态设为walking*/
+                mPhysics->targetpos = cur_cursor_pos;
+                std::cout<<"(targetpos):"<<mPhysics->targetpos.x<<"---"<<mPhysics->targetpos.y<<std::endl;
+                ret = Map::GetMovePath(mPhysics->targetpos, obj_pos, &mPhysics->Path,&mPhysics->cnt);
+                //Map::ClearMoveRange();
+                mPhysics->state = ret?mPhysics->MOVE::WALK :mPhysics->MOVE::STOP; /*walk*/
+                if(!ret)
+                {
+                    mPhysics->targetpos = mPhysics->Position();
+                }
+                //mSelect = false;
+                Map::ClearMoveRange();
+            }
+            else if(mPhysics->state == mPhysics->MOVE::WALK)
+            {
+                std::cout<<"(pos):"<<mPhysics->Position().x<<"---"<<mPhysics->Position().y<<std::endl;
+                if(mPhysics->targetpos == mPhysics->Position())
+                {
+                    std::cout<<"(mPhysics->targetpos):"<<mPhysics->targetpos.x<<std::endl;
+                    mPhysics->state = mPhysics->MOVE::STOP;
+                    mPhysics->step = 0;
+                    Map::ClearMovePath();
+                    mSelect = false;
+                }
+                else
+                {
+                    std::cout<<"(why):"<<std::endl;
+                }
+                
+            }
+        }
+    }
+    else
+    {
+        // obj_pos = mPhysics->Position();
+        // if(obj_pos == mPhysics->targetpos)
+        // {
+        //     Map::ClearMovePath();
+        //     Map::ClearMoveRange();
+        // }
+        if(mPhysics->state == mPhysics->MOVE::STOP)
+        {
+            //std::cout<<"(state):"<<mPhysics->state<<std::endl;
+            /*公用movepath会导致其他的状态进入清除*/
+            //Map::ClearMovePath();
+            //Map::ClearMoveRange();
+        }
+    }
+    if(strcmp(mName.c_str(),"guanyu_horse") == 0)
+    {
+        //std::cout<<"(mSelect):"<<mSelect<<std::endl;
     }
 
 }
@@ -87,7 +149,6 @@ void Entity::Draw(std::weak_ptr<Camera> camera)
     { 
         Window::renderTexture(objTexture, mPhysics->Position().x, mPhysics->Position().y, NULL);
     }
-    
 }
 
 void Entity::OnMouseDown()
