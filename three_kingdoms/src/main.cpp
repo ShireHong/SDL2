@@ -1,19 +1,81 @@
+#include <stdlib.h>
 #include <stdexcept>
 #include <memory>
 #include <iostream>
 #include "window.h"
 #include "statemanager.h"
 #include "input.h"
+#include <SDL2/SDL.h> // for SDL_Init, SDL_INIT_TIMER
+#include <time.h>
+#include <cstdlib>
 
+#include "game_launcher.h"
 #undef main
+
+
+
+/**
+ * I would prefer to setup locale first so that early error
+ * messages can get localized, but we need the game_launcher
+ * initialized to have filesystem::get_intl_dir() to work.  Note: setlocale()
+ * does not take GUI language setting into account.
+ */
+static void init_locale()
+{
+#if defined _WIN32 || defined __APPLE__
+	setlocale(LC_ALL, "English");
+#else
+	std::setlocale(LC_ALL, "C");
+#endif
+}
+
+/**
+ * Setups the game environment and enters
+ * the titlescreen or game loops.
+ */
+static int do_gameloop()
+{
+	srand(time(nullptr));
+
+	const auto game = std::make_unique<game_launcher>(true);
+	const int start_ticks = SDL_GetTicks();
+
+	init_locale();
+
+	SDL_EventState(SDL_SYSWMEVENT, SDL_ENABLE);
+
+    // If loading a game, skip the titlescreen entirely
+    //if(game->has_load_data() && game->load_game()) {
+    game->launch_game();
+        //continue;
+    //}
+
+}
+
+
 int main(int argc, char** argv)
 {
+
+#ifdef _WIN32
+	_putenv("PANGOCAIRO_BACKEND=fontconfig");
+	_putenv("FONTCONFIG_PATH=fonts");
+#endif
+
+    SDL_SetHint(SDL_HINT_NO_SIGNAL_HANDLERS, "1");
+	// Is there a reason not to just use SDL_INIT_EVERYTHING?
+	if(SDL_Init(SDL_INIT_TIMER) < 0) {
+		std::cout << "Couldn't initialize SDL: " << SDL_GetError();
+		return (1);
+	}
+	atexit(SDL_Quit);
+
+    SDL_StartTextInput();
     
-    Window::Init("Three_kingdoms", 960, 720);
+    //Window::Init("Three_kingdoms", 960, 720);
     Input::Init();
 
-    StateManager::InitIntro();
-    std::cout<<"exit"<<std::endl;
+    do_gameloop();
+    //StateManager::InitIntro();
     Input::Close();
     //Debug::Quit();
     Window::Quit();
