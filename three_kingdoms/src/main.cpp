@@ -10,6 +10,7 @@
 #include <cstdlib>
 
 #include "game_launcher.h"
+#include "events.h"
 #undef main
 
 
@@ -42,8 +43,16 @@ static int do_gameloop()
 
 	init_locale();
 
+    bool res;
+
 	SDL_EventState(SDL_SYSWMEVENT, SDL_ENABLE);
 
+
+    res = game->init_video();
+	if(res == false) {
+		std::cout << "could not initialize display" <<std::endl;
+		return 1;
+	}
     // If loading a game, skip the titlescreen entirely
     //if(game->has_load_data() && game->load_game()) {
     game->launch_game();
@@ -57,8 +66,8 @@ int main(int argc, char** argv)
 {
 
 #ifdef _WIN32
-	_putenv("PANGOCAIRO_BACKEND=fontconfig");
-	_putenv("FONTCONFIG_PATH=fonts");
+	putenv("PANGOCAIRO_BACKEND=fontconfig");
+	putenv("FONTCONFIG_PATH=fonts");
 #endif
 
     SDL_SetHint(SDL_HINT_NO_SIGNAL_HANDLERS, "1");
@@ -71,8 +80,10 @@ int main(int argc, char** argv)
 
     SDL_StartTextInput();
     
-    //Window::Init("Three_kingdoms", 960, 720);
-    Input::Init();
+    //Window::Init("Three_kingdoms", 202, 200);
+    //Input::Init();
+
+    events::event_context global_context;
 
     do_gameloop();
     //StateManager::InitIntro();

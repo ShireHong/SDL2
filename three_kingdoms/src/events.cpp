@@ -14,7 +14,7 @@
 */
 
 #include "events.h"
-
+#include <iostream>
 #include <algorithm>
 #include <cassert>
 #include <deque>
@@ -108,7 +108,8 @@ void pump()
 	int begin_ignoring = 0;
 
 	std::vector<SDL_Event> events;
-	while(SDL_PollEvent(&temp_event)) {
+	while(SDL_PollEvent(&temp_event)) 
+    {
 		if(temp_event.type == INVOKE_FUNCTION_EVENT) {
 			//static_cast<invoked_function_data*>(temp_event.user.data1)->call();
 			continue;
@@ -149,6 +150,7 @@ void pump()
 			// Always make sure a cursor is displayed if the mouse moves or if the user clicks
 			//cursor::set_focus(true);
 			process_tooltip_strings(event.motion.x, event.motion.y);
+
 			break;
 		}
 

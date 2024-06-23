@@ -6,7 +6,7 @@
 
 #include <string>                       // for string
 #include <vector>                       // for vector
-
+#include "events.h"
 
 class game_launcher
 {
@@ -21,6 +21,8 @@ public:
 private:
 	game_launcher(const game_launcher&) = delete;
 	game_launcher& operator=(const game_launcher&) = delete;
+
+    const events::event_context main_event_context_;
 
 };
 

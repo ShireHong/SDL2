@@ -1,3 +1,4 @@
+#include <iostream>
 #include "controller_base.h"
 #include "mouse_handler_base.h"
 #include "events.h"
@@ -31,11 +32,16 @@ void controller_base::handle_event(const SDL_Event& event)
 			};
 			if(new_event.motion.which != SDL_TOUCH_MOUSEID) {
 				mh_base.mouse_motion_event(new_event.motion, false);
+                
+                std::cout<<"motion 1"<<std::endl;
 			}
 		} else {
 			if(new_event.motion.which != SDL_TOUCH_MOUSEID) {
 				mh_base.mouse_motion_event(event.motion, false);
+                std::cout<<"motion 2"<<std::endl;
 			}
+            
+            
 		}
 		break;
 
@@ -65,6 +71,7 @@ void controller_base::handle_event(const SDL_Event& event)
 		// 	show_menu(get_display().get_theme().context_menu()->items(), event.button.x, event.button.y, true,
 		// 			get_display());
 		// }
+        std::cout<<"up"<<std::endl;
 		break;
 	// TODO: Support finger specifically, like pan the map. For now, SDL's "shadow mouse" events will do.
 	case SDL_MULTIGESTURE:

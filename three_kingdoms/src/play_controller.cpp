@@ -1,17 +1,22 @@
 #include <iostream>
 #include "play_controller.h"
+#include "resources.h"
 
-
+static void clear_resources()
+{
+	resources::controller = nullptr;
+}
 
 play_controller::play_controller()
                 : mouse_handler_(*this)
 {
-    std::cout<<"play_controller"<<std::endl;
+    //std::cout<<"play_controller"<<std::endl;
+    resources::controller = this;
 }
 
 play_controller::~play_controller()
 {
-
+    clear_resources();
 }
 
 

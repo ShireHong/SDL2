@@ -36,7 +36,7 @@ endif()
 #找到sdl2的依赖库
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${three_kingdoms_SOURCE_DIR}/cmake")
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -pedantic -std=c++17")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -pedantic ")
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS} ${CMAKE_CXX_FLAGS_DEBUG} -g")
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS} ${CMAKE_CXX_FLAGS_RELEASE} -O2")
 
@@ -52,6 +52,8 @@ find_package(SDL2_mixer REQUIRED)
 
 include_directories(${SDL2_INCLUDE_DIR})
 include_directories(include)
+#有这个就可以把一些h文件和c文件放一起，让后一起编译，不然include里面的h文件编译会报找不到h文件
+include_directories( ${CMAKE_SOURCE_DIR}/src/ )
 
 #将需要调用到的文件打包到与执行文件一个目录，先把文件重命名
 set(RESOURCE ${CMAKE_SOURCE_DIR}/resource)
@@ -59,11 +61,14 @@ set(RESOURCE ${CMAKE_SOURCE_DIR}/resource)
 # 把需要用到的资源拷贝到执行目录下，后面执行文件会用到
 file(COPY ${RESOURCE} DESTINATION ${CMAKE_BINARY_DIR})
 
+#add_subdirectory(src)
+
 #编译可执行文件
+
 aux_source_directory(src DIR_SRCS)
+aux_source_directory(src/sdl DIR_SRCS_SDL)
 
-
-add_executable( three_kingdoms ${DIR_SRCS})
+add_executable( three_kingdoms ${DIR_SRCS} ${DIR_SRCS_SDL})
 
 #在使用zlib的时候，有一个文件中需要定义WANT_ZLIB这个宏
 if(WANT_ZLIB )
