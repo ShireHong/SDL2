@@ -195,6 +195,33 @@ src/camera.cpp.s:
 	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/camera.cpp.s
 .PHONY : src/camera.cpp.s
 
+src/controller_base.obj: src/controller_base.cpp.obj
+
+.PHONY : src/controller_base.obj
+
+# target to build an object file
+src/controller_base.cpp.obj:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/controller_base.cpp.obj
+.PHONY : src/controller_base.cpp.obj
+
+src/controller_base.i: src/controller_base.cpp.i
+
+.PHONY : src/controller_base.i
+
+# target to preprocess a source file
+src/controller_base.cpp.i:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/controller_base.cpp.i
+.PHONY : src/controller_base.cpp.i
+
+src/controller_base.s: src/controller_base.cpp.s
+
+.PHONY : src/controller_base.s
+
+# target to generate assembly for a file
+src/controller_base.cpp.s:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/controller_base.cpp.s
+.PHONY : src/controller_base.cpp.s
+
 src/entity.obj: src/entity.cpp.obj
 
 .PHONY : src/entity.obj
@@ -249,6 +276,60 @@ src/entitymanager.cpp.s:
 	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/entitymanager.cpp.s
 .PHONY : src/entitymanager.cpp.s
 
+src/events.obj: src/events.cpp.obj
+
+.PHONY : src/events.obj
+
+# target to build an object file
+src/events.cpp.obj:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/events.cpp.obj
+.PHONY : src/events.cpp.obj
+
+src/events.i: src/events.cpp.i
+
+.PHONY : src/events.i
+
+# target to preprocess a source file
+src/events.cpp.i:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/events.cpp.i
+.PHONY : src/events.cpp.i
+
+src/events.s: src/events.cpp.s
+
+.PHONY : src/events.s
+
+# target to generate assembly for a file
+src/events.cpp.s:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/events.cpp.s
+.PHONY : src/events.cpp.s
+
+src/game_launcher.obj: src/game_launcher.cpp.obj
+
+.PHONY : src/game_launcher.obj
+
+# target to build an object file
+src/game_launcher.cpp.obj:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/game_launcher.cpp.obj
+.PHONY : src/game_launcher.cpp.obj
+
+src/game_launcher.i: src/game_launcher.cpp.i
+
+.PHONY : src/game_launcher.i
+
+# target to preprocess a source file
+src/game_launcher.cpp.i:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/game_launcher.cpp.i
+.PHONY : src/game_launcher.cpp.i
+
+src/game_launcher.s: src/game_launcher.cpp.s
+
+.PHONY : src/game_launcher.s
+
+# target to generate assembly for a file
+src/game_launcher.cpp.s:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/game_launcher.cpp.s
+.PHONY : src/game_launcher.cpp.s
+
 src/gamestate.obj: src/gamestate.cpp.obj
 
 .PHONY : src/gamestate.obj
@@ -302,6 +383,33 @@ src/input.s: src/input.cpp.s
 src/input.cpp.s:
 	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/input.cpp.s
 .PHONY : src/input.cpp.s
+
+src/location.obj: src/location.cpp.obj
+
+.PHONY : src/location.obj
+
+# target to build an object file
+src/location.cpp.obj:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/location.cpp.obj
+.PHONY : src/location.cpp.obj
+
+src/location.i: src/location.cpp.i
+
+.PHONY : src/location.i
+
+# target to preprocess a source file
+src/location.cpp.i:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/location.cpp.i
+.PHONY : src/location.cpp.i
+
+src/location.s: src/location.cpp.s
+
+.PHONY : src/location.s
+
+# target to generate assembly for a file
+src/location.cpp.s:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/location.cpp.s
+.PHONY : src/location.cpp.s
 
 src/main.obj: src/main.cpp.obj
 
@@ -411,6 +519,60 @@ src/motionstate.cpp.s:
 	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/motionstate.cpp.s
 .PHONY : src/motionstate.cpp.s
 
+src/mouse_events.obj: src/mouse_events.cpp.obj
+
+.PHONY : src/mouse_events.obj
+
+# target to build an object file
+src/mouse_events.cpp.obj:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/mouse_events.cpp.obj
+.PHONY : src/mouse_events.cpp.obj
+
+src/mouse_events.i: src/mouse_events.cpp.i
+
+.PHONY : src/mouse_events.i
+
+# target to preprocess a source file
+src/mouse_events.cpp.i:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/mouse_events.cpp.i
+.PHONY : src/mouse_events.cpp.i
+
+src/mouse_events.s: src/mouse_events.cpp.s
+
+.PHONY : src/mouse_events.s
+
+# target to generate assembly for a file
+src/mouse_events.cpp.s:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/mouse_events.cpp.s
+.PHONY : src/mouse_events.cpp.s
+
+src/mouse_handler_base.obj: src/mouse_handler_base.cpp.obj
+
+.PHONY : src/mouse_handler_base.obj
+
+# target to build an object file
+src/mouse_handler_base.cpp.obj:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/mouse_handler_base.cpp.obj
+.PHONY : src/mouse_handler_base.cpp.obj
+
+src/mouse_handler_base.i: src/mouse_handler_base.cpp.i
+
+.PHONY : src/mouse_handler_base.i
+
+# target to preprocess a source file
+src/mouse_handler_base.cpp.i:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/mouse_handler_base.cpp.i
+.PHONY : src/mouse_handler_base.cpp.i
+
+src/mouse_handler_base.s: src/mouse_handler_base.cpp.s
+
+.PHONY : src/mouse_handler_base.s
+
+# target to generate assembly for a file
+src/mouse_handler_base.cpp.s:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/mouse_handler_base.cpp.s
+.PHONY : src/mouse_handler_base.cpp.s
+
 src/physics.obj: src/physics.cpp.obj
 
 .PHONY : src/physics.obj
@@ -437,6 +599,141 @@ src/physics.s: src/physics.cpp.s
 src/physics.cpp.s:
 	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/physics.cpp.s
 .PHONY : src/physics.cpp.s
+
+src/play_controller.obj: src/play_controller.cpp.obj
+
+.PHONY : src/play_controller.obj
+
+# target to build an object file
+src/play_controller.cpp.obj:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/play_controller.cpp.obj
+.PHONY : src/play_controller.cpp.obj
+
+src/play_controller.i: src/play_controller.cpp.i
+
+.PHONY : src/play_controller.i
+
+# target to preprocess a source file
+src/play_controller.cpp.i:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/play_controller.cpp.i
+.PHONY : src/play_controller.cpp.i
+
+src/play_controller.s: src/play_controller.cpp.s
+
+.PHONY : src/play_controller.s
+
+# target to generate assembly for a file
+src/play_controller.cpp.s:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/play_controller.cpp.s
+.PHONY : src/play_controller.cpp.s
+
+src/resources.obj: src/resources.cpp.obj
+
+.PHONY : src/resources.obj
+
+# target to build an object file
+src/resources.cpp.obj:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/resources.cpp.obj
+.PHONY : src/resources.cpp.obj
+
+src/resources.i: src/resources.cpp.i
+
+.PHONY : src/resources.i
+
+# target to preprocess a source file
+src/resources.cpp.i:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/resources.cpp.i
+.PHONY : src/resources.cpp.i
+
+src/resources.s: src/resources.cpp.s
+
+.PHONY : src/resources.s
+
+# target to generate assembly for a file
+src/resources.cpp.s:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/resources.cpp.s
+.PHONY : src/resources.cpp.s
+
+src/sdl/input.obj: src/sdl/input.cpp.obj
+
+.PHONY : src/sdl/input.obj
+
+# target to build an object file
+src/sdl/input.cpp.obj:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/sdl/input.cpp.obj
+.PHONY : src/sdl/input.cpp.obj
+
+src/sdl/input.i: src/sdl/input.cpp.i
+
+.PHONY : src/sdl/input.i
+
+# target to preprocess a source file
+src/sdl/input.cpp.i:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/sdl/input.cpp.i
+.PHONY : src/sdl/input.cpp.i
+
+src/sdl/input.s: src/sdl/input.cpp.s
+
+.PHONY : src/sdl/input.s
+
+# target to generate assembly for a file
+src/sdl/input.cpp.s:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/sdl/input.cpp.s
+.PHONY : src/sdl/input.cpp.s
+
+src/sdl/rect.obj: src/sdl/rect.cpp.obj
+
+.PHONY : src/sdl/rect.obj
+
+# target to build an object file
+src/sdl/rect.cpp.obj:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/sdl/rect.cpp.obj
+.PHONY : src/sdl/rect.cpp.obj
+
+src/sdl/rect.i: src/sdl/rect.cpp.i
+
+.PHONY : src/sdl/rect.i
+
+# target to preprocess a source file
+src/sdl/rect.cpp.i:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/sdl/rect.cpp.i
+.PHONY : src/sdl/rect.cpp.i
+
+src/sdl/rect.s: src/sdl/rect.cpp.s
+
+.PHONY : src/sdl/rect.s
+
+# target to generate assembly for a file
+src/sdl/rect.cpp.s:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/sdl/rect.cpp.s
+.PHONY : src/sdl/rect.cpp.s
+
+src/sdl/window.obj: src/sdl/window.cpp.obj
+
+.PHONY : src/sdl/window.obj
+
+# target to build an object file
+src/sdl/window.cpp.obj:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/sdl/window.cpp.obj
+.PHONY : src/sdl/window.cpp.obj
+
+src/sdl/window.i: src/sdl/window.cpp.i
+
+.PHONY : src/sdl/window.i
+
+# target to preprocess a source file
+src/sdl/window.cpp.i:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/sdl/window.cpp.i
+.PHONY : src/sdl/window.cpp.i
+
+src/sdl/window.s: src/sdl/window.cpp.s
+
+.PHONY : src/sdl/window.s
+
+# target to generate assembly for a file
+src/sdl/window.cpp.s:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/sdl/window.cpp.s
+.PHONY : src/sdl/window.cpp.s
 
 src/state.obj: src/state.cpp.obj
 
@@ -681,6 +978,33 @@ src/tmx_xml.c.s:
 	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/tmx_xml.c.s
 .PHONY : src/tmx_xml.c.s
 
+src/video.obj: src/video.cpp.obj
+
+.PHONY : src/video.obj
+
+# target to build an object file
+src/video.cpp.obj:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/video.cpp.obj
+.PHONY : src/video.cpp.obj
+
+src/video.i: src/video.cpp.i
+
+.PHONY : src/video.i
+
+# target to preprocess a source file
+src/video.cpp.i:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/video.cpp.i
+.PHONY : src/video.cpp.i
+
+src/video.s: src/video.cpp.s
+
+.PHONY : src/video.s
+
+# target to generate assembly for a file
+src/video.cpp.s:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/video.cpp.s
+.PHONY : src/video.cpp.s
+
 src/window.obj: src/window.cpp.obj
 
 .PHONY : src/window.obj
@@ -724,18 +1048,30 @@ help:
 	@echo ... src/camera.obj
 	@echo ... src/camera.i
 	@echo ... src/camera.s
+	@echo ... src/controller_base.obj
+	@echo ... src/controller_base.i
+	@echo ... src/controller_base.s
 	@echo ... src/entity.obj
 	@echo ... src/entity.i
 	@echo ... src/entity.s
 	@echo ... src/entitymanager.obj
 	@echo ... src/entitymanager.i
 	@echo ... src/entitymanager.s
+	@echo ... src/events.obj
+	@echo ... src/events.i
+	@echo ... src/events.s
+	@echo ... src/game_launcher.obj
+	@echo ... src/game_launcher.i
+	@echo ... src/game_launcher.s
 	@echo ... src/gamestate.obj
 	@echo ... src/gamestate.i
 	@echo ... src/gamestate.s
 	@echo ... src/input.obj
 	@echo ... src/input.i
 	@echo ... src/input.s
+	@echo ... src/location.obj
+	@echo ... src/location.i
+	@echo ... src/location.s
 	@echo ... src/main.obj
 	@echo ... src/main.i
 	@echo ... src/main.s
@@ -748,9 +1084,30 @@ help:
 	@echo ... src/motionstate.obj
 	@echo ... src/motionstate.i
 	@echo ... src/motionstate.s
+	@echo ... src/mouse_events.obj
+	@echo ... src/mouse_events.i
+	@echo ... src/mouse_events.s
+	@echo ... src/mouse_handler_base.obj
+	@echo ... src/mouse_handler_base.i
+	@echo ... src/mouse_handler_base.s
 	@echo ... src/physics.obj
 	@echo ... src/physics.i
 	@echo ... src/physics.s
+	@echo ... src/play_controller.obj
+	@echo ... src/play_controller.i
+	@echo ... src/play_controller.s
+	@echo ... src/resources.obj
+	@echo ... src/resources.i
+	@echo ... src/resources.s
+	@echo ... src/sdl/input.obj
+	@echo ... src/sdl/input.i
+	@echo ... src/sdl/input.s
+	@echo ... src/sdl/rect.obj
+	@echo ... src/sdl/rect.i
+	@echo ... src/sdl/rect.s
+	@echo ... src/sdl/window.obj
+	@echo ... src/sdl/window.i
+	@echo ... src/sdl/window.s
 	@echo ... src/state.obj
 	@echo ... src/state.i
 	@echo ... src/state.s
@@ -778,6 +1135,9 @@ help:
 	@echo ... src/tmx_xml.obj
 	@echo ... src/tmx_xml.i
 	@echo ... src/tmx_xml.s
+	@echo ... src/video.obj
+	@echo ... src/video.i
+	@echo ... src/video.s
 	@echo ... src/window.obj
 	@echo ... src/window.i
 	@echo ... src/window.s
