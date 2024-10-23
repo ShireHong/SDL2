@@ -1,5 +1,0 @@
-#constexpr 错误，这个是需要c++17支持，编译的时候不要带c++11，在camke txt文件里面去掉。
-
-#putenv 编不过，同理c++11不能加。
-
-#optional问题，需要更新mingw

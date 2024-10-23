@@ -26,11 +26,11 @@ bool game_launcher::init_video()
 	// if(icon != nullptr) {
 	// 	video::set_window_icon(icon);
 	// }
-    SDL_Surface* icon = IMG_Load("icons/icon-game.png");
+    SDL_Surface* icon = IMG_Load("resource/icons/icon-game.png");
     if (icon  != nullptr) 
     {
         //SDL_SetWindowIcon(video::window_, icon);
-        //video::set_window_icon(icon);
+        video::set_window_icon(icon);
     }
 #endif
 	return true;

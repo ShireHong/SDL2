@@ -1,8 +1,8 @@
 #pragma once
 
-#include "point.h"
+#include "sdl/point.h"
 #include "sdl/rect.h"
-
+#include "sdl/texture.h"
 #include <SDL2/SDL_render.h>
 
 #include <vector>
@@ -132,7 +132,7 @@ bool window_has_mouse_focus();
 void set_window_title(const std::string& title);
 
 /** Sets the icon of the main window. */
-void set_window_icon(SDL_Surface& icon);
+void set_window_icon(SDL_Surface* icon);
 
 
 /**********************/
@@ -266,7 +266,7 @@ rect to_output(const rect& draw_space_rect);
  *              with SDL_TEXTUREACCESS_TARGET, or an empty texture to
  *              indicate the underlying window.
  */
-//void force_render_target(const texture& t);
+void force_render_target(const texture& t);
 
 /** Reset the render target to the main window / screen. */
 void clear_render_target();

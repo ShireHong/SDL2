@@ -65,10 +65,26 @@ file(COPY ${RESOURCE} DESTINATION ${CMAKE_BINARY_DIR})
 
 #编译可执行文件
 
-aux_source_directory(src DIR_SRCS)
+aux_source_directory(src/ DIR_SRCS)
 aux_source_directory(src/sdl DIR_SRCS_SDL)
+aux_source_directory(src/preferences DIR_SRCS_PREF)
+aux_source_directory(src/gui DIR_SRCS_GUI)
+aux_source_directory(src/gui/widgets DIR_SRCS_GUI_WIDGETS)
+aux_source_directory(src/gui/core DIR_SRCS_GUI_CORE)
+aux_source_directory(src/gui/dialogs DIR_SRCS_GUI_DIALOGS)
 
-add_executable( three_kingdoms ${DIR_SRCS} ${DIR_SRCS_SDL})
+
+set(SOURCE_ALL 
+	${DIR_SRCS} 
+	${DIR_SRCS_SDL} 
+	${DIR_SRCS_PREF}
+	${DIR_SRCS_GUI}
+    ${DIR_SRCS_GUI_WIDGETS}
+    ${DIR_SRCS_GUI_CORE}
+    ${DIR_SRCS_GUI_DIALOGS}
+	)
+#add_executable( three_kingdoms ${DIR_SRCS} ${DIR_SRCS_SDL} ${DIR_SRCS_PREF})
+add_executable( three_kingdoms ${SOURCE_ALL} )
 
 #在使用zlib的时候，有一个文件中需要定义WANT_ZLIB这个宏
 if(WANT_ZLIB )

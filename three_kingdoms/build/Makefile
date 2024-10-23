@@ -195,6 +195,87 @@ src/camera.cpp.s:
 	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/camera.cpp.s
 .PHONY : src/camera.cpp.s
 
+src/color.obj: src/color.cpp.obj
+
+.PHONY : src/color.obj
+
+# target to build an object file
+src/color.cpp.obj:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/color.cpp.obj
+.PHONY : src/color.cpp.obj
+
+src/color.i: src/color.cpp.i
+
+.PHONY : src/color.i
+
+# target to preprocess a source file
+src/color.cpp.i:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/color.cpp.i
+.PHONY : src/color.cpp.i
+
+src/color.s: src/color.cpp.s
+
+.PHONY : src/color.s
+
+# target to generate assembly for a file
+src/color.cpp.s:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/color.cpp.s
+.PHONY : src/color.cpp.s
+
+src/config.obj: src/config.cpp.obj
+
+.PHONY : src/config.obj
+
+# target to build an object file
+src/config.cpp.obj:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/config.cpp.obj
+.PHONY : src/config.cpp.obj
+
+src/config.i: src/config.cpp.i
+
+.PHONY : src/config.i
+
+# target to preprocess a source file
+src/config.cpp.i:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/config.cpp.i
+.PHONY : src/config.cpp.i
+
+src/config.s: src/config.cpp.s
+
+.PHONY : src/config.s
+
+# target to generate assembly for a file
+src/config.cpp.s:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/config.cpp.s
+.PHONY : src/config.cpp.s
+
+src/config_cache.obj: src/config_cache.cpp.obj
+
+.PHONY : src/config_cache.obj
+
+# target to build an object file
+src/config_cache.cpp.obj:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/config_cache.cpp.obj
+.PHONY : src/config_cache.cpp.obj
+
+src/config_cache.i: src/config_cache.cpp.i
+
+.PHONY : src/config_cache.i
+
+# target to preprocess a source file
+src/config_cache.cpp.i:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/config_cache.cpp.i
+.PHONY : src/config_cache.cpp.i
+
+src/config_cache.s: src/config_cache.cpp.s
+
+.PHONY : src/config_cache.s
+
+# target to generate assembly for a file
+src/config_cache.cpp.s:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/config_cache.cpp.s
+.PHONY : src/config_cache.cpp.s
+
 src/controller_base.obj: src/controller_base.cpp.obj
 
 .PHONY : src/controller_base.obj
@@ -356,6 +437,357 @@ src/gamestate.s: src/gamestate.cpp.s
 src/gamestate.cpp.s:
 	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gamestate.cpp.s
 .PHONY : src/gamestate.cpp.s
+
+src/gui/core/gui_definition.obj: src/gui/core/gui_definition.cpp.obj
+
+.PHONY : src/gui/core/gui_definition.obj
+
+# target to build an object file
+src/gui/core/gui_definition.cpp.obj:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/core/gui_definition.cpp.obj
+.PHONY : src/gui/core/gui_definition.cpp.obj
+
+src/gui/core/gui_definition.i: src/gui/core/gui_definition.cpp.i
+
+.PHONY : src/gui/core/gui_definition.i
+
+# target to preprocess a source file
+src/gui/core/gui_definition.cpp.i:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/core/gui_definition.cpp.i
+.PHONY : src/gui/core/gui_definition.cpp.i
+
+src/gui/core/gui_definition.s: src/gui/core/gui_definition.cpp.s
+
+.PHONY : src/gui/core/gui_definition.s
+
+# target to generate assembly for a file
+src/gui/core/gui_definition.cpp.s:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/core/gui_definition.cpp.s
+.PHONY : src/gui/core/gui_definition.cpp.s
+
+src/gui/core/static_registry.obj: src/gui/core/static_registry.cpp.obj
+
+.PHONY : src/gui/core/static_registry.obj
+
+# target to build an object file
+src/gui/core/static_registry.cpp.obj:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/core/static_registry.cpp.obj
+.PHONY : src/gui/core/static_registry.cpp.obj
+
+src/gui/core/static_registry.i: src/gui/core/static_registry.cpp.i
+
+.PHONY : src/gui/core/static_registry.i
+
+# target to preprocess a source file
+src/gui/core/static_registry.cpp.i:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/core/static_registry.cpp.i
+.PHONY : src/gui/core/static_registry.cpp.i
+
+src/gui/core/static_registry.s: src/gui/core/static_registry.cpp.s
+
+.PHONY : src/gui/core/static_registry.s
+
+# target to generate assembly for a file
+src/gui/core/static_registry.cpp.s:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/core/static_registry.cpp.s
+.PHONY : src/gui/core/static_registry.cpp.s
+
+src/gui/core/top_level_drawable.obj: src/gui/core/top_level_drawable.cpp.obj
+
+.PHONY : src/gui/core/top_level_drawable.obj
+
+# target to build an object file
+src/gui/core/top_level_drawable.cpp.obj:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/core/top_level_drawable.cpp.obj
+.PHONY : src/gui/core/top_level_drawable.cpp.obj
+
+src/gui/core/top_level_drawable.i: src/gui/core/top_level_drawable.cpp.i
+
+.PHONY : src/gui/core/top_level_drawable.i
+
+# target to preprocess a source file
+src/gui/core/top_level_drawable.cpp.i:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/core/top_level_drawable.cpp.i
+.PHONY : src/gui/core/top_level_drawable.cpp.i
+
+src/gui/core/top_level_drawable.s: src/gui/core/top_level_drawable.cpp.s
+
+.PHONY : src/gui/core/top_level_drawable.s
+
+# target to generate assembly for a file
+src/gui/core/top_level_drawable.cpp.s:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/core/top_level_drawable.cpp.s
+.PHONY : src/gui/core/top_level_drawable.cpp.s
+
+src/gui/core/widget_definition.obj: src/gui/core/widget_definition.cpp.obj
+
+.PHONY : src/gui/core/widget_definition.obj
+
+# target to build an object file
+src/gui/core/widget_definition.cpp.obj:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/core/widget_definition.cpp.obj
+.PHONY : src/gui/core/widget_definition.cpp.obj
+
+src/gui/core/widget_definition.i: src/gui/core/widget_definition.cpp.i
+
+.PHONY : src/gui/core/widget_definition.i
+
+# target to preprocess a source file
+src/gui/core/widget_definition.cpp.i:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/core/widget_definition.cpp.i
+.PHONY : src/gui/core/widget_definition.cpp.i
+
+src/gui/core/widget_definition.s: src/gui/core/widget_definition.cpp.s
+
+.PHONY : src/gui/core/widget_definition.s
+
+# target to generate assembly for a file
+src/gui/core/widget_definition.cpp.s:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/core/widget_definition.cpp.s
+.PHONY : src/gui/core/widget_definition.cpp.s
+
+src/gui/core/window_builder.obj: src/gui/core/window_builder.cpp.obj
+
+.PHONY : src/gui/core/window_builder.obj
+
+# target to build an object file
+src/gui/core/window_builder.cpp.obj:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/core/window_builder.cpp.obj
+.PHONY : src/gui/core/window_builder.cpp.obj
+
+src/gui/core/window_builder.i: src/gui/core/window_builder.cpp.i
+
+.PHONY : src/gui/core/window_builder.i
+
+# target to preprocess a source file
+src/gui/core/window_builder.cpp.i:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/core/window_builder.cpp.i
+.PHONY : src/gui/core/window_builder.cpp.i
+
+src/gui/core/window_builder.s: src/gui/core/window_builder.cpp.s
+
+.PHONY : src/gui/core/window_builder.s
+
+# target to generate assembly for a file
+src/gui/core/window_builder.cpp.s:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/core/window_builder.cpp.s
+.PHONY : src/gui/core/window_builder.cpp.s
+
+src/gui/dialogs/message.obj: src/gui/dialogs/message.cpp.obj
+
+.PHONY : src/gui/dialogs/message.obj
+
+# target to build an object file
+src/gui/dialogs/message.cpp.obj:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/dialogs/message.cpp.obj
+.PHONY : src/gui/dialogs/message.cpp.obj
+
+src/gui/dialogs/message.i: src/gui/dialogs/message.cpp.i
+
+.PHONY : src/gui/dialogs/message.i
+
+# target to preprocess a source file
+src/gui/dialogs/message.cpp.i:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/dialogs/message.cpp.i
+.PHONY : src/gui/dialogs/message.cpp.i
+
+src/gui/dialogs/message.s: src/gui/dialogs/message.cpp.s
+
+.PHONY : src/gui/dialogs/message.s
+
+# target to generate assembly for a file
+src/gui/dialogs/message.cpp.s:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/dialogs/message.cpp.s
+.PHONY : src/gui/dialogs/message.cpp.s
+
+src/gui/dialogs/modal_dialog.obj: src/gui/dialogs/modal_dialog.cpp.obj
+
+.PHONY : src/gui/dialogs/modal_dialog.obj
+
+# target to build an object file
+src/gui/dialogs/modal_dialog.cpp.obj:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/dialogs/modal_dialog.cpp.obj
+.PHONY : src/gui/dialogs/modal_dialog.cpp.obj
+
+src/gui/dialogs/modal_dialog.i: src/gui/dialogs/modal_dialog.cpp.i
+
+.PHONY : src/gui/dialogs/modal_dialog.i
+
+# target to preprocess a source file
+src/gui/dialogs/modal_dialog.cpp.i:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/dialogs/modal_dialog.cpp.i
+.PHONY : src/gui/dialogs/modal_dialog.cpp.i
+
+src/gui/dialogs/modal_dialog.s: src/gui/dialogs/modal_dialog.cpp.s
+
+.PHONY : src/gui/dialogs/modal_dialog.s
+
+# target to generate assembly for a file
+src/gui/dialogs/modal_dialog.cpp.s:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/dialogs/modal_dialog.cpp.s
+.PHONY : src/gui/dialogs/modal_dialog.cpp.s
+
+src/gui/gui.obj: src/gui/gui.cpp.obj
+
+.PHONY : src/gui/gui.obj
+
+# target to build an object file
+src/gui/gui.cpp.obj:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/gui.cpp.obj
+.PHONY : src/gui/gui.cpp.obj
+
+src/gui/gui.i: src/gui/gui.cpp.i
+
+.PHONY : src/gui/gui.i
+
+# target to preprocess a source file
+src/gui/gui.cpp.i:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/gui.cpp.i
+.PHONY : src/gui/gui.cpp.i
+
+src/gui/gui.s: src/gui/gui.cpp.s
+
+.PHONY : src/gui/gui.s
+
+# target to generate assembly for a file
+src/gui/gui.cpp.s:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/gui.cpp.s
+.PHONY : src/gui/gui.cpp.s
+
+src/gui/widgets/container_base.obj: src/gui/widgets/container_base.cpp.obj
+
+.PHONY : src/gui/widgets/container_base.obj
+
+# target to build an object file
+src/gui/widgets/container_base.cpp.obj:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/widgets/container_base.cpp.obj
+.PHONY : src/gui/widgets/container_base.cpp.obj
+
+src/gui/widgets/container_base.i: src/gui/widgets/container_base.cpp.i
+
+.PHONY : src/gui/widgets/container_base.i
+
+# target to preprocess a source file
+src/gui/widgets/container_base.cpp.i:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/widgets/container_base.cpp.i
+.PHONY : src/gui/widgets/container_base.cpp.i
+
+src/gui/widgets/container_base.s: src/gui/widgets/container_base.cpp.s
+
+.PHONY : src/gui/widgets/container_base.s
+
+# target to generate assembly for a file
+src/gui/widgets/container_base.cpp.s:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/widgets/container_base.cpp.s
+.PHONY : src/gui/widgets/container_base.cpp.s
+
+src/gui/widgets/panel.obj: src/gui/widgets/panel.cpp.obj
+
+.PHONY : src/gui/widgets/panel.obj
+
+# target to build an object file
+src/gui/widgets/panel.cpp.obj:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/widgets/panel.cpp.obj
+.PHONY : src/gui/widgets/panel.cpp.obj
+
+src/gui/widgets/panel.i: src/gui/widgets/panel.cpp.i
+
+.PHONY : src/gui/widgets/panel.i
+
+# target to preprocess a source file
+src/gui/widgets/panel.cpp.i:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/widgets/panel.cpp.i
+.PHONY : src/gui/widgets/panel.cpp.i
+
+src/gui/widgets/panel.s: src/gui/widgets/panel.cpp.s
+
+.PHONY : src/gui/widgets/panel.s
+
+# target to generate assembly for a file
+src/gui/widgets/panel.cpp.s:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/widgets/panel.cpp.s
+.PHONY : src/gui/widgets/panel.cpp.s
+
+src/gui/widgets/styled_widget.obj: src/gui/widgets/styled_widget.cpp.obj
+
+.PHONY : src/gui/widgets/styled_widget.obj
+
+# target to build an object file
+src/gui/widgets/styled_widget.cpp.obj:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/widgets/styled_widget.cpp.obj
+.PHONY : src/gui/widgets/styled_widget.cpp.obj
+
+src/gui/widgets/styled_widget.i: src/gui/widgets/styled_widget.cpp.i
+
+.PHONY : src/gui/widgets/styled_widget.i
+
+# target to preprocess a source file
+src/gui/widgets/styled_widget.cpp.i:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/widgets/styled_widget.cpp.i
+.PHONY : src/gui/widgets/styled_widget.cpp.i
+
+src/gui/widgets/styled_widget.s: src/gui/widgets/styled_widget.cpp.s
+
+.PHONY : src/gui/widgets/styled_widget.s
+
+# target to generate assembly for a file
+src/gui/widgets/styled_widget.cpp.s:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/widgets/styled_widget.cpp.s
+.PHONY : src/gui/widgets/styled_widget.cpp.s
+
+src/gui/widgets/widget.obj: src/gui/widgets/widget.cpp.obj
+
+.PHONY : src/gui/widgets/widget.obj
+
+# target to build an object file
+src/gui/widgets/widget.cpp.obj:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/widgets/widget.cpp.obj
+.PHONY : src/gui/widgets/widget.cpp.obj
+
+src/gui/widgets/widget.i: src/gui/widgets/widget.cpp.i
+
+.PHONY : src/gui/widgets/widget.i
+
+# target to preprocess a source file
+src/gui/widgets/widget.cpp.i:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/widgets/widget.cpp.i
+.PHONY : src/gui/widgets/widget.cpp.i
+
+src/gui/widgets/widget.s: src/gui/widgets/widget.cpp.s
+
+.PHONY : src/gui/widgets/widget.s
+
+# target to generate assembly for a file
+src/gui/widgets/widget.cpp.s:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/widgets/widget.cpp.s
+.PHONY : src/gui/widgets/widget.cpp.s
+
+src/gui/widgets/window.obj: src/gui/widgets/window.cpp.obj
+
+.PHONY : src/gui/widgets/window.obj
+
+# target to build an object file
+src/gui/widgets/window.cpp.obj:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/widgets/window.cpp.obj
+.PHONY : src/gui/widgets/window.cpp.obj
+
+src/gui/widgets/window.i: src/gui/widgets/window.cpp.i
+
+.PHONY : src/gui/widgets/window.i
+
+# target to preprocess a source file
+src/gui/widgets/window.cpp.i:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/widgets/window.cpp.i
+.PHONY : src/gui/widgets/window.cpp.i
+
+src/gui/widgets/window.s: src/gui/widgets/window.cpp.s
+
+.PHONY : src/gui/widgets/window.s
+
+# target to generate assembly for a file
+src/gui/widgets/window.cpp.s:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/widgets/window.cpp.s
+.PHONY : src/gui/widgets/window.cpp.s
 
 src/input.obj: src/input.cpp.obj
 
@@ -627,6 +1059,33 @@ src/play_controller.cpp.s:
 	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/play_controller.cpp.s
 .PHONY : src/play_controller.cpp.s
 
+src/preferences/preferences.obj: src/preferences/preferences.cpp.obj
+
+.PHONY : src/preferences/preferences.obj
+
+# target to build an object file
+src/preferences/preferences.cpp.obj:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/preferences/preferences.cpp.obj
+.PHONY : src/preferences/preferences.cpp.obj
+
+src/preferences/preferences.i: src/preferences/preferences.cpp.i
+
+.PHONY : src/preferences/preferences.i
+
+# target to preprocess a source file
+src/preferences/preferences.cpp.i:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/preferences/preferences.cpp.i
+.PHONY : src/preferences/preferences.cpp.i
+
+src/preferences/preferences.s: src/preferences/preferences.cpp.s
+
+.PHONY : src/preferences/preferences.s
+
+# target to generate assembly for a file
+src/preferences/preferences.cpp.s:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/preferences/preferences.cpp.s
+.PHONY : src/preferences/preferences.cpp.s
+
 src/resources.obj: src/resources.cpp.obj
 
 .PHONY : src/resources.obj
@@ -681,6 +1140,33 @@ src/sdl/input.cpp.s:
 	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/sdl/input.cpp.s
 .PHONY : src/sdl/input.cpp.s
 
+src/sdl/point.obj: src/sdl/point.cpp.obj
+
+.PHONY : src/sdl/point.obj
+
+# target to build an object file
+src/sdl/point.cpp.obj:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/sdl/point.cpp.obj
+.PHONY : src/sdl/point.cpp.obj
+
+src/sdl/point.i: src/sdl/point.cpp.i
+
+.PHONY : src/sdl/point.i
+
+# target to preprocess a source file
+src/sdl/point.cpp.i:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/sdl/point.cpp.i
+.PHONY : src/sdl/point.cpp.i
+
+src/sdl/point.s: src/sdl/point.cpp.s
+
+.PHONY : src/sdl/point.s
+
+# target to generate assembly for a file
+src/sdl/point.cpp.s:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/sdl/point.cpp.s
+.PHONY : src/sdl/point.cpp.s
+
 src/sdl/rect.obj: src/sdl/rect.cpp.obj
 
 .PHONY : src/sdl/rect.obj
@@ -707,6 +1193,60 @@ src/sdl/rect.s: src/sdl/rect.cpp.s
 src/sdl/rect.cpp.s:
 	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/sdl/rect.cpp.s
 .PHONY : src/sdl/rect.cpp.s
+
+src/sdl/surface.obj: src/sdl/surface.cpp.obj
+
+.PHONY : src/sdl/surface.obj
+
+# target to build an object file
+src/sdl/surface.cpp.obj:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/sdl/surface.cpp.obj
+.PHONY : src/sdl/surface.cpp.obj
+
+src/sdl/surface.i: src/sdl/surface.cpp.i
+
+.PHONY : src/sdl/surface.i
+
+# target to preprocess a source file
+src/sdl/surface.cpp.i:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/sdl/surface.cpp.i
+.PHONY : src/sdl/surface.cpp.i
+
+src/sdl/surface.s: src/sdl/surface.cpp.s
+
+.PHONY : src/sdl/surface.s
+
+# target to generate assembly for a file
+src/sdl/surface.cpp.s:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/sdl/surface.cpp.s
+.PHONY : src/sdl/surface.cpp.s
+
+src/sdl/texture.obj: src/sdl/texture.cpp.obj
+
+.PHONY : src/sdl/texture.obj
+
+# target to build an object file
+src/sdl/texture.cpp.obj:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/sdl/texture.cpp.obj
+.PHONY : src/sdl/texture.cpp.obj
+
+src/sdl/texture.i: src/sdl/texture.cpp.i
+
+.PHONY : src/sdl/texture.i
+
+# target to preprocess a source file
+src/sdl/texture.cpp.i:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/sdl/texture.cpp.i
+.PHONY : src/sdl/texture.cpp.i
+
+src/sdl/texture.s: src/sdl/texture.cpp.s
+
+.PHONY : src/sdl/texture.s
+
+# target to generate assembly for a file
+src/sdl/texture.cpp.s:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/sdl/texture.cpp.s
+.PHONY : src/sdl/texture.cpp.s
 
 src/sdl/window.obj: src/sdl/window.cpp.obj
 
@@ -1048,6 +1588,15 @@ help:
 	@echo ... src/camera.obj
 	@echo ... src/camera.i
 	@echo ... src/camera.s
+	@echo ... src/color.obj
+	@echo ... src/color.i
+	@echo ... src/color.s
+	@echo ... src/config.obj
+	@echo ... src/config.i
+	@echo ... src/config.s
+	@echo ... src/config_cache.obj
+	@echo ... src/config_cache.i
+	@echo ... src/config_cache.s
 	@echo ... src/controller_base.obj
 	@echo ... src/controller_base.i
 	@echo ... src/controller_base.s
@@ -1066,6 +1615,45 @@ help:
 	@echo ... src/gamestate.obj
 	@echo ... src/gamestate.i
 	@echo ... src/gamestate.s
+	@echo ... src/gui/core/gui_definition.obj
+	@echo ... src/gui/core/gui_definition.i
+	@echo ... src/gui/core/gui_definition.s
+	@echo ... src/gui/core/static_registry.obj
+	@echo ... src/gui/core/static_registry.i
+	@echo ... src/gui/core/static_registry.s
+	@echo ... src/gui/core/top_level_drawable.obj
+	@echo ... src/gui/core/top_level_drawable.i
+	@echo ... src/gui/core/top_level_drawable.s
+	@echo ... src/gui/core/widget_definition.obj
+	@echo ... src/gui/core/widget_definition.i
+	@echo ... src/gui/core/widget_definition.s
+	@echo ... src/gui/core/window_builder.obj
+	@echo ... src/gui/core/window_builder.i
+	@echo ... src/gui/core/window_builder.s
+	@echo ... src/gui/dialogs/message.obj
+	@echo ... src/gui/dialogs/message.i
+	@echo ... src/gui/dialogs/message.s
+	@echo ... src/gui/dialogs/modal_dialog.obj
+	@echo ... src/gui/dialogs/modal_dialog.i
+	@echo ... src/gui/dialogs/modal_dialog.s
+	@echo ... src/gui/gui.obj
+	@echo ... src/gui/gui.i
+	@echo ... src/gui/gui.s
+	@echo ... src/gui/widgets/container_base.obj
+	@echo ... src/gui/widgets/container_base.i
+	@echo ... src/gui/widgets/container_base.s
+	@echo ... src/gui/widgets/panel.obj
+	@echo ... src/gui/widgets/panel.i
+	@echo ... src/gui/widgets/panel.s
+	@echo ... src/gui/widgets/styled_widget.obj
+	@echo ... src/gui/widgets/styled_widget.i
+	@echo ... src/gui/widgets/styled_widget.s
+	@echo ... src/gui/widgets/widget.obj
+	@echo ... src/gui/widgets/widget.i
+	@echo ... src/gui/widgets/widget.s
+	@echo ... src/gui/widgets/window.obj
+	@echo ... src/gui/widgets/window.i
+	@echo ... src/gui/widgets/window.s
 	@echo ... src/input.obj
 	@echo ... src/input.i
 	@echo ... src/input.s
@@ -1096,15 +1684,27 @@ help:
 	@echo ... src/play_controller.obj
 	@echo ... src/play_controller.i
 	@echo ... src/play_controller.s
+	@echo ... src/preferences/preferences.obj
+	@echo ... src/preferences/preferences.i
+	@echo ... src/preferences/preferences.s
 	@echo ... src/resources.obj
 	@echo ... src/resources.i
 	@echo ... src/resources.s
 	@echo ... src/sdl/input.obj
 	@echo ... src/sdl/input.i
 	@echo ... src/sdl/input.s
+	@echo ... src/sdl/point.obj
+	@echo ... src/sdl/point.i
+	@echo ... src/sdl/point.s
 	@echo ... src/sdl/rect.obj
 	@echo ... src/sdl/rect.i
 	@echo ... src/sdl/rect.s
+	@echo ... src/sdl/surface.obj
+	@echo ... src/sdl/surface.i
+	@echo ... src/sdl/surface.s
+	@echo ... src/sdl/texture.obj
+	@echo ... src/sdl/texture.i
+	@echo ... src/sdl/texture.s
 	@echo ... src/sdl/window.obj
 	@echo ... src/sdl/window.i
 	@echo ... src/sdl/window.s

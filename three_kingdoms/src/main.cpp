@@ -8,9 +8,10 @@
 #include <SDL2/SDL.h> // for SDL_Init, SDL_INIT_TIMER
 #include <time.h>
 #include <cstdlib>
-
+#include "gui/gui.h"                  // for init
 #include "game_launcher.h"
 #include "events.h"
+#include "gui/dialogs/message.h"      // for show_error_message
 #undef main
 
 
@@ -53,6 +54,15 @@ static int do_gameloop()
 		std::cout << "could not initialize display" <<std::endl;
 		return 1;
 	}
+
+    gui2::init();
+    
+    if (false)
+    {
+        std::string msg ="Unable to create ";
+		gui2::show_message("Logging Failure", msg, gui2::dialogs::message::ok_button);
+    }
+
     // If loading a game, skip the titlescreen entirely
     //if(game->has_load_data() && game->load_game()) {
     game->launch_game();

@@ -3,7 +3,7 @@
 
 #include <memory>
 #include <string>
-#include <SDL.h>
+#include <SDL2/SDL.h>
 
 ///Enum for the 3 mouse buttons
 enum MOUSE 

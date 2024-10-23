@@ -4,9 +4,9 @@
 #include <string>
 #include <stdexcept> /* try throw的引用头文件 */
 #include <memory> /* unique_ptr */
-#include <SDL.h>
-#include <SDL_image.h>
-#include <SDL_ttf.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
 #include <glm/glm.hpp>
 #include <tmx.h>
 #include "timer.h"

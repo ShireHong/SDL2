@@ -1,8 +1,10 @@
 #include "video.h"
 
 
-#include "point.h"
+#include "sdl/point.h"
 #include "sdl/window.h"
+#include "preferences/preferences.h"
+#include "sdl/texture.h"
 #include <memory> /* unique_ptr */
 #include <iostream>
 #include <SDL2/SDL_render.h> // SDL_Texture
@@ -17,10 +19,10 @@ namespace
 std::unique_ptr<sdl::window> window;
 
 // /** The main offscreen render target. */
-// texture render_texture_ = {};
+texture render_texture_ = {};
 
 // /** The current offscreen render target. */
-// texture current_render_target_ = {};
+texture current_render_target_ = {};
 
 bool headless_ = false; /**< running with no window at all */
 bool testing_ = false; /**< running unit tests */
@@ -173,7 +175,7 @@ bool update_test_framebuffer()
 
 	return changed;
 }
-#if 0
+#if 1
 bool update_framebuffer()
 {
 	if (!window) {
@@ -196,11 +198,12 @@ bool update_framebuffer()
 
 	// Find max valid pixel scale at current output size.
 	point osize(window->get_output_size());
+    std::cout<<osize<<std::endl;
 	int max_scale = std::min(
 		osize.x / pref_constants::min_window_width,
 		osize.y / pref_constants::min_window_height);
 	max_scale = std::min(max_scale, pref_constants::max_pixel_scale);
-
+    std::cout<<max_scale<<std::endl;
 	// Determine best pixel scale according to preference and window size
 	int scale = 1;
 	if (prefs::get().auto_pixel_scale()) {
@@ -223,30 +226,34 @@ bool update_framebuffer()
 		changed = true;
 	}
 
-	// Update logical size if it doesn't match the current resolution and scale.
-	point lsize(window->get_logical_size());
-	point wsize(window->get_size());
-	if (lsize.x != osize.x / scale || lsize.y != osize.y / scale) {
-		if (!prefs::get().auto_pixel_scale() && scale < prefs::get().pixel_scale()) {
-			LOG_DP << "reducing pixel scale from desired "
+	// // Update logical size if it doesn't match the current resolution and scale.
+	 point lsize(window->get_logical_size());
+	 point wsize(window->get_size());
+     std::cout<<lsize<<std::endl;
+     std::cout<<wsize<<std::endl;
+	if (lsize.x != osize.x / scale || lsize.y != osize.y / scale) 
+    {
+		if (!prefs::get().auto_pixel_scale() && scale < prefs::get().pixel_scale()) 
+        {
+			std::cout << "reducing pixel scale from desired "
 				<< prefs::get().pixel_scale() << " to maximum allowable "
 				<< scale;
 		}
-		LOG_DP << "pixel scale: " << scale;
-		LOG_DP << "overriding logical size";
-		LOG_DP << "  old lsize: " << lsize;
-		LOG_DP << "  old wsize: " << wsize;
-		LOG_DP << "  old osize: " << osize;
+		std::cout << "pixel scale: " << scale <<std::endl;
+		std::cout << "overriding logical size"<<std::endl;
+		std::cout << "  old lsize: " << lsize <<std::endl;
+		std::cout << "  old wsize: " << wsize <<std::endl;
+		std::cout << "  old osize: " << osize <<std::endl;
 		window->set_logical_size(osize.x / scale, osize.y / scale);
 		lsize = window->get_logical_size();
 		wsize = window->get_size();
 		osize = window->get_output_size();
-		LOG_DP << "  new lsize: " << lsize;
-		LOG_DP << "  new wsize: " << wsize;
-		LOG_DP << "  new osize: " << osize;
+		std::cout << "  new lsize: " << lsize <<std::endl;
+		std::cout << "  new wsize: " << wsize <<std::endl;
+		std::cout << "  new osize: " << osize <<std::endl;
 		float sx, sy;
 		SDL_RenderGetScale(*window, &sx, &sy);
-		LOG_DP << "  render scale: " << sx << ", " << sy;
+		std::cout << "  render scale: " << sx << ", " << sy <<std::endl;
 	}
 	// Cache it for easy access
 	game_canvas_size_ = lsize;
@@ -257,7 +264,7 @@ bool update_framebuffer()
 		SDL_QueryTexture(render_texture_, nullptr, nullptr, &w, &h);
 		if (w != osize.x || h != osize.y) {
 			// Delete it and let it be recreated.
-			LOG_DP << "destroying old render texture";
+			std::cout << "destroying old render texture" << std::endl;
 			render_texture_.reset();
 		} else {
 			// This isn't currently used, but ensure it's accurate anyway.
@@ -265,7 +272,8 @@ bool update_framebuffer()
 		}
 	}
 	if (!render_texture_) {
-		LOG_DP << "creating offscreen render texture";
+		//LOG_DP << "creating offscreen render texture";
+        std::cout << "creating offscreen render texture" << std::endl;
 		render_texture_.assign(SDL_CreateTexture(
 			*window,
 			window->pixel_format(),
@@ -284,15 +292,20 @@ bool update_framebuffer()
 	input_area_ = {{}, wsize};
 
 	rect active_area = to_output(draw_area());
+
+    std::cout << "active_area: " << active_area << std::endl;
 	if (active_area.size() != osize) {
-		LOG_DP << "render target offset: LT " << active_area.pos() << " RB "
-		       << osize - active_area.size() - active_area.pos();
+		// LOG_DP << "render target offset: LT " << active_area.pos() << " RB "
+		//        << osize - active_area.size() - active_area.pos();
+        std::cout << "render target offset: LT " << active_area.pos() << " RB "
+		        << osize - active_area.size() - active_area.pos() << std::endl;
 		// Translate active_area into display coordinates as input_area_
 		input_area_ = {
 			(active_area.pos() * wsize) / osize,
 			(active_area.size() * wsize) / osize
 		};
-		LOG_DP << "input area: " << input_area_;
+		//LOG_DP << "input area: " << input_area_;
+        std::cout << "input area: " << input_area_ << std::endl;
 	}
 
 	return changed;
@@ -351,7 +364,7 @@ void init_window(bool hidden)
 	SDL_GetCurrentDisplayMode(window->get_display_index(), &currentDisplayMode);
 	refresh_rate_ = currentDisplayMode.refresh_rate != 0 ? currentDisplayMode.refresh_rate : 60;
 
-	//update_framebuffer();
+	update_framebuffer();
 }
 
 bool has_window()
@@ -386,6 +399,10 @@ point game_canvas_size()
 	return game_canvas_size_;
 }
 
+rect draw_area()
+{
+	return {0, 0, current_render_target_.w(), current_render_target_.h()};
+}
 
 
 point draw_offset()
@@ -407,6 +424,16 @@ rect output_area()
 	return {0, 0, p.x, p.y};
 }
 
+rect to_output(const rect& r)
+{
+	// Multiply r by integer scale, adding draw_offset to the position.
+	point dsize = current_render_target_.draw_size();
+	point osize = current_render_target_.get_raw_size();
+	point pos = (r.pos() * (osize / dsize)) + draw_offset();
+	point size = r.size() * (osize / dsize);
+	return {pos, size};
+}
+
 rect input_area()
 {
 	return input_area_;
@@ -424,12 +451,47 @@ int current_refresh_rate()
 }
 
 
-// texture get_render_target()
-// {
-// 	// This should always be up-to-date, but assert for sanity.
-// 	assert(current_render_target_ == SDL_GetRenderTarget(get_renderer()));
-// 	return current_render_target_;
-// }
+void force_render_target(const texture& t)
+{
+	if (SDL_SetRenderTarget(get_renderer(), t)) {
+		// ERR_DP << "failed to set render target to "
+		// 	<< static_cast<void*>(t.get()) << ' '
+		// 	<< t.draw_size() << " / " << t.get_raw_size();
+		// ERR_DP << "last SDL error: " << SDL_GetError();
+        std::cout << "failed to set render target to "
+		 	<< static_cast<void*>(t.get()) << ' '
+		 	<< t.draw_size() << " / " << t.get_raw_size() << std::endl;
+		std::cout << "last SDL error: " <<  std::endl;
+		//throw error("failed to set render target");
+	}
+	current_render_target_ = t;
+
+	if (testing_) {
+		return;
+	}
+
+	// The scale factor gets reset when the render target changes,
+	// so make sure it gets set back appropriately.
+	if (!t) {
+		// DBG_DP << "rendering to window / screen";
+        std::cout << "rendering to window / screen" << std::endl;
+		window->set_logical_size(game_canvas_size_);
+	} else if (t == render_texture_) {
+		//DBG_DP << "rendering to primary buffer";
+        std::cout << "rendering to primary buffer" << std::endl;
+		window->set_logical_size(game_canvas_size_);
+
+        std::cout << "game_canvas_size_: " << game_canvas_size_ << std::endl;
+	} else {
+		// DBG_DP << "rendering to custom target "
+		// 	<< static_cast<void*>(t.get()) << ' '
+		// 	<< t.draw_size() << " / " << t.get_raw_size();
+        std::cout << "rendering to custom target "
+		 	<< static_cast<void*>(t.get()) << ' '
+		 	<< t.draw_size() << " / " << t.get_raw_size() << std::endl;
+		window->set_logical_size(t.w(), t.h());
+	}
+}
 
 
 void set_window_title(const std::string& title)

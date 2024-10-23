@@ -6,7 +6,7 @@
 #include "base.h"
 #include "physics.h"
 #include "map.h"
-#include <SDL_image.h>
+#include <SDL2/SDL_image.h>
 
 ///The Entity class, to provide functions that call to attached Lua scripts
 /**

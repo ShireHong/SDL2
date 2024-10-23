@@ -1,0 +1,13 @@
+#constexpr 错误，这个是需要c++17支持，编译的时候不要带c++11，在camke txt文件里面去掉。
+
+#putenv 编不过，同理c++11不能加。
+
+#optional问题，需要更新mingw，c++17标准库特性
+
+#std::is_same_v is no member of std，is_same_v是c++17引入的特性
+
+#namespace "std" has no member "string_view"  c++17版本
+
+#include <any>  c++17标准库特性
+
+#is_base_of_v 是 C++17 标准库提供的一个类型特性，用于判断一个类型是否是另一个类型的基类

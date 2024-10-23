@@ -3,7 +3,7 @@
 
 #include <string>
 #include <sstream>
-#include <SDL.h>
+#include <SDL2/SDL.h>
 #include "vectors.h"
 
 ///A rectangle
