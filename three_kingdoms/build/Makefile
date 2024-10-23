@@ -195,6 +195,7 @@ src/camera.cpp.s:
 	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/camera.cpp.s
 .PHONY : src/camera.cpp.s
 
+<<<<<<< HEAD
 src/color.obj: src/color.cpp.obj
 
 .PHONY : src/color.obj
@@ -276,6 +277,8 @@ src/config_cache.cpp.s:
 	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/config_cache.cpp.s
 .PHONY : src/config_cache.cpp.s
 
+=======
+>>>>>>> 50ce4473dd51241d6dc3e891d90540e0d735ba82
 src/controller_base.obj: src/controller_base.cpp.obj
 
 .PHONY : src/controller_base.obj
@@ -1059,6 +1062,7 @@ src/play_controller.cpp.s:
 	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/play_controller.cpp.s
 .PHONY : src/play_controller.cpp.s
 
+<<<<<<< HEAD
 src/preferences/preferences.obj: src/preferences/preferences.cpp.obj
 
 .PHONY : src/preferences/preferences.obj
@@ -1086,6 +1090,8 @@ src/preferences/preferences.cpp.s:
 	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/preferences/preferences.cpp.s
 .PHONY : src/preferences/preferences.cpp.s
 
+=======
+>>>>>>> 50ce4473dd51241d6dc3e891d90540e0d735ba82
 src/resources.obj: src/resources.cpp.obj
 
 .PHONY : src/resources.obj
@@ -1140,6 +1146,7 @@ src/sdl/input.cpp.s:
 	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/sdl/input.cpp.s
 .PHONY : src/sdl/input.cpp.s
 
+<<<<<<< HEAD
 src/sdl/point.obj: src/sdl/point.cpp.obj
 
 .PHONY : src/sdl/point.obj
@@ -1167,6 +1174,8 @@ src/sdl/point.cpp.s:
 	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/sdl/point.cpp.s
 .PHONY : src/sdl/point.cpp.s
 
+=======
+>>>>>>> 50ce4473dd51241d6dc3e891d90540e0d735ba82
 src/sdl/rect.obj: src/sdl/rect.cpp.obj
 
 .PHONY : src/sdl/rect.obj
@@ -1194,6 +1203,7 @@ src/sdl/rect.cpp.s:
 	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/sdl/rect.cpp.s
 .PHONY : src/sdl/rect.cpp.s
 
+<<<<<<< HEAD
 src/sdl/surface.obj: src/sdl/surface.cpp.obj
 
 .PHONY : src/sdl/surface.obj
@@ -1248,6 +1258,8 @@ src/sdl/texture.cpp.s:
 	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/sdl/texture.cpp.s
 .PHONY : src/sdl/texture.cpp.s
 
+=======
+>>>>>>> 50ce4473dd51241d6dc3e891d90540e0d735ba82
 src/sdl/window.obj: src/sdl/window.cpp.obj
 
 .PHONY : src/sdl/window.obj
@@ -1588,6 +1600,7 @@ help:
 	@echo ... src/camera.obj
 	@echo ... src/camera.i
 	@echo ... src/camera.s
+<<<<<<< HEAD
 	@echo ... src/color.obj
 	@echo ... src/color.i
 	@echo ... src/color.s
@@ -1597,6 +1610,8 @@ help:
 	@echo ... src/config_cache.obj
 	@echo ... src/config_cache.i
 	@echo ... src/config_cache.s
+=======
+>>>>>>> 50ce4473dd51241d6dc3e891d90540e0d735ba82
 	@echo ... src/controller_base.obj
 	@echo ... src/controller_base.i
 	@echo ... src/controller_base.s
@@ -1684,15 +1699,19 @@ help:
 	@echo ... src/play_controller.obj
 	@echo ... src/play_controller.i
 	@echo ... src/play_controller.s
+<<<<<<< HEAD
 	@echo ... src/preferences/preferences.obj
 	@echo ... src/preferences/preferences.i
 	@echo ... src/preferences/preferences.s
+=======
+>>>>>>> 50ce4473dd51241d6dc3e891d90540e0d735ba82
 	@echo ... src/resources.obj
 	@echo ... src/resources.i
 	@echo ... src/resources.s
 	@echo ... src/sdl/input.obj
 	@echo ... src/sdl/input.i
 	@echo ... src/sdl/input.s
+<<<<<<< HEAD
 	@echo ... src/sdl/point.obj
 	@echo ... src/sdl/point.i
 	@echo ... src/sdl/point.s
@@ -1705,6 +1724,11 @@ help:
 	@echo ... src/sdl/texture.obj
 	@echo ... src/sdl/texture.i
 	@echo ... src/sdl/texture.s
+=======
+	@echo ... src/sdl/rect.obj
+	@echo ... src/sdl/rect.i
+	@echo ... src/sdl/rect.s
+>>>>>>> 50ce4473dd51241d6dc3e891d90540e0d735ba82
 	@echo ... src/sdl/window.obj
 	@echo ... src/sdl/window.i
 	@echo ... src/sdl/window.s
