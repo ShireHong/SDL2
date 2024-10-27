@@ -57,7 +57,7 @@ static int do_gameloop()
 
     gui2::init();
     
-    if (false)
+    if (true)
     {
         std::string msg ="Unable to create ";
 		gui2::show_message("Logging Failure", msg, gui2::dialogs::message::ok_button);

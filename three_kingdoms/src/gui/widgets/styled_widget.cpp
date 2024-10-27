@@ -545,7 +545,7 @@ namespace implementation
 {
 
 builder_styled_widget::builder_styled_widget(const config& cfg)
-	: builder_widget(cfg)
+	 : builder_widget(cfg)
 	// , definition(cfg["definition"])
 	// , label_string(cfg["label"].t_str())
 	// , tooltip(cfg["tooltip"].t_str())

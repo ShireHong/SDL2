@@ -10,9 +10,9 @@
 
 namespace gui2
 {
-// gui_theme_map_t guis;
-// gui_theme_map_t::iterator current_gui = guis.end();
-// gui_theme_map_t::iterator default_gui = guis.end();
+gui_theme_map_t guis;
+gui_theme_map_t::iterator current_gui = guis.end();
+gui_theme_map_t::iterator default_gui = guis.end();
 
 gui_definition::gui_definition()
 	: widget_types()

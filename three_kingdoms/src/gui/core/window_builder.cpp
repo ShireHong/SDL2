@@ -37,27 +37,27 @@ std::unique_ptr<window> build(const std::string& type)
 	// return window;
 }
 
-// builder_widget::builder_widget(const config& cfg)
-// 	: id(cfg["id"])
-// 	, linked_group(cfg["linked_group"])
-// 	, debug_border_mode(widget::debug_border::none)
-// 	, debug_border_color(decode_color(cfg["debug_border_color"]))
-// {
-// 	// TODO: move to a `decode` function?
-// 	switch(const int dbm = cfg["debug_border_mode"].to_int(0); dbm) {
-// 	case 0:
-// 		debug_border_mode = widget::debug_border::none;
-// 		break;
-// 	case 1:
-// 		debug_border_mode = widget::debug_border::outline;
-// 		break;
-// 	case 2:
-// 		debug_border_mode = widget::debug_border::fill;
-// 		break;
-// 	default:
-// 		WRN_GUI_P << "Widget builder: unknown debug border mode " << dbm << ".";
-// 	}
-// }
+builder_widget::builder_widget(const config& cfg)
+	// : id(cfg["id"])
+	// , linked_group(cfg["linked_group"])
+	// , debug_border_mode(widget::debug_border::none)
+	// , debug_border_color(decode_color(cfg["debug_border_color"]))
+{
+	// TODO: move to a `decode` function?
+	// switch(const int dbm = cfg["debug_border_mode"].to_int(0); dbm) {
+	// case 0:
+	// 	debug_border_mode = widget::debug_border::none;
+	// 	break;
+	// case 1:
+	// 	debug_border_mode = widget::debug_border::outline;
+	// 	break;
+	// case 2:
+	// 	debug_border_mode = widget::debug_border::fill;
+	// 	break;
+	// default:
+	// 	WRN_GUI_P << "Widget builder: unknown debug border mode " << dbm << ".";
+	// }
+}
 
 builder_widget_ptr create_widget_builder()
 {
