@@ -28,7 +28,7 @@ namespace gui2
 void register_window(const std::string& id);
 
 /** Function type alias for @ref register_widget. */
-//using widget_parser_t = std::function<styled_widget_definition_ptr(const config&)>;
+using widget_parser_t = std::function<styled_widget_definition_ptr(const resolution_definition&)>;
 
 /**
  * Registers a widget type.
@@ -48,7 +48,7 @@ void register_window(const std::string& id);
  *                            definition in the game config. If nullptr the
  *                            default [\<id\>_definition] is used.
  */
-//void register_widget(const std::string& type, widget_parser_t f, const char* key = nullptr);
+void register_widget(const std::string& type, widget_parser_t f, const char* key = nullptr);
 
 /** Function type alias for @ref register_widget_builder. */
 //using widget_builder_func_t = std::function<builder_widget_ptr(const config&)>;
@@ -91,7 +91,7 @@ void register_window(const std::string& id);
 struct registered_widget_parser
 {
 	/** The widget definition WML parser function. */
-	//widget_parser_t parser;
+	widget_parser_t parser;
 
 	/** The tag containing the definition WML. */
 	const char* key;

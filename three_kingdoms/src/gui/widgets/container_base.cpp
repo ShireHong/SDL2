@@ -22,6 +22,7 @@ container_base::container_base(const implementation::builder_styled_widget& buil
 	: styled_widget(builder, control_type)
 	// , grid_()
 {
+    std::cout<<"container_base"<<std::endl;
 	// grid_.set_parent(this);
 	// connect_signal<event::REQUEST_PLACEMENT>(
 	// 	std::bind(&container_base::clear_layout_size, this),

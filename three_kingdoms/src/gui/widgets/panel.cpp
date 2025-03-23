@@ -24,6 +24,7 @@ REGISTER_WIDGET(panel)
 panel::panel(const implementation::builder_styled_widget& builder, const std::string& control_type)
 	: container_base(builder, control_type.empty() ? type() : control_type)
 {
+    std::cout<<"panel"<<std::endl;
 }
 
 SDL_Rect panel::get_client_rect() const

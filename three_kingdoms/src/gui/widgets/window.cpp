@@ -408,7 +408,8 @@ void window::finish_build(const builder_window::window_resolution& definition)
 
 	set_click_dismiss(definition.click_dismiss);
 
-	// const auto conf = cast_config_to<window_definition>();
+	//window_definition win_def(win_resol);
+    const auto conf = cast_config_to<window_definition>();
 	// assert(conf);
 
 	// if(conf->grid) {
@@ -1388,9 +1389,17 @@ void window::signal_handler_close_window()
 window_definition::window_definition(const config& cfg)
 	: styled_widget_definition(cfg)
 {
+	std::cout << "Parsing window cfg" << id << std::endl;
+
+	//load_resolutions<resolution>(cfg);
+}
+
+window_definition::window_definition(const resolution_definition& resol_def)
+    : styled_widget_definition(resol_def)
+{
 	// DBG_GUI_P << "Parsing window " << id;
     std::cout << "Parsing window " << id << std::endl;
-	// load_resolutions<resolution>(cfg);
+	load_resolutions<resolution>(resol_def);
 }
 
 window_definition::resolution::resolution(const config& cfg)

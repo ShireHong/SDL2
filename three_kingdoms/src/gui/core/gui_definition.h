@@ -34,7 +34,7 @@ class gui_definition
 {
 public:
 	/** Private ctor. Use create to initialize a new definition. */
-	explicit gui_definition();
+	explicit gui_definition(const resolution_definition& resol_def);
 
 	using widget_definition_map_t = std::map<std::string, styled_widget_definition_ptr>;
 

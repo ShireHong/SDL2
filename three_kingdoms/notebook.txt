@@ -11,3 +11,14 @@
 #include <any>  c++17标准库特性
 
 #is_base_of_v 是 C++17 标准库提供的一个类型特性，用于判断一个类型是否是另一个类型的基类
+
+#auto& def_map = widget_types[type_id]; 如果 type_id 不存在，容器会创建一个新的元素，其键为 type_id
+
+#explicit 防止隐形转换
+
+#findstr /s /i  "xxx" . 在文件中查找
+
+#const auto& [type_id, wid_parser] : reg_wid_types() 需要c++17
+
+#std::function 
+

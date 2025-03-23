@@ -138,13 +138,13 @@ using builder_grid_map = std::map<std::string, builder_grid_const_ptr>;
 class builder_window
 {
 public:
-	// explicit builder_window(const config& cfg)
-	// 	: resolutions()
-	// 	, id_(cfg["id"])
-	// 	, description_(cfg["description"])
-	// {
-	// 	read(cfg);
-	// }
+	explicit builder_window()
+		: resolutions()
+		//, id_(cfg["id"])
+		//, description_(cfg["description"])
+	{
+		//read(cfg);
+	}
 
 	struct window_resolution
 	{

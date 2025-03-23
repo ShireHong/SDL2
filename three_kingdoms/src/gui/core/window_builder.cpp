@@ -38,7 +38,7 @@ std::unique_ptr<window> build(const std::string& type)
 }
 
 builder_widget::builder_widget(const config& cfg)
-	// : id(cfg["id"])
+	: id("widget")
 	// , linked_group(cfg["linked_group"])
 	// , debug_border_mode(widget::debug_border::none)
 	// , debug_border_color(decode_color(cfg["debug_border_color"]))

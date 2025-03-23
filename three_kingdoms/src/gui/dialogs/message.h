@@ -1,6 +1,7 @@
 
 #pragma once
 
+#include <iostream>
 #include "gui/dialogs/modal_dialog.h"
 #include "gui/widgets/widget.h"
 
@@ -37,6 +38,7 @@ public:
 		, title_use_markup_(title_use_markup)
 		//, buttons_(count)
 	{
+        std::cout<<"message create"<<std::endl;
 	}
 
 	enum button_id {

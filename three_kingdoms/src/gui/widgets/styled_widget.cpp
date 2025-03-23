@@ -40,7 +40,7 @@ styled_widget::styled_widget(const implementation::builder_styled_widget& builde
 	, use_tooltip_on_label_overflow_(builder.use_tooltip_on_label_overflow)
 	// , tooltip_(builder.tooltip)
 	// , help_message_(builder.help)
-	//, config_(get_control(control_type, definition_))
+	, config_(get_control(control_type, definition_))
 	// , canvases_(config_->state.size()) // One canvas per state
 	// , renderer_()
 	, text_maximum_width_(0)
@@ -48,6 +48,7 @@ styled_widget::styled_widget(const implementation::builder_styled_widget& builde
 	// , text_ellipse_mode_(PANGO_ELLIPSIZE_END)
 	, shrunken_(false)
 {
+    std::cout<<"styled_widget"<<std::endl;
 	/*
 	 * Fill in each canvas from the widget state definitons.
 	 *

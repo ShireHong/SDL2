@@ -20,7 +20,6 @@ void register_window(const std::string& id)
 {
 	bool added = false;
 	std::tie(std::ignore, added) = registered_window_types().emplace(id);
-
 	if(!added) {
 		// WRN_GUI_P << "Window '" << id << "' already registered. Ignoring.";
         std::cout << "Window '" << id << "' already registered. Ignoring." << std::endl;
@@ -33,10 +32,10 @@ std::map<std::string, registered_widget_parser>& registered_widget_types()
 	return result;
 }
 
-// void register_widget(const std::string& type, widget_parser_t f, const char* key)
-// {
-// 	registered_widget_types()[type] = {f, key};
-// }
+void register_widget(const std::string& type, widget_parser_t f, const char* key)
+{
+	registered_widget_types()[type] = {f, key};
+}
 
 // std::map<std::string, widget_builder_func_t>& widget_builder_lookup()
 // {

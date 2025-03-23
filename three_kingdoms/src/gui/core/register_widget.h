@@ -28,7 +28,6 @@
 		{                                                                                                              \
 			register_helper()                                                                                          \
 			{                                                                                                          \
-                                                                                                                       \
  			}                                                                                                          \
 		};                                                                                                             \
                                                                                                                        \

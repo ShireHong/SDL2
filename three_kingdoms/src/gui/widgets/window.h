@@ -758,9 +758,19 @@ struct window_definition : public styled_widget_definition
 {
 	explicit window_definition(const config& cfg);
 
+    explicit window_definition(const resolution_definition& resol_def);
+
 	struct resolution : public panel_definition::resolution
 	{
 		explicit resolution(const config& cfg);
+        explicit resolution(const int win_w, 
+                            const int win_h,
+                            const int min_w,
+                            const int min_h,
+                            const int def_w,
+                            const int def_h,
+                            const int max_w,
+                            const int max_h);
 
 		builder_grid_ptr grid;
 	};

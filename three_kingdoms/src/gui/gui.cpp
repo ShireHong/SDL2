@@ -1,8 +1,9 @@
 
 #include "gui/gui.h"
-
+#include "gui/core/gui_definition.h"
 #include "preferences/preferences.h"
-
+#include "gui/core/static_registry.h"
+#include "gui/widgets/window.h"
 
 namespace gui2
 {
@@ -13,9 +14,28 @@ void init()
 	if(initialized) {
 		return;
 	}
-
 	std::cout << "Initializing UI subststem." << std::endl;
+    resolution_definition  win_resol(800, 900, 800, 900, 800, 900, 800, 900);
 
+    auto iter = guis.emplace("default", gui_definition(win_resol)).first;
+
+    default_gui = iter;
+    current_gui = iter;
+
+    //[](const config& cfg) { return std::make_shared<type>(cfg); }, key); 
+    register_widget("win", 
+    [](const resolution_definition&win_resol) {  // 第二个参数：解析器函数
+        return std::make_shared<window_definition>(win_resol);  // win_def 继承自 style_wid_def
+    }, 
+    nullptr);
+
+    std::string id = "default";
+    auto iter = guis.emplace(id, gui_definition(win_resol)).first;
+
+    if(id == "default") {
+        default_gui = iter;
+        current_gui = default_gui;
+    }
 	// Save current screen size.
 	//settings::update_screen_size_variables();
 
@@ -66,7 +86,7 @@ void init()
 	// 	current_gui = default_gui;
 	// }
 
-	// current_gui->second.activate();
+	current_gui->second.activate();
 
 	initialized = true;
 }

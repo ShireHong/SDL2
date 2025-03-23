@@ -60,6 +60,14 @@ struct panel_definition : public styled_widget_definition
 	struct resolution : public resolution_definition
 	{
 		explicit resolution(const config& cfg);
+        explicit resolution(const int win_w, 
+                            const int win_h,
+                            const int min_w,
+                            const int min_h,
+                            const int def_w,
+                            const int def_h,
+                            const int max_w,
+                            const int max_h);
 
 		unsigned top_border;
 		unsigned bottom_border;
