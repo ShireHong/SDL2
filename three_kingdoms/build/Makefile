@@ -708,6 +708,33 @@ src/gui/widgets/panel.cpp.s:
 	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/widgets/panel.cpp.s
 .PHONY : src/gui/widgets/panel.cpp.s
 
+src/gui/widgets/settings.obj: src/gui/widgets/settings.cpp.obj
+
+.PHONY : src/gui/widgets/settings.obj
+
+# target to build an object file
+src/gui/widgets/settings.cpp.obj:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/widgets/settings.cpp.obj
+.PHONY : src/gui/widgets/settings.cpp.obj
+
+src/gui/widgets/settings.i: src/gui/widgets/settings.cpp.i
+
+.PHONY : src/gui/widgets/settings.i
+
+# target to preprocess a source file
+src/gui/widgets/settings.cpp.i:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/widgets/settings.cpp.i
+.PHONY : src/gui/widgets/settings.cpp.i
+
+src/gui/widgets/settings.s: src/gui/widgets/settings.cpp.s
+
+.PHONY : src/gui/widgets/settings.s
+
+# target to generate assembly for a file
+src/gui/widgets/settings.cpp.s:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/widgets/settings.cpp.s
+.PHONY : src/gui/widgets/settings.cpp.s
+
 src/gui/widgets/styled_widget.obj: src/gui/widgets/styled_widget.cpp.obj
 
 .PHONY : src/gui/widgets/styled_widget.obj
@@ -1645,6 +1672,9 @@ help:
 	@echo ... src/gui/widgets/panel.obj
 	@echo ... src/gui/widgets/panel.i
 	@echo ... src/gui/widgets/panel.s
+	@echo ... src/gui/widgets/settings.obj
+	@echo ... src/gui/widgets/settings.i
+	@echo ... src/gui/widgets/settings.s
 	@echo ... src/gui/widgets/styled_widget.obj
 	@echo ... src/gui/widgets/styled_widget.i
 	@echo ... src/gui/widgets/styled_widget.s

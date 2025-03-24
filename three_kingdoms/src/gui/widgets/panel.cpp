@@ -88,16 +88,50 @@ void panel::set_self_active(const bool /*active*/)
 
 // }---------- DEFINITION ---------{
 
-panel_definition::panel_definition(const config& cfg)
-	: styled_widget_definition(cfg)
+// panel_definition::panel_definition(const config& cfg)
+// 	: styled_widget_definition(cfg)
+// {
+// 	// DBG_GUI_P << "Parsing panel " << id;
+//     std::cout << "Parsing panel " << id << std::endl;
+// 	// load_resolutions<resolution>(cfg);
+// }
+
+panel_definition::panel_definition(const resolution_definition& resol_def)
+	: styled_widget_definition(resol_def)
 {
 	// DBG_GUI_P << "Parsing panel " << id;
     std::cout << "Parsing panel " << id << std::endl;
-	// load_resolutions<resolution>(cfg);
+	load_resolutions(resol_def);
 }
 
-panel_definition::resolution::resolution(const config& cfg)
-	: resolution_definition(cfg)
+// panel_definition::resolution::resolution(const config& cfg)
+// 	: resolution_definition(cfg)
+// 	// , top_border(cfg["top_border"])
+// 	// , bottom_border(cfg["bottom_border"])
+// 	// , left_border(cfg["left_border"])
+// 	// , right_border(cfg["right_border"])
+// {
+// 	// The panel needs to know the order.
+// 	// state.emplace_back(VALIDATE_WML_CHILD(cfg, "background", missing_mandatory_wml_tag("panel_definition][resolution", "background")));
+// 	// state.emplace_back(VALIDATE_WML_CHILD(cfg, "foreground", missing_mandatory_wml_tag("panel_definition][resolution", "foreground")));
+// }
+
+panel_definition::resolution::resolution(const int win_w, 
+                                        const int win_h,
+                                        const int min_w,
+                                        const int min_h,
+                                        const int def_w,
+                                        const int def_h,
+                                        const int max_w,
+                                        const int max_h)
+	: resolution_definition(win_w, 
+                            win_h,
+                            min_w,
+                            min_h,
+                            def_w,
+                            def_h,
+                            max_w,
+                            max_h)
 	// , top_border(cfg["top_border"])
 	// , bottom_border(cfg["bottom_border"])
 	// , left_border(cfg["left_border"])

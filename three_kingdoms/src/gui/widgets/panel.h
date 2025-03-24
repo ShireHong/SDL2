@@ -55,11 +55,11 @@ private:
 
 struct panel_definition : public styled_widget_definition
 {
-	explicit panel_definition(const config& cfg);
-
+	explicit panel_definition(const resolution_definition& resol_def);
+    
 	struct resolution : public resolution_definition
 	{
-		explicit resolution(const config& cfg);
+		//explicit resolution(const config& cfg);
         explicit resolution(const int win_w, 
                             const int win_h,
                             const int min_w,

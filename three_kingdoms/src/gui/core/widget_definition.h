@@ -29,7 +29,7 @@ struct state_definition
 struct resolution_definition
 {
 	// explicit resolution_definition(unsigned int w, unsigned int h,unsigned int min_w, unsigned int min_h,unsigned int def_w, unsigned int def_h,unsigned int max_w, unsigned int max_h);
-    explicit resolution_definition(const config& cfg);
+    //explicit resolution_definition(const config& cfg);
     explicit resolution_definition(const int win_w, 
                                    const int win_h,
                                    const int min_w,
@@ -70,7 +70,7 @@ resolution_definition_const_ptr;
 
 struct styled_widget_definition
 {
-	explicit styled_widget_definition(const config& cfg);
+	// explicit styled_widget_definition(const config& cfg);
     explicit styled_widget_definition(const resolution_definition& resol_def);
 
     //explicit styled_widget_definition();
@@ -83,10 +83,10 @@ struct styled_widget_definition
 	// 	}
 	// }
 
-    template<class T>
+    // template<class T>
 	void load_resolutions(const resolution_definition& resol_def)
 	{
-		resolutions.emplace_back(std::make_shared<T>(resol_def));
+		resolutions.emplace_back(std::make_shared<resolution_definition>(resol_def));
 	}
 
 	std::string id;

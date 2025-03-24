@@ -1386,24 +1386,51 @@ void window::signal_handler_close_window()
 
 // }---------- DEFINITION ---------{
 
-window_definition::window_definition(const config& cfg)
-	: styled_widget_definition(cfg)
-{
-	std::cout << "Parsing window cfg" << id << std::endl;
+// window_definition::window_definition(const config& cfg)
+// 	: styled_widget_definition(cfg)
+// {
+// 	std::cout << "Parsing window cfg" << id << std::endl;
 
-	//load_resolutions<resolution>(cfg);
-}
+// 	//load_resolutions<resolution>(cfg);
+// }
 
 window_definition::window_definition(const resolution_definition& resol_def)
     : styled_widget_definition(resol_def)
 {
 	// DBG_GUI_P << "Parsing window " << id;
     std::cout << "Parsing window " << id << std::endl;
-	load_resolutions<resolution>(resol_def);
+	load_resolutions(resol_def);
 }
 
-window_definition::resolution::resolution(const config& cfg)
-	: panel_definition::resolution(cfg), grid(nullptr)
+// window_definition::resolution::resolution(const config& cfg)
+// 	: panel_definition::resolution(cfg), grid(nullptr)
+// {
+// 	// auto child = cfg.optional_child("grid");
+// 	// // VALIDATE(child, _("No grid defined."));
+
+// 	// /** @todo Evaluate whether the grid should become mandatory. */
+// 	// if(child) {
+// 	// 	grid = std::make_shared<builder_grid>(*child);
+// 	// }
+// }
+
+window_definition::resolution::resolution(const int win_w, 
+                                            const int win_h,
+                                            const int min_w,
+                                            const int min_h,
+                                            const int def_w,
+                                            const int def_h,
+                                            const int max_w,
+                                            const int max_h)
+	: panel_definition::resolution(win_w, 
+                                    win_h,
+                                    min_w,
+                                    min_h,
+                                    def_w,
+                                    def_h,
+                                    max_w,
+                                    max_h)
+    , grid(nullptr)
 {
 	// auto child = cfg.optional_child("grid");
 	// // VALIDATE(child, _("No grid defined."));
@@ -1418,170 +1445,3 @@ window_definition::resolution::resolution(const config& cfg)
 
 } // namespace gui2
 
-
-/**
- * @page layout_algorithm Layout algorithm
- *
- * @section introduction-layout_algorithm Introduction
- *
- * This page describes how the layout engine for the dialogs works. First
- * a global overview of some terms used in this document.
- *
- * - @ref gui2::widget "Widget"; Any item which can be used in the widget
- *   toolkit. Not all widgets are visible. In general widgets cannot be
- *   sized directly, but this is controlled by a window. A widget has an
- *   internal size cache and if the value in the cache is not equal to 0,0
- *   that value is its best size. This value gets set when the widget can
- *   honor a resize request.  It will be set with the value which honors
- *   the request.
- *
- * - @ref gui2::grid "Grid"; A grid is an invisible container which holds
- *   one or more widgets.  Several widgets have a grid in them to hold
- *   multiple widgets eg panels and windows.
- *
- * - @ref gui2::grid::child "Grid cell"; Every widget which is in a grid is
- *   put in a grid cell. These cells also hold the information about the gaps
- *   between widgets the behavior on growing etc. All grid cells must have a
- *   widget inside them.
- *
- * - @ref gui2::window "Window"; A window is a top level item which has a
- *   grid with its children. The window handles the sizing of the window and
- *   makes sure everything fits.
- *
- * - @ref gui2::window::linked_size "Shared size group"; A shared size
- *   group is a number of widgets which share width and or height. These
- *   widgets are handled separately in the layout algorithm. All grid cells
- *   width such a widget will get the same height and or width and these
- *   widgets won't be resized when there's not enough size. To be sure that
- *   these widgets don't cause trouble for the layout algorithm, they must be
- *   in a container with scrollbars so there will always be a way to properly
- *   layout them. The engine must enforce this restriction so the shared
- *   layout property must be set by the engine after validation.
- *
- * - All visible grid cells; A grid cell is visible when the widget inside
- *   of it doesn't have the state visibility::invisible. Widgets which have the
- *   state visibility::hidden are sized properly since when they become
- *   visibility::visible the layout shouldn't be invalidated. A grid cell
- *   that's invisible has size 0,0.
- *
- * - All resizable grid cells; A grid cell is resizable under the following
- *   conditions:
- *   - The widget is visibility::visible.
- *   - The widget is not in a shared size group.
- *
- * There are two layout algorithms with a different purpose.
- *
- * - The Window algorithm; this algorithm's goal is it to make sure all grid
- *   cells fit in the window. Sizing the grid cells depends on the widget
- *   size as well, but this algorithm only sizes the grid cells and doesn't
- *   handle the widgets inside them.
- *
- * - The Grid algorithm; after the Window algorithm made sure that all grid
- *   cells fit this algorithm makes sure the widgets are put in the optimal
- *   state in their grid cell.
- *
- * @section layout_algorithm_window Window
- *
- * Here is the algorithm used to layout the window:
- *
- * - Perform a full initialization
- *   (@ref gui2::widget::layout_initialize (full_initialization = true)):
- *   - Clear the internal best size cache for all widgets.
- *   - For widgets with scrollbars hide them unless the
- *     @ref gui2::scrollbar_container::scrollbar_mode "scrollbar_mode" is
- *     ALWAYS_VISIBLE or AUTO_VISIBLE.
- * - Handle shared sizes:
- *   - Height and width:
- *     - Get the best size for all widgets that share height and width.
- *     - Set the maximum of width and height as best size for all these
- *       widgets.
- *   - Width only:
- *     - Get the best width for all widgets which share their width.
- *     - Set the maximum width for all widgets, but keep their own height.
- *   - Height only:
- *     - Get the best height for all widgets which share their height.
- *     - Set the maximum height for all widgets, but keep their own width.
- * - Start layout loop:
- *   - Get best size.
- *   - If width <= maximum_width && height <= maximum_height we're done.
- *   - If width > maximum_width, optimize the width:
- *     - For every grid cell in a grid row there will be a resize request
- *       (@ref gui2::grid::reduce_width):
- *       - Sort the widgets in the row on the resize priority.
- *         - Loop through this priority queue until the row fits
- *           - If priority != 0 try to share the extra width else all
- *             widgets are tried to reduce the full size.
- *           - Try to shrink the widgets by either wrapping or using a
- *             scrollbar (@ref gui2::widget::request_reduce_width).
- *           - If the row fits in the wanted width this row is done.
- *           - Else try the next priority.
- *         - All priorities done and the width still doesn't fit.
- *         - Loop through this priority queue until the row fits.
- *           - If priority != 0:
- *             - try to share the extra width
- *           -Else:
- *             - All widgets are tried to reduce the full size.
- *           - Try to shrink the widgets by sizing them smaller as really
- *             wanted (@ref gui2::widget::demand_reduce_width).
- *             For labels, buttons etc. they get ellipsized.
- *           - If the row fits in the wanted width this row is done.
- *           - Else try the next priority.
- *         - All priorities done and the width still doesn't fit.
- *         - Throw a layout width doesn't fit exception.
- *   - If height > maximum_height, optimize the height
- *       (@ref gui2::grid::reduce_height):
- *     - For every grid cell in a grid column there will be a resize request:
- *       - Sort the widgets in the column on the resize priority.
- *         - Loop through this priority queue until the column fits:
- *           - If priority != 0 try to share the extra height else all
- *              widgets are tried to reduce the full size.
- *           - Try to shrink the widgets by using a scrollbar
- *             (@ref gui2::widget::request_reduce_height).
- *             - If succeeded for a widget the width is influenced and the
- *               width might be invalid.
- *             - Throw a width modified exception.
- *           - If the column fits in the wanted height this column is done.
- *           - Else try the next priority.
- *         - All priorities done and the height still doesn't fit.
- *         - Loop through this priority queue until the column fits.
- *           - If priority != 0 try to share the extra height else all
- *             widgets are tried to reduce the full size.
- *           - Try to shrink the widgets by sizing them smaller as really
- *             wanted (@ref gui2::widget::demand_reduce_width).
- *             For labels, buttons etc. they get ellipsized .
- *           - If the column fits in the wanted height this column is done.
- *           - Else try the next priority.
- *         - All priorities done and the height still doesn't fit.
- *         - Throw a layout height doesn't fit exception.
- * - End layout loop.
- *
- * - Catch @ref gui2::layout_exception_width_modified "width modified":
- *   - Goto relayout.
- *
- * - Catch
- *   @ref gui2::layout_exception_width_resize_failed "width resize failed":
- *   - If the window has a horizontal scrollbar which isn't shown but can be
- *     shown.
- *     - Show the scrollbar.
- *     - goto relayout.
- *   - Else show a layout failure message.
- *
- * - Catch
- *   @ref gui2::layout_exception_height_resize_failed "height resize failed":
- *   - If the window has a vertical scrollbar which isn't shown but can be
- *     shown:
- *     - Show the scrollbar.
- *     - goto relayout.
- *   - Else:
- *     - show a layout failure message.
- *
- * - Relayout:
- *   - Initialize all widgets
- *     (@ref gui2::widget::layout_initialize (full_initialization = false))
- *   - Handle shared sizes, since the reinitialization resets that state.
- *   - Goto start layout loop.
- *
- * @section grid Grid
- *
- * This section will be documented later.
- */

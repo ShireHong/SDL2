@@ -17,11 +17,6 @@ void init()
 	std::cout << "Initializing UI subststem." << std::endl;
     resolution_definition  win_resol(800, 900, 800, 900, 800, 900, 800, 900);
 
-    auto iter = guis.emplace("default", gui_definition(win_resol)).first;
-
-    default_gui = iter;
-    current_gui = iter;
-
     //[](const config& cfg) { return std::make_shared<type>(cfg); }, key); 
     register_widget("win", 
     [](const resolution_definition&win_resol) {  // 第二个参数：解析器函数

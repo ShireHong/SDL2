@@ -7,6 +7,7 @@
 #include "gui/core/static_registry.h"
 #include "gui/widgets/settings.h"
 // #include "wml_exception.hpp"
+#include <assert.h>
 
 namespace gui2
 {
@@ -29,7 +30,8 @@ gui_definition::gui_definition(const resolution_definition& resol_def)
     , id_("gui definion")
 {
     std::cout << "Parsing gui " << id_ << std::endl;
-
+    std::cout << "register here" << std::endl;
+    window_types.emplace("message", builder_window());
 	//
 	// Widget parsing
 	//
