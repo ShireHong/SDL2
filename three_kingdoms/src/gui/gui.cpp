@@ -18,7 +18,7 @@ void init()
     resolution_definition  win_resol(800, 900, 800, 900, 800, 900, 800, 900);
 
     //[](const config& cfg) { return std::make_shared<type>(cfg); }, key); 
-    register_widget("win", 
+    register_widget("window", /*equal to get_control control_type*/
     [](const resolution_definition&win_resol) {  // 第二个参数：解析器函数
         return std::make_shared<window_definition>(win_resol);  // win_def 继承自 style_wid_def
     }, 

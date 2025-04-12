@@ -521,7 +521,7 @@ int window::show(const unsigned auto_close_timeout)
 	 */
 	invalidate_layout();
 	queue_redraw();
-
+    // std::cout<<"window::show"<<std::endl;
 	// Make sure we display at least once in all cases.
 	events::draw();
 
@@ -534,7 +534,7 @@ int window::show(const unsigned auto_close_timeout)
 
 		delay_event(event, auto_close_timeout);
 	}
-
+#if 0
 	try
 	{
 		// According to the comment in the next loop, we need to pump() once
@@ -548,7 +548,7 @@ int window::show(const unsigned auto_close_timeout)
 		for(status_ = status::SHOWING; status_ != status::CLOSED;) {
 			// Process and handle all pending events.
 			events::pump();
-
+            //std::cout << "***********" << std::endl;
 			if(!mouse_button_state_initialized) {
 				/*
 				 * The state must be initialize when showing the dialog.
@@ -580,7 +580,7 @@ int window::show(const unsigned auto_close_timeout)
 		hide();
 		throw;
 	}
-
+#endif
 	// if(text_box_base* tb = dynamic_cast<text_box_base*>(event_distributor_->keyboard_focus())) {
 	// 	tb->interrupt_composition();
 	// }

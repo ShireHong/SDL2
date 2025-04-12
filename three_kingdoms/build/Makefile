@@ -303,6 +303,60 @@ src/controller_base.cpp.s:
 	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/controller_base.cpp.s
 .PHONY : src/controller_base.cpp.s
 
+src/draw.obj: src/draw.cpp.obj
+
+.PHONY : src/draw.obj
+
+# target to build an object file
+src/draw.cpp.obj:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/draw.cpp.obj
+.PHONY : src/draw.cpp.obj
+
+src/draw.i: src/draw.cpp.i
+
+.PHONY : src/draw.i
+
+# target to preprocess a source file
+src/draw.cpp.i:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/draw.cpp.i
+.PHONY : src/draw.cpp.i
+
+src/draw.s: src/draw.cpp.s
+
+.PHONY : src/draw.s
+
+# target to generate assembly for a file
+src/draw.cpp.s:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/draw.cpp.s
+.PHONY : src/draw.cpp.s
+
+src/draw_manager.obj: src/draw_manager.cpp.obj
+
+.PHONY : src/draw_manager.obj
+
+# target to build an object file
+src/draw_manager.cpp.obj:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/draw_manager.cpp.obj
+.PHONY : src/draw_manager.cpp.obj
+
+src/draw_manager.i: src/draw_manager.cpp.i
+
+.PHONY : src/draw_manager.i
+
+# target to preprocess a source file
+src/draw_manager.cpp.i:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/draw_manager.cpp.i
+.PHONY : src/draw_manager.cpp.i
+
+src/draw_manager.s: src/draw_manager.cpp.s
+
+.PHONY : src/draw_manager.s
+
+# target to generate assembly for a file
+src/draw_manager.cpp.s:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/draw_manager.cpp.s
+.PHONY : src/draw_manager.cpp.s
+
 src/entity.obj: src/entity.cpp.obj
 
 .PHONY : src/entity.obj
@@ -1627,6 +1681,12 @@ help:
 	@echo ... src/controller_base.obj
 	@echo ... src/controller_base.i
 	@echo ... src/controller_base.s
+	@echo ... src/draw.obj
+	@echo ... src/draw.i
+	@echo ... src/draw.s
+	@echo ... src/draw_manager.obj
+	@echo ... src/draw_manager.i
+	@echo ... src/draw_manager.s
 	@echo ... src/entity.obj
 	@echo ... src/entity.i
 	@echo ... src/entity.s

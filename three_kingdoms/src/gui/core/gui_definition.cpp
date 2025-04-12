@@ -42,18 +42,22 @@ gui_definition::gui_definition(const resolution_definition& resol_def)
         const auto& type_id = it->first;
         const auto& widget_parser = it->second;
 		auto& def_map = widget_types[type_id];
-
+        //std::cout<<"type id = "<<type_id<<std::endl;
 		const std::string key =	widget_parser.key
 			? widget_parser.key
 			: type_id + "_definition";
 
 		bool found_default_def = false;
 
+        //std::cout<<"key = "<<key<<std::endl;
+
         // Run the static parser to get a definition ptr.
         styled_widget_definition_ptr def_ptr = widget_parser.parser(resol_def);
+        /*equal to get_control definition*/
+        const std::string& def_id = "default";
+        //const std::string& def_id = def_ptr->id;
 
-        const std::string& def_id = def_ptr->id;
-
+        //std::cout<<"def_id = "<<def_id<<std::endl;
         if(def_map.find(def_id) != def_map.end()) {
             // ERR_GUI_P << "Skipping duplicate definition '" << def_id << "' for '" << type_id << "'";
             std::cout<<"Skipping duplicate definition '" << def_id << "' for '" << type_id << "'"<<std::endl;
@@ -167,7 +171,7 @@ resolution_definition_ptr get_control(const std::string& control_type, const std
 	const auto& default_types = default_gui->second.widget_types;
 
 	const auto widget_definitions = current_types.find(control_type);
-
+    //std::cout<< "control_type =" << control_type <<std::endl;
 	gui_definition::widget_definition_map_t::const_iterator control;
 
 	if(widget_definitions == current_types.end()) {
@@ -175,7 +179,7 @@ resolution_definition_ptr get_control(const std::string& control_type, const std
 	}
 
 	control = widget_definitions->second.find(definition);
-
+    //std::cout<< "definition =" << definition <<std::endl;
 	if(control == widget_definitions->second.end()) {
 	fallback:
 		bool found_fallback = false;

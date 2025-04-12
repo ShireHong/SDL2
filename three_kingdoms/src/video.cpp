@@ -336,7 +336,7 @@ void init_window(bool hidden)
 {
     const int x = SDL_WINDOWPOS_CENTERED;
 	const int y = SDL_WINDOWPOS_CENTERED;
-	const point res = {200,300};
+	const point res = {400,300};
 	const int w = res.x;
 	const int h = res.y;
 
@@ -357,9 +357,6 @@ void init_window(bool hidden)
 	// If that is no longer true, then you should clean things up.
 	
     //assert(!render_texture_);
-
-
-
 	SDL_DisplayMode currentDisplayMode;
 	SDL_GetCurrentDisplayMode(window->get_display_index(), &currentDisplayMode);
 	refresh_rate_ = currentDisplayMode.refresh_rate != 0 ? currentDisplayMode.refresh_rate : 60;
@@ -491,6 +488,62 @@ void force_render_target(const texture& t)
 		 	<< t.draw_size() << " / " << t.get_raw_size() << std::endl;
 		window->set_logical_size(t.w(), t.h());
 	}
+}
+
+void clear_render_target()
+{
+	force_render_target({});
+}
+
+void reset_render_target()
+{
+	force_render_target(render_texture_);
+}
+
+texture get_render_target()
+{
+	// This should always be up-to-date, but assert for sanity.
+	assert(current_render_target_ == SDL_GetRenderTarget(get_renderer()));
+	return current_render_target_;
+}
+
+// Note: this is not thread-safe.
+// Drawing functions should not be called while this is active.
+// SDL renderer usage is not thread-safe anyway, so this is fine.
+void render_screen()
+{
+	if(headless_ || testing_) {
+		// No need to present anything in this case
+		return;
+	}
+
+	if(!window) {
+		// WRN_DP << "trying to render with no window";
+        std::cout << "trying to render with no window" << std::endl;
+		return;
+	}
+
+	// This should only ever be called when the main render texture is the
+	// current render target. It could be adapted otherwise... but let's not.
+	if(SDL_GetRenderTarget(*window) != render_texture_) {
+		// ERR_DP << "trying to render screen, but current render texture is "
+		// 	<< static_cast<void*>(SDL_GetRenderTarget(*window))
+		// 	<< " | " << static_cast<void*>(current_render_target_.get())
+		// 	<< ". It should be " << static_cast<void*>(render_texture_.get());
+		// throw error("tried to render screen from wrong render target");
+	}
+
+	// Clear the render target so we're drawing to the window.
+	clear_render_target();
+
+	// Copy the render texture to the window.
+	SDL_RenderCopy(*window, render_texture_, nullptr, nullptr);
+
+	// Finalize and display the frame.
+	SDL_RenderPresent(*window);
+
+	// Reset the render target to the render texture.
+	reset_render_target();
 }
 
 

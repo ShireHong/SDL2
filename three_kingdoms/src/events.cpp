@@ -23,7 +23,7 @@
 #include <thread>
 #include <utility>
 #include <vector>
-
+#include "draw_manager.h"
 #include <SDL2/SDL.h>
 
 
@@ -221,7 +221,8 @@ void pump()
 
 void draw()
 {
-	//draw_manager::sparkle();
+    //std::cout<<"draw"<<std::endl;
+	draw_manager::sparkle();
 }
 
 void raise_process_event()
