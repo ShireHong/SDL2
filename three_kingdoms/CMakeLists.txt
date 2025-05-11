@@ -36,7 +36,7 @@ endif()
 #找到sdl2的依赖库
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${three_kingdoms_SOURCE_DIR}/cmake")
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -pedantic ")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -pedantic -pthread")
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS} ${CMAKE_CXX_FLAGS_DEBUG} -g")
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS} ${CMAKE_CXX_FLAGS_RELEASE} -O2")
 
@@ -72,6 +72,7 @@ aux_source_directory(src/gui DIR_SRCS_GUI)
 aux_source_directory(src/gui/widgets DIR_SRCS_GUI_WIDGETS)
 aux_source_directory(src/gui/core DIR_SRCS_GUI_CORE)
 aux_source_directory(src/gui/dialogs DIR_SRCS_GUI_DIALOGS)
+aux_source_directory(src/gui/core/event DIR_SRCS_CORE_EVENT)
 
 
 set(SOURCE_ALL 
@@ -82,6 +83,7 @@ set(SOURCE_ALL
     ${DIR_SRCS_GUI_WIDGETS}
     ${DIR_SRCS_GUI_CORE}
     ${DIR_SRCS_GUI_DIALOGS}
+	${DIR_SRCS_CORE_EVENT}
 	)
 #add_executable( three_kingdoms ${DIR_SRCS} ${DIR_SRCS_SDL} ${DIR_SRCS_PREF})
 add_executable( three_kingdoms ${SOURCE_ALL} )

@@ -492,6 +492,87 @@ src/gamestate.cpp.s:
 	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gamestate.cpp.s
 .PHONY : src/gamestate.cpp.s
 
+src/gui/core/event/dispatcher.obj: src/gui/core/event/dispatcher.cpp.obj
+
+.PHONY : src/gui/core/event/dispatcher.obj
+
+# target to build an object file
+src/gui/core/event/dispatcher.cpp.obj:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/core/event/dispatcher.cpp.obj
+.PHONY : src/gui/core/event/dispatcher.cpp.obj
+
+src/gui/core/event/dispatcher.i: src/gui/core/event/dispatcher.cpp.i
+
+.PHONY : src/gui/core/event/dispatcher.i
+
+# target to preprocess a source file
+src/gui/core/event/dispatcher.cpp.i:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/core/event/dispatcher.cpp.i
+.PHONY : src/gui/core/event/dispatcher.cpp.i
+
+src/gui/core/event/dispatcher.s: src/gui/core/event/dispatcher.cpp.s
+
+.PHONY : src/gui/core/event/dispatcher.s
+
+# target to generate assembly for a file
+src/gui/core/event/dispatcher.cpp.s:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/core/event/dispatcher.cpp.s
+.PHONY : src/gui/core/event/dispatcher.cpp.s
+
+src/gui/core/event/distributor.obj: src/gui/core/event/distributor.cpp.obj
+
+.PHONY : src/gui/core/event/distributor.obj
+
+# target to build an object file
+src/gui/core/event/distributor.cpp.obj:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/core/event/distributor.cpp.obj
+.PHONY : src/gui/core/event/distributor.cpp.obj
+
+src/gui/core/event/distributor.i: src/gui/core/event/distributor.cpp.i
+
+.PHONY : src/gui/core/event/distributor.i
+
+# target to preprocess a source file
+src/gui/core/event/distributor.cpp.i:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/core/event/distributor.cpp.i
+.PHONY : src/gui/core/event/distributor.cpp.i
+
+src/gui/core/event/distributor.s: src/gui/core/event/distributor.cpp.s
+
+.PHONY : src/gui/core/event/distributor.s
+
+# target to generate assembly for a file
+src/gui/core/event/distributor.cpp.s:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/core/event/distributor.cpp.s
+.PHONY : src/gui/core/event/distributor.cpp.s
+
+src/gui/core/event/handler.obj: src/gui/core/event/handler.cpp.obj
+
+.PHONY : src/gui/core/event/handler.obj
+
+# target to build an object file
+src/gui/core/event/handler.cpp.obj:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/core/event/handler.cpp.obj
+.PHONY : src/gui/core/event/handler.cpp.obj
+
+src/gui/core/event/handler.i: src/gui/core/event/handler.cpp.i
+
+.PHONY : src/gui/core/event/handler.i
+
+# target to preprocess a source file
+src/gui/core/event/handler.cpp.i:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/core/event/handler.cpp.i
+.PHONY : src/gui/core/event/handler.cpp.i
+
+src/gui/core/event/handler.s: src/gui/core/event/handler.cpp.s
+
+.PHONY : src/gui/core/event/handler.s
+
+# target to generate assembly for a file
+src/gui/core/event/handler.cpp.s:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/core/event/handler.cpp.s
+.PHONY : src/gui/core/event/handler.cpp.s
+
 src/gui/core/gui_definition.obj: src/gui/core/gui_definition.cpp.obj
 
 .PHONY : src/gui/core/gui_definition.obj
@@ -545,6 +626,33 @@ src/gui/core/static_registry.s: src/gui/core/static_registry.cpp.s
 src/gui/core/static_registry.cpp.s:
 	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/core/static_registry.cpp.s
 .PHONY : src/gui/core/static_registry.cpp.s
+
+src/gui/core/timer.obj: src/gui/core/timer.cpp.obj
+
+.PHONY : src/gui/core/timer.obj
+
+# target to build an object file
+src/gui/core/timer.cpp.obj:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/core/timer.cpp.obj
+.PHONY : src/gui/core/timer.cpp.obj
+
+src/gui/core/timer.i: src/gui/core/timer.cpp.i
+
+.PHONY : src/gui/core/timer.i
+
+# target to preprocess a source file
+src/gui/core/timer.cpp.i:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/core/timer.cpp.i
+.PHONY : src/gui/core/timer.cpp.i
+
+src/gui/core/timer.s: src/gui/core/timer.cpp.s
+
+.PHONY : src/gui/core/timer.s
+
+# target to generate assembly for a file
+src/gui/core/timer.cpp.s:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/core/timer.cpp.s
+.PHONY : src/gui/core/timer.cpp.s
 
 src/gui/core/top_level_drawable.obj: src/gui/core/top_level_drawable.cpp.obj
 
@@ -734,6 +842,33 @@ src/gui/widgets/container_base.s: src/gui/widgets/container_base.cpp.s
 src/gui/widgets/container_base.cpp.s:
 	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/widgets/container_base.cpp.s
 .PHONY : src/gui/widgets/container_base.cpp.s
+
+src/gui/widgets/helper.obj: src/gui/widgets/helper.cpp.obj
+
+.PHONY : src/gui/widgets/helper.obj
+
+# target to build an object file
+src/gui/widgets/helper.cpp.obj:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/widgets/helper.cpp.obj
+.PHONY : src/gui/widgets/helper.cpp.obj
+
+src/gui/widgets/helper.i: src/gui/widgets/helper.cpp.i
+
+.PHONY : src/gui/widgets/helper.i
+
+# target to preprocess a source file
+src/gui/widgets/helper.cpp.i:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/widgets/helper.cpp.i
+.PHONY : src/gui/widgets/helper.cpp.i
+
+src/gui/widgets/helper.s: src/gui/widgets/helper.cpp.s
+
+.PHONY : src/gui/widgets/helper.s
+
+# target to generate assembly for a file
+src/gui/widgets/helper.cpp.s:
+	$(MAKE) -f CMakeFiles\three_kingdoms.dir\build.make CMakeFiles/three_kingdoms.dir/src/gui/widgets/helper.cpp.s
+.PHONY : src/gui/widgets/helper.cpp.s
 
 src/gui/widgets/panel.obj: src/gui/widgets/panel.cpp.obj
 
@@ -1702,12 +1837,24 @@ help:
 	@echo ... src/gamestate.obj
 	@echo ... src/gamestate.i
 	@echo ... src/gamestate.s
+	@echo ... src/gui/core/event/dispatcher.obj
+	@echo ... src/gui/core/event/dispatcher.i
+	@echo ... src/gui/core/event/dispatcher.s
+	@echo ... src/gui/core/event/distributor.obj
+	@echo ... src/gui/core/event/distributor.i
+	@echo ... src/gui/core/event/distributor.s
+	@echo ... src/gui/core/event/handler.obj
+	@echo ... src/gui/core/event/handler.i
+	@echo ... src/gui/core/event/handler.s
 	@echo ... src/gui/core/gui_definition.obj
 	@echo ... src/gui/core/gui_definition.i
 	@echo ... src/gui/core/gui_definition.s
 	@echo ... src/gui/core/static_registry.obj
 	@echo ... src/gui/core/static_registry.i
 	@echo ... src/gui/core/static_registry.s
+	@echo ... src/gui/core/timer.obj
+	@echo ... src/gui/core/timer.i
+	@echo ... src/gui/core/timer.s
 	@echo ... src/gui/core/top_level_drawable.obj
 	@echo ... src/gui/core/top_level_drawable.i
 	@echo ... src/gui/core/top_level_drawable.s
@@ -1729,6 +1876,9 @@ help:
 	@echo ... src/gui/widgets/container_base.obj
 	@echo ... src/gui/widgets/container_base.i
 	@echo ... src/gui/widgets/container_base.s
+	@echo ... src/gui/widgets/helper.obj
+	@echo ... src/gui/widgets/helper.i
+	@echo ... src/gui/widgets/helper.s
 	@echo ... src/gui/widgets/panel.obj
 	@echo ... src/gui/widgets/panel.i
 	@echo ... src/gui/widgets/panel.s

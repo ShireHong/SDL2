@@ -2,7 +2,7 @@
 // #include "gui/widgets/window_private.hpp"
 
 #include "config.h"
-// #include "draw.hpp"
+#include "draw.h"
 #include "events.h"
 // #include "formula/callable.hpp"
 // #include "formula/string_utils.hpp"
@@ -10,22 +10,22 @@
 // #include "log.hpp"
 // #include "gui/auxiliary/typed_formula.hpp"
 // #include "gui/auxiliary/find_widget.hpp"
-// #include "gui/core/event/distributor.hpp"
-// #include "gui/core/event/handler.hpp"
-// #include "gui/core/event/message.hpp"
+#include "gui/core/event/distributor.h"
+#include "gui/core/event/handler.h"
+#include "gui/core/event/message.h"
 // #include "gui/core/log.hpp"
 // #include "gui/core/layout_exception.hpp"
 #include "sdl/point.h"
 #include "gui/core/window_builder.h"
 // #include "gui/dialogs/tooltip.hpp"
 // #include "gui/widgets/button.h"
-// #include "gui/widgets/container_base.h"
+#include "gui/widgets/container_base.h"
 // #include "gui/widgets/text_box_base.hpp"
 #include "gui/core/register_widget.h"
 // #include "gui/widgets/grid.hpp"
-// #include "gui/widgets/helper.hpp"
+#include "gui/widgets/helper.h"
 #include "gui/widgets/panel.h"
-// #include "gui/widgets/settings.hpp"
+#include "gui/widgets/settings.h"
 #include "gui/widgets/widget.h"
 #include "gui/widgets/window.h"
 // #ifdef DEBUG_WINDOW_LAYOUT_GRAPHS
@@ -851,7 +851,7 @@ void window::layout()
 	// log_scope2(log_gui_layout, LOG_SCOPE_HEADER);
 
 	point size = get_best_size();
-	// const point mouse = get_mouse_position();
+	const point mouse = get_mouse_position();
 
 	// variables_.add("mouse_x", wfl::variant(mouse.x));
 	// variables_.add("mouse_y", wfl::variant(mouse.y));
@@ -865,6 +865,8 @@ void window::layout()
 
 	// unsigned int maximum_width = maximum_width_(variables_, &functions_);
 	// unsigned int maximum_height = maximum_height_(variables_, &functions_);
+    unsigned int maximum_width = 900;
+	unsigned int maximum_height = 800;
 
 	// if(automatic_placement_) {
 	// 	if(maximum_width == 0 || maximum_width > settings::screen_width) {
@@ -1035,7 +1037,7 @@ void window::layout()
 	generate_dot_file("layout_finished", LAYOUT);
 	need_layout_ = false;
 
-	// event::init_mouse_location();
+	event::init_mouse_location();
 }
 
 void window::layout_linked_widgets()

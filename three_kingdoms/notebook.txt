@@ -22,3 +22,6 @@
 
 #std::function 
 
+#if constexpr语法是c++17引入
+
+#error: 'invoke' is not a member of 'std'  std::invoke在c++17版本引入

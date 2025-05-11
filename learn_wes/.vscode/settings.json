@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "tmx_utils.h": "c",
+        "string.h": "c"
+    }
+}
