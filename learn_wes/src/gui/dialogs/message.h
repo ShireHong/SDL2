@@ -4,7 +4,7 @@
 #include <iostream>
 #include "gui/dialogs/modal_dialog.h"
 #include "gui/widgets/widget.h"
-// #include "gui/widgets/button.h"
+#include "gui/widgets/button.h"
 
 namespace gui2
 {
@@ -37,7 +37,7 @@ public:
 		, auto_close_(auto_close)
 		, message_use_markup_(message_use_markup)
 		, title_use_markup_(title_use_markup)
-		// , buttons_(count)
+		, buttons_(count)
 	{
         std::cout<<"message create " << window_id()<<std::endl;
 	}
@@ -135,7 +135,7 @@ private:
 	{
 		button_status();
 
-		//button* ptr;
+		button* ptr;
 		std::string caption;
 		widget::visibility visible;
 		int retval;

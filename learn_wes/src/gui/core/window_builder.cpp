@@ -59,6 +59,28 @@ builder_widget::builder_widget(const config& cfg)
 	// }
 }
 
+builder_widget::builder_widget()
+	: id("widget")
+	// , linked_group(cfg["linked_group"])
+	, debug_border_mode(widget::debug_border::none)
+	// , debug_border_color(decode_color(cfg["debug_border_color"]))
+{
+	// TODO: move to a `decode` function?
+	// switch(const int dbm = cfg["debug_border_mode"].to_int(0); dbm) {
+	// case 0:
+	// 	debug_border_mode = widget::debug_border::none;
+	// 	break;
+	// case 1:
+		debug_border_mode = widget::debug_border::outline;
+	// 	break;
+	// case 2:
+	// 	debug_border_mode = widget::debug_border::fill;
+	// 	break;
+	// default:
+	// 	WRN_GUI_P << "Widget builder: unknown debug border mode " << dbm << ".";
+	// }
+}
+
 builder_widget_ptr create_widget_builder()
 {
 	// config::const_all_children_itors children = cfg.all_children_range();
@@ -121,50 +143,50 @@ builder_widget_ptr create_widget_builder()
 // 	}
 // }
 
-// builder_window::window_resolution::window_resolution(const config& cfg)
-// 	: window_width(cfg["window_width"])
-// 	, window_height(cfg["window_height"])
-// 	, automatic_placement(cfg["automatic_placement"].to_bool(true))
-// 	, x(cfg["x"])
-// 	, y(cfg["y"])
-// 	, width(cfg["width"])
-// 	, height(cfg["height"])
-// 	, reevaluate_best_size(cfg["reevaluate_best_size"])
-// 	, functions()
-// 	, vertical_placement(implementation::get_v_align(cfg["vertical_placement"]))
-// 	, horizontal_placement(implementation::get_h_align(cfg["horizontal_placement"]))
-// 	, maximum_width(cfg["maximum_width"], 0u)
-// 	, maximum_height(cfg["maximum_height"], 0u)
-// 	, click_dismiss(cfg["click_dismiss"].to_bool())
-// 	, definition(cfg["definition"])
-// 	, linked_groups()
-// 	, tooltip(cfg.child_or_empty("tooltip"), "tooltip")
-// 	, helptip(cfg.child_or_empty("helptip"), "helptip")
-// 	, grid(nullptr)
-// {
-// 	if(!cfg["functions"].empty()) {
-// 		wfl::formula(cfg["functions"], &functions).evaluate();
-// 	}
+builder_window::window_resolution::window_resolution(const config& cfg)
+	: window_width(300)
+	, window_height(200)
+	, automatic_placement(true)
+	// , x(0)
+	// , y(0)
+	// , width(300)
+	// , height(200)
+	// , reevaluate_best_size(cfg["reevaluate_best_size"])
+	// , functions()
+	// , vertical_placement(implementation::get_v_align(cfg["vertical_placement"]))
+	// , horizontal_placement(implementation::get_h_align(cfg["horizontal_placement"]))
+	// , maximum_width(cfg["maximum_width"], 0u)
+	// , maximum_height(cfg["maximum_height"], 0u)
+	// , click_dismiss(cfg["click_dismiss"].to_bool())
+	// , definition(cfg["definition"])
+	// , linked_groups()
+	// , tooltip(cfg.child_or_empty("tooltip"), "tooltip")
+	// , helptip(cfg.child_or_empty("helptip"), "helptip")
+	, grid(nullptr)
+{
+	// if(!cfg["functions"].empty()) {
+	// 	wfl::formula(cfg["functions"], &functions).evaluate();
+	// }
 
-// 	auto c = cfg.optional_child("grid");
+	// auto c = cfg.optional_child("grid");
 
-// 	VALIDATE(c, _("No grid defined."));
+	// VALIDATE(c, _("No grid defined."));
 
-// 	grid = std::make_shared<builder_grid>(*c);
+	// grid = std::make_shared<builder_grid>(*c);
 
-// 	if(!automatic_placement) {
-// 		VALIDATE(width.has_formula() || width(), missing_mandatory_wml_key("resolution", "width"));
-// 		VALIDATE(height.has_formula() || height(), missing_mandatory_wml_key("resolution", "height"));
-// 	}
+	// if(!automatic_placement) {
+	// 	VALIDATE(width.has_formula() || width(), missing_mandatory_wml_key("resolution", "width"));
+	// 	VALIDATE(height.has_formula() || height(), missing_mandatory_wml_key("resolution", "height"));
+	// }
 
-// 	DBG_GUI_P << "Window builder: parsing resolution " << window_width << ',' << window_height;
+	// DBG_GUI_P << "Window builder: parsing resolution " << window_width << ',' << window_height;
 
-// 	if(definition.empty()) {
-// 		definition = "default";
-// 	}
+	// if(definition.empty()) {
+	// 	definition = "default";
+	// }
 
-// 	linked_groups = parse_linked_group_definitions(cfg);
-// }
+	// linked_groups = parse_linked_group_definitions(cfg);
+}
 
 // builder_window::window_resolution::tooltip_info::tooltip_info(const config& cfg, const std::string& tagname)
 // 	: id(cfg["id"])
@@ -172,58 +194,58 @@ builder_widget_ptr create_widget_builder()
 // 	VALIDATE(!id.empty(), missing_mandatory_wml_key("[window][resolution][" + tagname + "]", "id"));
 // }
 
-// builder_grid::builder_grid(const config& cfg)
-// 	: builder_widget(cfg)
-// 	, rows(0)
-// 	, cols(0)
-// 	, row_grow_factor()
-// 	, col_grow_factor()
-// 	, flags()
-// 	, border_size()
-// 	, widgets()
-// {
-// 	log_scope2(log_gui_parse, "Window builder: parsing a grid");
+builder_grid::builder_grid(const config& cfg)
+	: builder_widget(cfg)
+	, rows(0)
+	, cols(0)
+	, row_grow_factor()
+	, col_grow_factor()
+	, flags()
+	, border_size()
+	, widgets()
+{
+	// log_scope2(log_gui_parse, "Window builder: parsing a grid");
 
-// 	for(const auto& row : cfg.child_range("row")) {
-// 		unsigned col = 0;
+	for(const auto& row : cfg.child_range("row")) {
+		unsigned col = 0;
 
-// 		row_grow_factor.push_back(row["grow_factor"]);
+		row_grow_factor.push_back(row["grow_factor"]);
 
-// 		for(const auto& c : row.child_range("column")) {
-// 			flags.push_back(implementation::read_flags(c));
-// 			border_size.push_back(c["border_size"]);
-// 			if(rows == 0) {
-// 				col_grow_factor.push_back(c["grow_factor"]);
-// 			}
+		for(const auto& c : row.child_range("column")) {
+			flags.push_back(implementation::read_flags(c));
+			border_size.push_back(c["border_size"]);
+			if(rows == 0) {
+				col_grow_factor.push_back(c["grow_factor"]);
+			}
 
-// 			widgets.push_back(create_widget_builder(c));
+			widgets.push_back(create_widget_builder(c));
 
-// 			++col;
-// 		}
+			++col;
+		}
 
-// 		if(col == 0) {
-// 			const t_string msg = VGETTEXT("Grid '$grid' row $row must have at least one column.", {
-// 				{"grid", id}, {"row", std::to_string(rows)}
-// 			});
+		if(col == 0) {
+			const t_string msg = VGETTEXT("Grid '$grid' row $row must have at least one column.", {
+				{"grid", id}, {"row", std::to_string(rows)}
+			});
 
-// 			FAIL(msg);
-// 		}
+			FAIL(msg);
+		}
 
-// 		++rows;
+		++rows;
 
-// 		if(rows == 1) {
-// 			cols = col;
-// 		} else if(col != cols) {
-// 			const t_string msg = VGETTEXT("Grid '$grid' row $row has a differing number of columns ($found found, $expected expected)", {
-// 				{"grid", id}, {"row", std::to_string(rows)}, {"found", std::to_string(col)}, {"expected", std::to_string(cols)}
-// 			});
+		if(rows == 1) {
+			cols = col;
+		} else if(col != cols) {
+			const t_string msg = VGETTEXT("Grid '$grid' row $row has a differing number of columns ($found found, $expected expected)", {
+				{"grid", id}, {"row", std::to_string(rows)}, {"found", std::to_string(col)}, {"expected", std::to_string(cols)}
+			});
 
-// 			FAIL(msg);
-// 		}
-// 	}
+			FAIL(msg);
+		}
+	}
 
-// 	DBG_GUI_P << "Window builder: grid has " << rows << " rows and " << cols << " columns.";
-// }
+	DBG_GUI_P << "Window builder: grid has " << rows << " rows and " << cols << " columns.";
+}
 
 // std::unique_ptr<widget> builder_grid::build() const
 // {

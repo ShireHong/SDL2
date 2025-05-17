@@ -1,6 +1,6 @@
 #include "draw.h"
 #include "draw_manager.h"
-// #include "gui/widgets/grid.hpp"
+#include "gui/widgets/grid.h"
 #include "gui/widgets/settings.h"
 #include "gui/widgets/window.h"
 #include "gui/widgets/widget.h"
@@ -17,17 +17,17 @@ namespace gui2
 /***** ***** ***** Constructor and destructor. ***** ***** *****/
 
 widget::widget()
-	/*: enable_lua_ptr<widget>(this)*/
-	: id_("")
+	: enable_lua_ptr<widget>(this)
+	, id_("")
 	, parent_(nullptr)
 	, x_(-1)
 	, y_(-1)
 	, width_(0)
 	, height_(0)
 	, layout_size_()
-// #ifdef DEBUG_WINDOW_LAYOUT_GRAPHS
-// 	, last_best_size_()
-// #endif
+#ifdef DEBUG_WINDOW_LAYOUT_GRAPHS
+	, last_best_size_()
+#endif
 	, linked_group_()
 	, visible_(visibility::visible)
 	, redraw_action_(redraw_action::full)
@@ -40,8 +40,8 @@ widget::widget()
 }
 
 widget::widget(const builder_widget& builder)
-	// : enable_lua_ptr<widget>(this)
-	: id_(builder.id)
+	: enable_lua_ptr<widget>(this)
+	, id_(builder.id)
 	, parent_(nullptr)
 	, x_(-1)
 	, y_(-1)
@@ -60,6 +60,8 @@ widget::widget(const builder_widget& builder)
 {
 	// DBG_GUI_LF << "widget create: " << static_cast<void*>(this);
     std::cout << "widget create: " << static_cast<void*>(this) << std::endl;
+	std::cout << "widget id " << id_ << std::endl;
+
 }
 
 widget::~widget()
@@ -86,7 +88,7 @@ widget::~widget()
 
 void widget::set_id(const std::string& id)
 {
-	// styled_widget* this_ctrl = dynamic_cast<styled_widget*>(this);
+	styled_widget* this_ctrl = dynamic_cast<styled_widget*>(this);
 
 	// DBG_GUI_LF
 	// << "set id of " << static_cast<void*>(this) << " to '" << id << "' "
@@ -109,7 +111,10 @@ window* widget::get_window()
 	// parent, we can also be the toplevel so start with
 	// ourselves instead of our parent.
 	widget* result = this;
-	while(result->parent_) {
+	std::cout <<result<<std::endl;
+	while(result->parent_) 
+	{
+		std::cout <<result<<std::endl;
 		result = result->parent_;
 	}
 
@@ -123,6 +128,7 @@ const window* widget::get_window() const
 	// parent, we can also be the toplevel so start with
 	// ourselves instead of our parent.
 	const widget* result = this;
+	std::cout <<"const "<<result<<std::endl;
 	while(result->parent_) {
 		result = result->parent_;
 	}

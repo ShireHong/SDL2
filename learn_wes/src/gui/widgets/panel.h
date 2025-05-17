@@ -10,6 +10,10 @@
 namespace gui2
 {
 
+namespace implementation
+{
+struct builder_panel;
+}
 // ------------ WIDGET -----------{
 
 class panel : public container_base
@@ -85,7 +89,9 @@ namespace implementation
 
 struct builder_panel : public builder_styled_widget
 {
-	explicit builder_panel(const config& cfg);
+	// explicit builder_panel(const config& cfg);
+
+	explicit builder_panel();
 
 	using builder_styled_widget::build;
 

@@ -7,11 +7,11 @@
 // #include "formula/string_utils.hpp"
 // #include "gettext.hpp"
 // #include "gui/auxiliary/iterator/walker_widget.hpp"
-// #include "gui/core/event/message.hpp"
+#include "gui/core/event/message.h"
 #include "gui/core/gui_definition.h"
 // #include "gui/core/log.hpp"
 // #include "gui/dialogs/tooltip.hpp"
-// #include "gui/widgets/settings.hpp"
+#include "gui/widgets/settings.h"
 // #include "hotkey/hotkey_item.hpp"
 #include "sdl/rect.h"
 // #include "wml_exception.hpp"
@@ -48,7 +48,7 @@ styled_widget::styled_widget(const implementation::builder_styled_widget& builde
 	// , text_ellipse_mode_(PANGO_ELLIPSIZE_END)
 	, shrunken_(false)
 {
-    std::cout<<"styled_widget"<<std::endl;
+    std::cout<<"styled_widget create"<<std::endl;
 	/*
 	 * Fill in each canvas from the widget state definitons.
 	 *
@@ -63,7 +63,7 @@ styled_widget::styled_widget(const implementation::builder_styled_widget& builde
 	update_canvas();
 
 	// Enable hover behavior if a tooltip was provided.
-	//set_wants_mouse_hover(!tooltip_.empty());
+	// set_wants_mouse_hover(!tooltip_.empty());
 
 	// connect_signal<event::SHOW_TOOLTIP>(std::bind(
 	// 		&styled_widget::signal_handler_show_tooltip, this, std::placeholders::_2, std::placeholders::_3, std::placeholders::_5));
@@ -75,6 +75,50 @@ styled_widget::styled_widget(const implementation::builder_styled_widget& builde
 	// 		&styled_widget::signal_handler_notify_remove_tooltip, this, std::placeholders::_2, std::placeholders::_3));
 }
 
+// void styled_widget::set_members(const widget_item& data)
+// {
+// 	/** @todo document this feature on the wiki. */
+// 	/** @todo do we need to add the debug colors here as well? */
+// 	widget_item::const_iterator itor = data.find("id");
+// 	if(itor != data.end()) {
+// 		set_id(itor->second);
+// 	}
+
+// 	itor = data.find("linked_group");
+// 	if(itor != data.end()) {
+// 		set_linked_group(itor->second);
+// 	}
+
+// 	itor = data.find("label");
+// 	if(itor != data.end()) {
+// 		set_label(itor->second);
+// 	}
+
+// 	itor = data.find("tooltip");
+// 	if(itor != data.end()) {
+// 		set_tooltip(itor->second);
+// 	}
+
+// 	itor = data.find("help");
+// 	if(itor != data.end()) {
+// 		set_help_message(itor->second);
+// 	}
+
+// 	itor = data.find("use_markup");
+// 	if(itor != data.end()) {
+// 		set_use_markup(utils::string_bool(itor->second));
+// 	}
+
+// 	itor = data.find("text_alignment");
+// 	if(itor != data.end()) {
+// 		set_text_alignment(decode_text_alignment(itor->second));
+// 	}
+// }
+
+bool styled_widget::disable_click_dismiss() const
+{
+	return get_visible() == widget::visibility::visible && get_active();
+}
 
 // iteration::walker_ptr styled_widget::create_walker()
 // {
@@ -547,6 +591,32 @@ namespace implementation
 
 builder_styled_widget::builder_styled_widget(const config& cfg)
 	 : builder_widget(cfg)
+	// , definition(cfg["definition"])
+	// , label_string(cfg["label"].t_str())
+	// , tooltip(cfg["tooltip"].t_str())
+	// , help(cfg["help"].t_str())
+	, use_tooltip_on_label_overflow(true)
+	// , use_markup(cfg["use_markup"].to_bool(false))s
+{
+	if(definition.empty()) {
+		definition = "default";
+	}
+
+	// VALIDATE_WITH_DEV_MESSAGE(
+	// 		help.empty() || !tooltip.empty(),
+	// 		_("Found a widget with a helptip and without a tooltip."),
+	// 		formatter() << "id '" << id << "' label '" << label_string
+	// 					 << "' helptip '" << help << "'.");
+
+
+	// DBG_GUI_P << "Window builder: found styled_widget with id '" << id
+	// 		  << "' and definition '" << definition << "'.";
+    std::cout << "Window builder: found styled_widget with id '" << id
+    << "' and definition '" << definition << "'." << std::endl;
+}
+
+builder_styled_widget::builder_styled_widget()
+	 : builder_widget()
 	// , definition(cfg["definition"])
 	// , label_string(cfg["label"].t_str())
 	// , tooltip(cfg["tooltip"].t_str())

@@ -53,7 +53,7 @@ static int do_gameloop()
 	}
 
     gui2::init();
-    
+    std::cout <<"------------------------------------------------------"<< std::endl;
     if (true)
     {
         std::string msg ="Unable to create ";

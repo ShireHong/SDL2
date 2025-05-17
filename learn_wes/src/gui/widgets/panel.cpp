@@ -24,7 +24,7 @@ REGISTER_WIDGET(panel)
 panel::panel(const implementation::builder_styled_widget& builder, const std::string& control_type)
 	: container_base(builder, control_type.empty() ? type() : control_type)
 {
-    std::cout<<"panel"<<std::endl;
+    std::cout<<"panel create"<<std::endl;
 }
 
 SDL_Rect panel::get_client_rect() const
@@ -165,16 +165,25 @@ panel_definition::resolution::resolution(const int win_w,
 namespace implementation
 {
 
-builder_panel::builder_panel(const config& cfg)
-	: builder_styled_widget(cfg), grid(nullptr)
+// builder_panel::builder_panel(const config& cfg)
+// 	: builder_styled_widget(cfg), grid(nullptr)
+// {
+// 	// auto c = cfg.optional_child("grid");
+
+// 	// VALIDATE(c, _("No grid defined."));
+
+// 	// grid = std::make_shared<builder_grid>(*c);
+// }
+
+builder_panel::builder_panel()
+	: builder_styled_widget(), grid(nullptr)
 {
 	// auto c = cfg.optional_child("grid");
 
 	// VALIDATE(c, _("No grid defined."));
 
-	// grid = std::make_shared<builder_grid>(*c);
+	grid = std::make_shared<builder_grid>();
 }
-
 std::unique_ptr<widget> builder_panel::build() const
 {
 	auto widget = std::make_unique<panel>(*this);
@@ -183,7 +192,7 @@ std::unique_ptr<widget> builder_panel::build() const
 	// 		  << definition << "'.";
     std::cout << "Window builder: placed panel '" << id << "' with definition '"
 			  << definition << "'." << std::endl;
-	// widget->init_grid(*grid);
+	widget->init_grid(*grid);
 	return widget;
 }
 

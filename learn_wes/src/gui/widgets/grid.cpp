@@ -34,6 +34,7 @@ grid::grid(const unsigned rows, const unsigned cols)
 	, col_grow_factor_(cols)
 	, children_(rows * cols)
 {
+	std::cout<<"grid create!"<<std::endl;
 	connect_signal<event::REQUEST_PLACEMENT>(
 		std::bind(&grid::request_placement, this,
 			std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4),

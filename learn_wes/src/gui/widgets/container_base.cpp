@@ -22,8 +22,8 @@ container_base::container_base(const implementation::builder_styled_widget& buil
 	: styled_widget(builder, control_type)
 	, grid_()
 {
-    std::cout<<"container_base"<<std::endl;
-	// grid_.set_parent(this);
+    std::cout<<"container_base create"<<std::endl;
+	grid_.set_parent(this);
 	// connect_signal<event::REQUEST_PLACEMENT>(
 	// 	std::bind(&container_base::clear_layout_size, this),
 	// 	event::dispatcher::back_pre_child);
@@ -253,14 +253,14 @@ bool container_base::disable_click_dismiss() const
 // 	return std::make_unique<gui2::iteration::container>(*this);
 // }
 
-// void container_base::init_grid(const builder_grid& grid_builder)
-// {
-// 	log_scope2(log_gui_general, LOG_SCOPE_HEADER);
+void container_base::init_grid(const builder_grid& grid_builder)
+{
+	// log_scope2(log_gui_general, LOG_SCOPE_HEADER);
 
-// 	assert(grid_.get_rows() == 0 && grid_.get_cols() == 0);
+	assert(grid_.get_rows() == 0 && grid_.get_cols() == 0);
 
-// 	grid_builder.build(grid_);
-// }
+	// grid_builder.build(grid_);
+}
 
 point container_base::border_space() const
 {

@@ -1,0 +1,7 @@
+/cygdrive/d/git_hub/SDL2/learn_wes/build/CMakeFiles/pcieframe.dir
+/cygdrive/d/git_hub/SDL2/learn_wes/build/CMakeFiles/edit_cache.dir
+/cygdrive/d/git_hub/SDL2/learn_wes/build/CMakeFiles/rebuild_cache.dir
+/cygdrive/d/git_hub/SDL2/learn_wes/build/CMakeFiles/list_install_components.dir
+/cygdrive/d/git_hub/SDL2/learn_wes/build/CMakeFiles/install.dir
+/cygdrive/d/git_hub/SDL2/learn_wes/build/CMakeFiles/install/local.dir
+/cygdrive/d/git_hub/SDL2/learn_wes/build/CMakeFiles/install/strip.dir

@@ -5,7 +5,7 @@
 
 #include "gui/core/event/message.h"
 // #include "gui/core/log.hpp"
-
+#include <iostream>
 namespace gui2
 {
 namespace event
@@ -25,6 +25,7 @@ dispatcher::dispatcher()
 	, connected_(false)
 	// , hotkeys_()
 {
+	std::cout<<"dispatcher create!"<<std::endl;
 }
 
 dispatcher::~dispatcher()

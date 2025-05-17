@@ -4,7 +4,7 @@
 #include "config.h"
 // #include "display.h"
 // #include "filesystem.hpp"
-// #include "game_config.hpp"
+#include "game_config.h"
 // #include "image_modifications.hpp"
 // #include "log.hpp"
 // #include "preferences/general.h"
@@ -20,6 +20,7 @@
 
 #include <boost/algorithm/string.hpp>
 #include <boost/functional/hash_fwd.hpp>
+#include <boost/functional/hash.hpp> 
 
 #include <iostream>
 #include <array>
@@ -399,59 +400,59 @@ static surface load_image_sub_file(const image::locator& loc)
 		return nullptr;
 	}
 
-	modification_queue mods = modification::decode(loc.get_modifications());
+	// modification_queue mods = modification::decode(loc.get_modifications());
 
-	while(!mods.empty()) {
-		modification* mod = mods.top();
+	// while(!mods.empty()) {
+	// 	modification* mod = mods.top();
 
-		try {
-			surf = (*mod)(surf);
-		} catch(const image::modification::imod_exception& e) {
-			std::ostringstream ss;
-			ss << "\n";
+	// 	try {
+	// 		surf = (*mod)(surf);
+	// 	} catch(const image::modification::imod_exception& e) {
+	// 		std::ostringstream ss;
+	// 		ss << "\n";
 
-			for(const std::string& mod_name : utils::parenthetical_split(loc.get_modifications(), '~')) {
-				ss << "\t" << mod_name << "\n";
-			}
+	// 		for(const std::string& mod_name : utils::parenthetical_split(loc.get_modifications(), '~')) {
+	// 			ss << "\t" << mod_name << "\n";
+	// 		}
 
-			ERR_CFG << "Failed to apply a modification to an image:\n"
-					<< "Image: " << loc.get_filename() << "\n"
-					<< "Modifications: " << ss.str() << "\n"
-					<< "Error: " << e.message;
-		}
+	// 		ERR_CFG << "Failed to apply a modification to an image:\n"
+	// 				<< "Image: " << loc.get_filename() << "\n"
+	// 				<< "Modifications: " << ss.str() << "\n"
+	// 				<< "Error: " << e.message;
+	// 	}
 
-		// NOTE: do this *after* applying the mod or you'll get crashes!
-		mods.pop();
-	}
+	// 	// NOTE: do this *after* applying the mod or you'll get crashes!
+	// 	mods.pop();
+	// }
 
-	if(loc.get_loc().valid()) {
-		rect srcrect(
-			((tile_size * 3) / 4)                           *  loc.get_loc().x,
-			  tile_size * loc.get_loc().y + (tile_size / 2) * (loc.get_loc().x % 2),
-			  tile_size,
-			  tile_size
-		);
+	// if(loc.get_loc().valid()) {
+	// 	rect srcrect(
+	// 		((tile_size * 3) / 4)                           *  loc.get_loc().x,
+	// 		  tile_size * loc.get_loc().y + (tile_size / 2) * (loc.get_loc().x % 2),
+	// 		  tile_size,
+	// 		  tile_size
+	// 	);
 
-		if(loc.get_center_x() >= 0 && loc.get_center_y() >= 0) {
-			srcrect.x += surf->w / 2 - loc.get_center_x();
-			srcrect.y += surf->h / 2 - loc.get_center_y();
-		}
+	// 	if(loc.get_center_x() >= 0 && loc.get_center_y() >= 0) {
+	// 		srcrect.x += surf->w / 2 - loc.get_center_x();
+	// 		srcrect.y += surf->h / 2 - loc.get_center_y();
+	// 	}
 
-		// cut and hex mask, but also check and cache if empty result
-		surface cut(cut_surface(surf, srcrect));
-		bool is_empty = false;
-		surf = mask_surface(cut, get_hexmask(), &is_empty);
+	// 	// cut and hex mask, but also check and cache if empty result
+	// 	surface cut(cut_surface(surf, srcrect));
+	// 	bool is_empty = false;
+	// 	surf = mask_surface(cut, get_hexmask(), &is_empty);
 
-		// discard empty images to free memory
-		if(is_empty) {
-			// Safe because those images are only used by terrain rendering
-			// and it filters them out.
-			// A safer and more general way would be to keep only one copy of it
-			surf = nullptr;
-		}
+	// 	// discard empty images to free memory
+	// 	if(is_empty) {
+	// 		// Safe because those images are only used by terrain rendering
+	// 		// and it filters them out.
+	// 		// A safer and more general way would be to keep only one copy of it
+	// 		surf = nullptr;
+	// 	}
 
-		loc.add_to_cache(is_empty_hex_, is_empty);
-	}
+	// 	loc.add_to_cache(is_empty_hex_, is_empty);
+	// }
 
 	return surf;
 }
@@ -462,26 +463,26 @@ static surface load_image_data_uri(const image::locator& loc)
 
 	parsed_data_URI parsed{loc.get_filename()};
 
-	if(!parsed.good) {
-		std::string_view fn = loc.get_filename();
-		std::string_view stripped = fn.substr(0, fn.find(","));
-		ERR_IMG << "Invalid data URI: " << stripped;
-	} else if(parsed.mime.substr(0, 5) != "image") {
-		ERR_IMG << "Data URI not of image MIME type: " << parsed.mime;
-	} else {
-		const std::vector<uint8_t> image_data = base64::decode(parsed.data);
-		filesystem::rwops_ptr rwops{SDL_RWFromConstMem(image_data.data(), image_data.size())};
+	// if(!parsed.good) {
+	// 	std::string_view fn = loc.get_filename();
+	// 	std::string_view stripped = fn.substr(0, fn.find(","));
+	// 	ERR_IMG << "Invalid data URI: " << stripped;
+	// } else if(parsed.mime.substr(0, 5) != "image") {
+	// 	ERR_IMG << "Data URI not of image MIME type: " << parsed.mime;
+	// } else {
+	// 	const std::vector<uint8_t> image_data = base64::decode(parsed.data);
+	// 	filesystem::rwops_ptr rwops{SDL_RWFromConstMem(image_data.data(), image_data.size())};
 
-		if(image_data.empty()) {
-			ERR_IMG << "Invalid encoding in data URI";
-		} else if(parsed.mime == "image/png") {
-			surf = IMG_LoadTyped_RW(rwops.release(), true, "PNG");
-		} else if(parsed.mime == "image/jpeg") {
-			surf = IMG_LoadTyped_RW(rwops.release(), true, "JPG");
-		} else {
-			ERR_IMG << "Invalid image MIME type: " << parsed.mime;
-		}
-	}
+	// 	if(image_data.empty()) {
+	// 		ERR_IMG << "Invalid encoding in data URI";
+	// 	} else if(parsed.mime == "image/png") {
+	// 		surf = IMG_LoadTyped_RW(rwops.release(), true, "PNG");
+	// 	} else if(parsed.mime == "image/jpeg") {
+	// 		surf = IMG_LoadTyped_RW(rwops.release(), true, "JPG");
+	// 	} else {
+	// 		ERR_IMG << "Invalid image MIME type: " << parsed.mime;
+	// 	}
+	// }
 
 	return surf;
 }
@@ -506,63 +507,63 @@ light_string get_light_string(int op, int r, int g, int b)
 
 static surface apply_light(surface surf, const light_string& ls)
 {
-	// atomic lightmap operation are handled directly (important to end recursion)
-	if(ls.size() == 4) {
-		// if no lightmap (first char = -1) then we need the initial value
-		//(before the halving done for lightmap)
-		int m = ls[0] == -1 ? 2 : 1;
-		return adjust_surface_color(surf, ls[1] * m, ls[2] * m, ls[3] * m);
-	}
+	// // atomic lightmap operation are handled directly (important to end recursion)
+	// if(ls.size() == 4) {
+	// 	// if no lightmap (first char = -1) then we need the initial value
+	// 	//(before the halving done for lightmap)
+	// 	int m = ls[0] == -1 ? 2 : 1;
+	// 	return adjust_surface_color(surf, ls[1] * m, ls[2] * m, ls[3] * m);
+	// }
 
-	// check if the lightmap is already cached or need to be generated
-	surface lightmap = nullptr;
-	auto i = surface_lightmaps_.find(ls);
-	if(i != surface_lightmaps_.end()) {
-		lightmap = i->second;
-	} else {
-		// build all the paths for lightmap sources
-		static const std::string p = "terrain/light/light";
-		static const std::string lm_img[19] {
-			p + ".png",
-			p + "-concave-2-tr.png", p + "-concave-2-r.png", p + "-concave-2-br.png",
-			p + "-concave-2-bl.png", p + "-concave-2-l.png", p + "-concave-2-tl.png",
-			p + "-convex-br-bl.png", p + "-convex-bl-l.png", p + "-convex-l-tl.png",
-			p + "-convex-tl-tr.png", p + "-convex-tr-r.png", p + "-convex-r-br.png",
-			p + "-convex-l-bl.png",  p + "-convex-tl-l.png", p + "-convex-tr-tl.png",
-			p + "-convex-r-tr.png",  p + "-convex-br-r.png", p + "-convex-bl-br.png"
-		};
+	// // check if the lightmap is already cached or need to be generated
+	// surface lightmap = nullptr;
+	// auto i = surface_lightmaps_.find(ls);
+	// if(i != surface_lightmaps_.end()) {
+	// 	lightmap = i->second;
+	// } else {
+	// 	// build all the paths for lightmap sources
+	// 	static const std::string p = "terrain/light/light";
+	// 	static const std::string lm_img[19] {
+	// 		p + ".png",
+	// 		p + "-concave-2-tr.png", p + "-concave-2-r.png", p + "-concave-2-br.png",
+	// 		p + "-concave-2-bl.png", p + "-concave-2-l.png", p + "-concave-2-tl.png",
+	// 		p + "-convex-br-bl.png", p + "-convex-bl-l.png", p + "-convex-l-tl.png",
+	// 		p + "-convex-tl-tr.png", p + "-convex-tr-r.png", p + "-convex-r-br.png",
+	// 		p + "-convex-l-bl.png",  p + "-convex-tl-l.png", p + "-convex-tr-tl.png",
+	// 		p + "-convex-r-tr.png",  p + "-convex-br-r.png", p + "-convex-bl-br.png"
+	// 	};
 
-		// decompose into atomic lightmap operations (4 chars)
-		for(std::size_t c = 0; c + 3 < ls.size(); c += 4) {
-			light_string sls = ls.substr(c, 4);
+	// 	// decompose into atomic lightmap operations (4 chars)
+	// 	for(std::size_t c = 0; c + 3 < ls.size(); c += 4) {
+	// 		light_string sls = ls.substr(c, 4);
 
-			// get the corresponding image and apply the lightmap operation to it
-			// This allows to also cache lightmap parts.
-			// note that we avoid infinite recursion by using only atomic operation
-			surface lts = image::get_lighted_image(lm_img[sls[0]], sls);
+	// 		// get the corresponding image and apply the lightmap operation to it
+	// 		// This allows to also cache lightmap parts.
+	// 		// note that we avoid infinite recursion by using only atomic operation
+	// 		surface lts = image::get_lighted_image(lm_img[sls[0]], sls);
 
-			// first image will be the base where we blit the others
-			if(lightmap == nullptr) {
-				// copy the cached image to avoid modifying the cache
-				lightmap = lts.clone();
-			} else {
-				sdl_blit(lts, nullptr, lightmap, nullptr);
-			}
-		}
+	// 		// first image will be the base where we blit the others
+	// 		if(lightmap == nullptr) {
+	// 			// copy the cached image to avoid modifying the cache
+	// 			lightmap = lts.clone();
+	// 		} else {
+	// 			sdl_blit(lts, nullptr, lightmap, nullptr);
+	// 		}
+	// 	}
 
-		// cache the result
-		surface_lightmaps_[ls] = lightmap;
-	}
+	// 	// cache the result
+	// 	surface_lightmaps_[ls] = lightmap;
+	// }
 
-	// apply the final lightmap
-	return light_surface(surf, lightmap);
+	// // apply the final lightmap
+	// return light_surface(surf, lightmap);
 }
 
 bool locator::file_exists() const
 {
-	return val_.is_data_uri
-		? parsed_data_URI{val_.filename}.good
-		: !filesystem::get_binary_file_location("images", val_.filename).empty();
+	// return val_.is_data_uri
+	// 	? parsed_data_URI{val_.filename}.good
+	// 	: !filesystem::get_binary_file_location("images", val_.filename).empty();
 }
 
 static surface load_from_disk(const locator& loc)
@@ -607,45 +608,45 @@ static surface get_hexed(const locator& i_locator, bool skip_cache = false)
 {
 	surface image(get_surface(i_locator, UNSCALED, skip_cache));
 	surface mask(get_hexmask());
-	// Ensure the image is the correct size by cropping and/or centering.
-	// TODO: this should probably be a function of sdl/utils
-	if(image && (image->w != mask->w || image->h != mask->h)) {
-		DBG_IMG << "adjusting [" << image->w << ',' << image->h << ']'
-			<< " image to hex mask: " << i_locator;
-		// the fitted surface
-		surface fit(mask->w, mask->h);
-		// if the image is too large in either dimension, crop it.
-		if(image->w > mask->w || image->h >= mask->h) {
-			// fill the crop surface with transparency
-			sdl::fill_surface_rect(fit, nullptr,
-				SDL_MapRGBA(fit->format, 0, 0, 0, 0)
-			);
-			// crop the input image to hexmask dimensions
-			int cutx = std::max(0, image->w - mask->w) / 2;
-			int cuty = std::max(0, image->h - mask->h) / 2;
-			int cutw = std::min(image->w, mask->w);
-			int cuth = std::min(image->h, mask->h);
-			image = cut_surface(image, {cutx, cuty, cutw, cuth});
-			// image will now have dimensions <= mask
-		}
-		// center image
-		int placex = (mask->w - image->w) / 2;
-		int placey = (mask->h - image->h) / 2;
-		rect dst = {placex, placey, image->w, image->h};
-		sdl_blit(image, nullptr, fit, &dst);
-		image = fit;
-	}
-	// hex cut tiles, also check and cache if empty result
-	bool is_empty = false;
-	surface res = mask_surface(image, mask, &is_empty, i_locator.get_filename());
-	i_locator.add_to_cache(is_empty_hex_, is_empty);
-	return res;
+	// // Ensure the image is the correct size by cropping and/or centering.
+	// // TODO: this should probably be a function of sdl/utils
+	// if(image && (image->w != mask->w || image->h != mask->h)) {
+	// 	DBG_IMG << "adjusting [" << image->w << ',' << image->h << ']'
+	// 		<< " image to hex mask: " << i_locator;
+	// 	// the fitted surface
+	// 	surface fit(mask->w, mask->h);
+	// 	// if the image is too large in either dimension, crop it.
+	// 	if(image->w > mask->w || image->h >= mask->h) {
+	// 		// fill the crop surface with transparency
+	// 		sdl::fill_surface_rect(fit, nullptr,
+	// 			SDL_MapRGBA(fit->format, 0, 0, 0, 0)
+	// 		);
+	// 		// crop the input image to hexmask dimensions
+	// 		int cutx = std::max(0, image->w - mask->w) / 2;
+	// 		int cuty = std::max(0, image->h - mask->h) / 2;
+	// 		int cutw = std::min(image->w, mask->w);
+	// 		int cuth = std::min(image->h, mask->h);
+	// 		image = cut_surface(image, {cutx, cuty, cutw, cuth});
+	// 		// image will now have dimensions <= mask
+	// 	}
+	// 	// center image
+	// 	int placex = (mask->w - image->w) / 2;
+	// 	int placey = (mask->h - image->h) / 2;
+	// 	rect dst = {placex, placey, image->w, image->h};
+	// 	sdl_blit(image, nullptr, fit, &dst);
+	// 	image = fit;
+	// }
+	// // hex cut tiles, also check and cache if empty result
+	// bool is_empty = false;
+	// surface res = mask_surface(image, mask, &is_empty, i_locator.get_filename());
+	// i_locator.add_to_cache(is_empty_hex_, is_empty);
+	// return res;
 }
 
 static surface get_tod_colored(const locator& i_locator, bool skip_cache = false)
 {
-	surface img = get_surface(i_locator, HEXED, skip_cache);
-	return adjust_surface_color(img, red_adjust, green_adjust, blue_adjust);
+	// surface img = get_surface(i_locator, HEXED, skip_cache);
+	// return adjust_surface_color(img, red_adjust, green_adjust, blue_adjust);
 }
 
 /** translate type to a simpler one when possible */
@@ -682,7 +683,8 @@ surface get_surface(
 
 	// select associated cache
 	if(type >= NUM_TYPES) {
-		WRN_IMG << "get_surface called with unknown image type";
+		// WRN_IMG << "get_surface called with unknown image type";
+		std::cout << "get_surface called with unknown image type" << std::endl;
 		return res;
 	}
 	surface_cache& imap = surfaces_[type];
@@ -692,7 +694,8 @@ surface get_surface(
 		return *cached_item;
 	}
 
-	DBG_IMG << "surface cache [" << type << "] miss: " << i_locator;
+	// DBG_IMG << "surface cache [" << type << "] miss: " << i_locator;
+	std::cout << "surface cache [" << type << "] miss: " << i_locator << std::endl;
 
 	// not cached, generate it
 	switch(type) {
@@ -713,15 +716,19 @@ surface get_surface(
 	bool_cache& skip = skipped_cache_[type];
 	if(i_locator.in_cache(skip) && i_locator.locate_in_cache(skip))
 	{
-		DBG_IMG << "duplicate load: " << i_locator
+		// DBG_IMG << "duplicate load: " << i_locator
+		// 	<< " [" << type << "]"
+		// 	<< " (" << duplicate_loads_ << "/" << total_loads_ << " total)";
+		std::cout << "duplicate load: " << i_locator
 			<< " [" << type << "]"
-			<< " (" << duplicate_loads_ << "/" << total_loads_ << " total)";
+			<< " (" << duplicate_loads_ << "/" << total_loads_ << " total)" << std::endl;
 		++duplicate_loads_;
 	}
 	++total_loads_;
 
 	if(skip_cache) {
-		DBG_IMG << "surface cache [" << type << "] skip: " << i_locator;
+		// DBG_IMG << "surface cache [" << type << "] skip: " << i_locator;
+		std::cout << "surface cache [" << type << "] skip: " << i_locator << std::endl;
 		i_locator.add_to_cache(skip, true);
 	} else {
 		i_locator.add_to_cache(imap, res);
@@ -754,8 +761,8 @@ surface get_lighted_image(const image::locator& i_locator, const light_string& l
 		}
 	}
 
-	DBG_IMG << "lit surface cache miss: " << i_locator;
-
+	// DBG_IMG << "lit surface cache miss: " << i_locator;
+	std::cout << "lit surface cache miss: " << i_locator << std::endl;
 	// not cached yet, generate it
 	res = get_surface(i_locator, HEXED);
 	res = apply_light(res, ls);
@@ -791,8 +798,8 @@ texture get_lighted_texture(
 		}
 	}
 
-	DBG_IMG << "lit texture cache miss: " << i_locator;
-
+	// DBG_IMG << "lit texture cache miss: " << i_locator;
+	std::cout << "lit texture cache miss: " << i_locator << std::endl;
 	// not cached yet, generate it
 	texture tex(get_lighted_image(i_locator, ls));
 
@@ -821,41 +828,41 @@ point get_size(const locator& i_locator, bool skip_cache)
 bool is_in_hex(const locator& i_locator)
 {
 	bool result;
-	{
-		if(i_locator.in_cache(in_hex_info_)) {
-			result = i_locator.locate_in_cache(in_hex_info_);
-		} else {
-			const surface image(get_surface(i_locator, UNSCALED));
+	// {
+	// 	if(i_locator.in_cache(in_hex_info_)) {
+	// 		result = i_locator.locate_in_cache(in_hex_info_);
+	// 	} else {
+	// 		const surface image(get_surface(i_locator, UNSCALED));
 
-			bool res = in_mask_surface(image, get_hexmask());
+	// 		bool res = in_mask_surface(image, get_hexmask());
 
-			i_locator.add_to_cache(in_hex_info_, res);
+	// 		i_locator.add_to_cache(in_hex_info_, res);
 
-			// std::cout << "in_hex : " << i_locator.get_filename()
-			//		<< " " << (res ? "yes" : "no") << "\n";
+	// 		// std::cout << "in_hex : " << i_locator.get_filename()
+	// 		//		<< " " << (res ? "yes" : "no") << "\n";
 
-			result = res;
-		}
-	}
+	// 		result = res;
+	// 	}
+	// }
 
 	return result;
 }
 
 bool is_empty_hex(const locator& i_locator)
 {
-	if(!i_locator.in_cache(is_empty_hex_)) {
-		const surface surf = get_surface(i_locator, HEXED);
-		// emptiness of terrain image is checked during hex cut
-		// so, maybe in cache now, let's recheck
-		if(!i_locator.in_cache(is_empty_hex_)) {
-			// should never reach here
-			// but do it manually if it happens
-			// assert(false);
-			bool is_empty = false;
-			mask_surface(surf, get_hexmask(), &is_empty);
-			i_locator.add_to_cache(is_empty_hex_, is_empty);
-		}
-	}
+	// if(!i_locator.in_cache(is_empty_hex_)) {
+	// 	const surface surf = get_surface(i_locator, HEXED);
+	// 	// emptiness of terrain image is checked during hex cut
+	// 	// so, maybe in cache now, let's recheck
+	// 	if(!i_locator.in_cache(is_empty_hex_)) {
+	// 		// should never reach here
+	// 		// but do it manually if it happens
+	// 		// assert(false);
+	// 		bool is_empty = false;
+	// 		mask_surface(surf, get_hexmask(), &is_empty);
+	// 		i_locator.add_to_cache(is_empty_hex_, is_empty);
+	// 	}
+	// }
 
 	return i_locator.locate_in_cache(is_empty_hex_);
 }
@@ -873,51 +880,51 @@ bool exists(const image::locator& i_locator)
 	auto [iter, success] = image_existence_map.emplace(i_locator.get_filename(), false);
 
 	bool& cache = iter->second;
-	if(success) {
-		if(i_locator.is_data_uri()) {
-			cache = parsed_data_URI{i_locator.get_filename()}.good;
-		} else {
-			cache = !filesystem::get_binary_file_location("images", i_locator.get_filename()).empty();
-		}
-	}
+	// if(success) {
+	// 	if(i_locator.is_data_uri()) {
+	// 		cache = parsed_data_URI{i_locator.get_filename()}.good;
+	// 	} else {
+	// 		cache = !filesystem::get_binary_file_location("images", i_locator.get_filename()).empty();
+	// 	}
+	// }
 
 	return cache;
 }
 
 static void precache_file_existence_internal(const std::string& dir, const std::string& subdir)
 {
-	const std::string checked_dir = dir + "/" + subdir;
-	if(precached_dirs.find(checked_dir) != precached_dirs.end()) {
-		return;
-	}
+	// const std::string checked_dir = dir + "/" + subdir;
+	// if(precached_dirs.find(checked_dir) != precached_dirs.end()) {
+	// 	return;
+	// }
 
-	precached_dirs.insert(checked_dir);
+	// precached_dirs.insert(checked_dir);
 
-	if(!filesystem::is_directory(checked_dir)) {
-		return;
-	}
+	// if(!filesystem::is_directory(checked_dir)) {
+	// 	return;
+	// }
 
-	std::vector<std::string> files_found;
-	std::vector<std::string> dirs_found;
-	filesystem::get_files_in_dir(checked_dir, &files_found, &dirs_found, filesystem::name_mode::FILE_NAME_ONLY,
-			filesystem::filter_mode::NO_FILTER, filesystem::reorder_mode::DONT_REORDER);
+	// std::vector<std::string> files_found;
+	// std::vector<std::string> dirs_found;
+	// filesystem::get_files_in_dir(checked_dir, &files_found, &dirs_found, filesystem::name_mode::FILE_NAME_ONLY,
+	// 		filesystem::filter_mode::NO_FILTER, filesystem::reorder_mode::DONT_REORDER);
 
-	for(const auto& f : files_found) {
-		image_existence_map[subdir + f] = true;
-	}
+	// for(const auto& f : files_found) {
+	// 	image_existence_map[subdir + f] = true;
+	// }
 
-	for(const auto& d : dirs_found) {
-		precache_file_existence_internal(dir, subdir + d + "/");
-	}
+	// for(const auto& d : dirs_found) {
+	// 	precache_file_existence_internal(dir, subdir + d + "/");
+	// }
 }
 
 void precache_file_existence(const std::string& subdir)
 {
-	const std::vector<std::string>& paths = filesystem::get_binary_paths("images");
+	// const std::vector<std::string>& paths = filesystem::get_binary_paths("images");
 
-	for(const auto& p : paths) {
-		precache_file_existence_internal(p, subdir);
-	}
+	// for(const auto& p : paths) {
+	// 	precache_file_existence_internal(p, subdir);
+	// }
 }
 
 bool precached_file_exists(const std::string& file)
@@ -941,19 +948,19 @@ save_result save_image(const surface& surf, const std::string& filename)
 		return save_result::no_image;
 	}
 
-	if(filesystem::ends_with(filename, ".jpeg") || filesystem::ends_with(filename, ".jpg") || filesystem::ends_with(filename, ".jpe")) {
-		LOG_IMG << "Writing a JPG image to " << filename;
+	// if(filesystem::ends_with(filename, ".jpeg") || filesystem::ends_with(filename, ".jpg") || filesystem::ends_with(filename, ".jpe")) {
+	// 	LOG_IMG << "Writing a JPG image to " << filename;
 
-		const int err = IMG_SaveJPG_RW(surf, filesystem::make_write_RWops(filename).release(), true, 75); // SDL takes ownership of the RWops
-		return err == 0 ? save_result::success : save_result::save_failed;
-	}
+	// 	const int err = IMG_SaveJPG_RW(surf, filesystem::make_write_RWops(filename).release(), true, 75); // SDL takes ownership of the RWops
+	// 	return err == 0 ? save_result::success : save_result::save_failed;
+	// }
 
-	if(filesystem::ends_with(filename, ".png")) {
-		LOG_IMG << "Writing a PNG image to " << filename;
+	// if(filesystem::ends_with(filename, ".png")) {
+	// 	LOG_IMG << "Writing a PNG image to " << filename;
 
-		const int err = IMG_SavePNG_RW(surf, filesystem::make_write_RWops(filename).release(), true); // SDL takes ownership of the RWops
-		return err == 0 ? save_result::success : save_result::save_failed;
-	}
+	// 	const int err = IMG_SavePNG_RW(surf, filesystem::make_write_RWops(filename).release(), true); // SDL takes ownership of the RWops
+	// 	return err == 0 ? save_result::success : save_result::save_failed;
+	// }
 
 	return save_result::unsupported_format;
 }
@@ -1006,7 +1013,8 @@ texture get_texture(const image::locator& i_locator, scale_quality quality, TYPE
 		return *cached_item;
 	}
 
-	DBG_IMG << "texture cache [" << type << "] miss: " << i_locator;
+	// DBG_IMG << "texture cache [" << type << "] miss: " << i_locator;
+	std::cout << "texture cache [" << type << "] miss: " << i_locator << std::endl;
 
 	//
 	// No texture was cached. In that case, create a new one. The explicit cases require special
@@ -1025,7 +1033,8 @@ texture get_texture(const image::locator& i_locator, scale_quality quality, TYPE
 
 	// Cache the texture.
 	if(skip_cache) {
-		DBG_IMG << "texture cache [" << type << "] skip: " << i_locator;
+		// DBG_IMG << "texture cache [" << type << "] skip: " << i_locator;
+		std::cout << "texture cache [" << type << "] skip: " << i_locator << std::endl;
 	} else {
 		i_locator.add_to_cache(*cache, res);
 	}

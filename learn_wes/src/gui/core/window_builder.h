@@ -3,7 +3,7 @@
 
 // #include "gui/auxiliary/typed_formula.hpp"
 // #include "gui/core/linked_group_definition.hpp"
-// #include "gui/widgets/grid.hpp"
+#include "gui/widgets/grid.h"
 #include "color.h"
 #include "gui/widgets/widget.h"
 #include "config.h"
@@ -36,6 +36,8 @@ struct builder_widget
 	//using optional_replacements = utils::optional_reference<const replacements_map>;
 
 	explicit builder_widget(const config& cfg);
+
+	explicit builder_widget();
 
 	virtual ~builder_widget()
 	{
@@ -104,8 +106,10 @@ using builder_widget_const_ptr = std::shared_ptr<const builder_widget>;
 
 struct builder_grid : public builder_widget
 {
-	//explicit builder_grid(const config& cfg);
+	explicit builder_grid(const config& cfg);
 
+	explicit builder_grid();
+	
 	unsigned rows;
 	unsigned cols;
 
@@ -148,7 +152,7 @@ public:
 
 	struct window_resolution
 	{
-	// 	explicit window_resolution(const config& cfg);
+		explicit window_resolution(const config& cfg);
 
 	    unsigned window_width;
         unsigned window_height;
@@ -186,7 +190,7 @@ public:
 	// 	tooltip_info tooltip;
 	// 	tooltip_info helptip;
 
-	// 	builder_grid_ptr grid;
+		builder_grid_ptr grid;
 	};
 
 	/**

@@ -36,6 +36,7 @@ button::button(const implementation::builder_button& builder)
 	, state_(ENABLED)
 	, retval_(retval::NONE)
 {
+	std::cout<<"button create!"<<std::endl;
 	connect_signal<event::MOUSE_ENTER>(
 			std::bind(&button::signal_handler_mouse_enter, this, std::placeholders::_2, std::placeholders::_3));
 	connect_signal<event::MOUSE_LEAVE>(

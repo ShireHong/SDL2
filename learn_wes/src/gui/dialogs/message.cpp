@@ -3,8 +3,8 @@
 #include "gui/dialogs/message.h"
 
 // #include "gettext.hpp"
-// #include "gui/auxiliary/find_widget.hpp"
-// #include "gui/widgets/button.hpp"
+#include "gui/auxiliary/find_widget.h"
+#include "gui/widgets/button.h"
 // #include "gui/widgets/image.hpp"
 // #include "gui/widgets/label.hpp"
 #include "gui/widgets/window.h"
@@ -36,16 +36,16 @@ struct message_implementation
 							message::button_status& button_status,
 							const std::string& id)
 	{
-		// button_status.ptr = find_widget<button>(&window, id, false, true);
-		// button_status.ptr->set_visible(button_status.visible);
+		button_status.ptr = find_widget<button>(&window, id, false, true);
+		button_status.ptr->set_visible(button_status.visible);
 
 		// if(!button_status.caption.empty()) {
 		// 	button_status.ptr->set_label(button_status.caption);
 		// }
 
-		// if(button_status.retval != retval::NONE) {
-		// 	button_status.ptr->set_retval(button_status.retval);
-		// }
+		if(button_status.retval != retval::NONE) {
+			button_status.ptr->set_retval(button_status.retval);
+		}
 	}
 };
 
@@ -88,10 +88,10 @@ void message::pre_show(window& window)
 
 void message::post_show(window& /*window*/)
 {
-	// for(auto & button_status : buttons_)
-	// {
-	// 	button_status.ptr = nullptr;
-	// }
+	for(auto & button_status : buttons_)
+	{
+		button_status.ptr = nullptr;
+	}
 }
 
 void message::set_button_caption(const button_id button,
@@ -120,13 +120,13 @@ void message::set_button_retval(const button_id button, const int retval)
 	// }
 }
 
-// message::button_status::button_status()
-// 	: ptr(nullptr)
-// 	, caption()
-// 	, visible(widget::visibility::invisible)
-// 	, retval(gui2::retval::NONE) // Needs explicit namespace qualifier to avoid name clashes.
-// {
-// }
+message::button_status::button_status()
+	: ptr(nullptr)
+	, caption()
+	, visible(widget::visibility::invisible)
+	, retval(gui2::retval::NONE) // Needs explicit namespace qualifier to avoid name clashes.
+{
+}
 
 } // namespace dialogs
 

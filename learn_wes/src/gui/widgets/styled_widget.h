@@ -520,6 +520,7 @@ struct builder_styled_widget : public builder_widget
 {
 public:
 	builder_styled_widget(const config& cfg);
+	builder_styled_widget();
 
 	using builder_widget::build;
 

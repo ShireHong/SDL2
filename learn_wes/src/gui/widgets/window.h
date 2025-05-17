@@ -30,7 +30,7 @@ namespace dialogs { class modal_dialog; }
 
 namespace event
 {
-// class distributor;
+class distributor;
 } // namespace event
 
 /**
@@ -40,8 +40,8 @@ namespace event
 class window : public panel, public top_level_drawable
 {
 	// friend class debug_layout_graph;
-	// friend std::unique_ptr<window> build(const builder_window::window_resolution&);
-	// friend struct window_implementation;
+	friend std::unique_ptr<window> build(const builder_window::window_resolution&);
+	friend struct window_implementation;
 	// friend class invalidate_layout_blocker;
 	// friend class pane;
 
@@ -725,27 +725,27 @@ private:
 	 * @param halt                See @ref event::dispatcher::fire.
 	 * @param mouse_button_mask   Forwared to @ref click_dismiss.
 	 */
-	// void signal_handler_click_dismiss(const event::ui_event event,
-	// 								  bool& handled,
-	// 								  bool& halt,
-	// 								  const int mouse_button_mask);
+	void signal_handler_click_dismiss(const event::ui_event event,
+									  bool& handled,
+									  bool& halt,
+									  const int mouse_button_mask);
 
-	// void signal_handler_sdl_key_down(const event::ui_event event,
-	// 								 bool& handled,
-	// 								 const SDL_Keycode key,
-	// 								 const SDL_Keymod mod,
-	// 								 bool handle_tab);
+	void signal_handler_sdl_key_down(const event::ui_event event,
+									 bool& handled,
+									 const SDL_Keycode key,
+									 const SDL_Keymod mod,
+									 bool handle_tab);
 
-	// void signal_handler_message_show_tooltip(const event::ui_event event,
-	// 										 bool& handled,
-	// 										 const event::message& message);
+	void signal_handler_message_show_tooltip(const event::ui_event event,
+											 bool& handled,
+											 const event::message& message);
 
-	// void signal_handler_message_show_helptip(const event::ui_event event,
-	// 										 bool& handled,
-	// 										 const event::message& message);
+	void signal_handler_message_show_helptip(const event::ui_event event,
+											 bool& handled,
+											 const event::message& message);
 
-	// void signal_handler_request_placement(const event::ui_event event,
-	// 									  bool& handled);
+	void signal_handler_request_placement(const event::ui_event event,
+										  bool& handled);
 
 	void signal_handler_close_window();
 

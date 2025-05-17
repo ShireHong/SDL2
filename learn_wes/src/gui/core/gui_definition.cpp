@@ -83,46 +83,6 @@ gui_definition::gui_definition(const resolution_definition& resol_def)
 }
 
 
-void gui_definition::activate() const
-{
-	
-}
-
-const builder_window::window_resolution& get_window_builder(const std::string& type)
-{
-	// settings::update_screen_size_variables();
-
-	const auto& current_windows = current_gui->second.window_types;
-	const auto& default_windows = default_gui->second.window_types;
-
-	auto iter = current_windows.find(type);
-	std::cout<<"type = "<< type <<std::endl;
-	if(iter == current_windows.end()) {
-		// Current GUI is the default one and no window type was found. Throw.
-		if(current_gui == default_gui) {
-			throw window_builder_invalid_id();
-		}
-        std::cout<<"default_gui"<<std::endl;
-		// Else, try again to find the window, this time in the default GUI.
-		iter = default_windows.find(type);
-
-		if(iter == default_windows.end()) {
-			throw window_builder_invalid_id();
-		}
-	}
-
-	// const auto& resolutions = iter->second.resolutions;
-
-	// VALIDATE(!resolutions.empty(), formatter() << "Window '" << type << "' has no resolutions.\n");
-
-	// return get_best_resolution(resolutions, [&](const builder_window::window_resolution& res) {
-	// 	return point(
-	// 		static_cast<int>(res.window_width),
-	// 		static_cast<int>(res.window_height)
-	// 	);
-	// });
-}
-
 namespace
 {
 template<typename TList, typename TConv>
@@ -161,6 +121,45 @@ const typename TList::value_type& get_best_resolution(const TList& list, const T
 	return *best_resolution;
 }
 
+}
+void gui_definition::activate() const
+{
+	
+}
+
+const builder_window::window_resolution& get_window_builder(const std::string& type)
+{
+	// settings::update_screen_size_variables();
+
+	const auto& current_windows = current_gui->second.window_types;
+	const auto& default_windows = default_gui->second.window_types;
+
+	auto iter = current_windows.find(type);
+	std::cout<<"type = "<< type <<std::endl;
+	if(iter == current_windows.end()) {
+		// Current GUI is the default one and no window type was found. Throw.
+		if(current_gui == default_gui) {
+			throw window_builder_invalid_id();
+		}
+        std::cout<<"default_gui"<<std::endl;
+		// Else, try again to find the window, this time in the default GUI.
+		iter = default_windows.find(type);
+
+		if(iter == default_windows.end()) {
+			throw window_builder_invalid_id();
+		}
+	}
+
+	const auto& resolutions = iter->second.resolutions;
+
+	// VALIDATE(!resolutions.empty(), formatter() << "Window '" << type << "' has no resolutions.\n");
+
+	// return get_best_resolution(resolutions, [&](const builder_window::window_resolution& res) {
+	// 	return point(
+	// 		static_cast<int>(res.window_width),
+	// 		static_cast<int>(res.window_height)
+	// 	);
+	// });
 }
 
 resolution_definition_ptr get_control(const std::string& control_type, const std::string& definition)

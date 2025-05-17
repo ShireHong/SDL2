@@ -22,7 +22,7 @@
 #include "gui/widgets/container_base.h"
 // #include "gui/widgets/text_box_base.hpp"
 #include "gui/core/register_widget.h"
-// #include "gui/widgets/grid.hpp"
+#include "gui/widgets/grid.h"
 #include "gui/widgets/helper.h"
 #include "gui/widgets/panel.h"
 #include "gui/widgets/settings.h"
@@ -72,7 +72,7 @@ namespace implementation
 class builder_window : public builder_styled_widget
 {
 public:
-	builder_window(const config& cfg) : builder_styled_widget(cfg)
+	builder_window() : builder_styled_widget()
 	{
 	}
 
@@ -231,7 +231,7 @@ window* manager::get_window(const unsigned id)
 } // namespace
 
 window::window(const builder_window::window_resolution& definition)
-	: panel(implementation::builder_window(::config ()), type())
+	: panel(implementation::builder_window(), type())
 	, status_(status::NEW)
 	, show_mode_(show_mode::none)
 	, retval_(retval::NONE)
@@ -264,9 +264,10 @@ window::window(const builder_window::window_resolution& definition)
 	// , event_distributor_(new event::distributor(*this, event::dispatcher::front_child))
 	, exit_hook_([](window&)->bool { return true; })
 {
+	std::cout<<"window create!"<<std::endl;
 	manager::instance().add(*this);
 
-	// connect();
+	connect();
 
 	// connect_signal<event::SDL_VIDEO_RESIZE>(std::bind(
 	// 		&window::signal_handler_sdl_video_resize, this, std::placeholders::_2, std::placeholders::_3, std::placeholders::_5));
@@ -274,30 +275,30 @@ window::window(const builder_window::window_resolution& definition)
 	// connect_signal<event::SDL_ACTIVATE>(std::bind(
 	// 		&event::distributor::initialize_state, event_distributor_.get()));
 
-	// connect_signal<event::SDL_LEFT_BUTTON_UP>(
-	// 		std::bind(&window::signal_handler_click_dismiss,
-	// 					this,
-	// 					std::placeholders::_2,
-	// 					std::placeholders::_3,
-	// 					std::placeholders::_4,
-	// 					SDL_BUTTON_LMASK),
-	// 		event::dispatcher::front_child);
-	// connect_signal<event::SDL_MIDDLE_BUTTON_UP>(
-	// 		std::bind(&window::signal_handler_click_dismiss,
-	// 					this,
-	// 					std::placeholders::_2,
-	// 					std::placeholders::_3,
-	// 					std::placeholders::_4,
-	// 					SDL_BUTTON_MMASK),
-	// 		event::dispatcher::front_child);
-	// connect_signal<event::SDL_RIGHT_BUTTON_UP>(
-	// 		std::bind(&window::signal_handler_click_dismiss,
-	// 					this,
-	// 					std::placeholders::_2,
-	// 					std::placeholders::_3,
-	// 					std::placeholders::_4,
-	// 					SDL_BUTTON_RMASK),
-	// 		event::dispatcher::front_child);
+	connect_signal<event::SDL_LEFT_BUTTON_UP>(
+			std::bind(&window::signal_handler_click_dismiss,
+						this,
+						std::placeholders::_2,
+						std::placeholders::_3,
+						std::placeholders::_4,
+						SDL_BUTTON_LMASK),
+			event::dispatcher::front_child);
+	connect_signal<event::SDL_MIDDLE_BUTTON_UP>(
+			std::bind(&window::signal_handler_click_dismiss,
+						this,
+						std::placeholders::_2,
+						std::placeholders::_3,
+						std::placeholders::_4,
+						SDL_BUTTON_MMASK),
+			event::dispatcher::front_child);
+	connect_signal<event::SDL_RIGHT_BUTTON_UP>(
+			std::bind(&window::signal_handler_click_dismiss,
+						this,
+						std::placeholders::_2,
+						std::placeholders::_3,
+						std::placeholders::_4,
+						SDL_BUTTON_RMASK),
+			event::dispatcher::front_child);
 
 	// connect_signal<event::SDL_KEY_DOWN>(
 	// 		std::bind(
@@ -1135,78 +1136,78 @@ void window::generate_dot_file(const std::string& generator,
 }
 #endif
 
-// void window_implementation::layout(window& window,
-// 									const unsigned maximum_width,
-// 									const unsigned maximum_height)
-// {
-// 	log_scope2(log_gui_layout, LOG_IMPL_SCOPE_HEADER);
+void window_implementation::layout(window& window,
+									const unsigned maximum_width,
+									const unsigned maximum_height)
+{
+	// log_scope2(log_gui_layout, LOG_IMPL_SCOPE_HEADER);
 
-// 	/*
-// 	 * For now we return the status, need to test later whether this can
-// 	 * entirely be converted to an exception based system as in 'promised' on
-// 	 * the algorithm page.
-// 	 */
+	/*
+	 * For now we return the status, need to test later whether this can
+	 * entirely be converted to an exception based system as in 'promised' on
+	 * the algorithm page.
+	 */
 
-// 	try
-// 	{
-// 		point size = window.get_best_size();
+	try
+	{
+		point size = window.get_best_size();
 
-// 		DBG_GUI_L << LOG_IMPL_HEADER << " best size : " << size
-// 				  << " maximum size : " << maximum_width << ','
-// 				  << maximum_height << ".";
-// 		if(size.x <= static_cast<int>(maximum_width)
-// 		   && size.y <= static_cast<int>(maximum_height)) {
+		// DBG_GUI_L << LOG_IMPL_HEADER << " best size : " << size
+		// 		  << " maximum size : " << maximum_width << ','
+		// 		  << maximum_height << ".";
+		if(size.x <= static_cast<int>(maximum_width)
+		   && size.y <= static_cast<int>(maximum_height)) {
 
-// 			DBG_GUI_L << LOG_IMPL_HEADER << " Result: Fits, nothing to do.";
-// 			return;
-// 		}
+			// DBG_GUI_L << LOG_IMPL_HEADER << " Result: Fits, nothing to do.";
+			return;
+		}
 
-// 		if(size.x > static_cast<int>(maximum_width)) {
-// 			window.reduce_width(maximum_width);
+		if(size.x > static_cast<int>(maximum_width)) {
+			window.reduce_width(maximum_width);
 
-// 			size = window.get_best_size();
-// 			if(size.x > static_cast<int>(maximum_width)) {
-// 				DBG_GUI_L << LOG_IMPL_HEADER << " Result: Resize width failed."
-// 						  << " Wanted width " << maximum_width
-// 						  << " resulting width " << size.x << ".";
-// 				throw layout_exception_width_resize_failed();
-// 			}
-// 			DBG_GUI_L << LOG_IMPL_HEADER
-// 					  << " Status: Resize width succeeded.";
-// 		}
+			size = window.get_best_size();
+			if(size.x > static_cast<int>(maximum_width)) {
+				// DBG_GUI_L << LOG_IMPL_HEADER << " Result: Resize width failed."
+				// 		  << " Wanted width " << maximum_width
+				// 		  << " resulting width " << size.x << ".";
+				throw layout_exception_width_resize_failed();
+			}
+			// DBG_GUI_L << LOG_IMPL_HEADER
+			// 		  << " Status: Resize width succeeded.";
+		}
 
-// 		if(size.y > static_cast<int>(maximum_height)) {
-// 			window.reduce_height(maximum_height);
+		if(size.y > static_cast<int>(maximum_height)) {
+			window.reduce_height(maximum_height);
 
-// 			size = window.get_best_size();
-// 			if(size.y > static_cast<int>(maximum_height)) {
-// 				DBG_GUI_L << LOG_IMPL_HEADER << " Result: Resize height failed."
-// 						  << " Wanted height " << maximum_height
-// 						  << " resulting height " << size.y << ".";
-// 				throw layout_exception_height_resize_failed();
-// 			}
-// 			DBG_GUI_L << LOG_IMPL_HEADER
-// 					  << " Status: Resize height succeeded.";
-// 		}
+			size = window.get_best_size();
+			if(size.y > static_cast<int>(maximum_height)) {
+				// DBG_GUI_L << LOG_IMPL_HEADER << " Result: Resize height failed."
+				// 		  << " Wanted height " << maximum_height
+				// 		  << " resulting height " << size.y << ".";
+				throw layout_exception_height_resize_failed();
+			}
+			// DBG_GUI_L << LOG_IMPL_HEADER
+			// 		  << " Status: Resize height succeeded.";
+		}
 
-// 		assert(size.x <= static_cast<int>(maximum_width)
-// 			   && size.y <= static_cast<int>(maximum_height));
+		assert(size.x <= static_cast<int>(maximum_width)
+			   && size.y <= static_cast<int>(maximum_height));
 
 
-// 		DBG_GUI_L << LOG_IMPL_HEADER << " Result: Resizing succeeded.";
-// 		return;
-// 	}
-// 	catch(const layout_exception_width_modified&)
-// 	{
-// 		DBG_GUI_L << LOG_IMPL_HEADER
-// 				  << " Status: Width has been modified, rerun.";
+		// DBG_GUI_L << LOG_IMPL_HEADER << " Result: Resizing succeeded.";
+		return;
+	}
+	catch(const layout_exception_width_modified&)
+	{
+		// DBG_GUI_L << LOG_IMPL_HEADER
+		// 		  << " Status: Width has been modified, rerun.";
 
-// 		window.layout_initialize(false);
-// 		window.layout_linked_widgets();
-// 		layout(window, maximum_width, maximum_height);
-// 		return;
-// 	}
-// }
+		window.layout_initialize(false);
+		window.layout_linked_widgets();
+		layout(window, maximum_width, maximum_height);
+		return;
+	}
+}
 
 void window::mouse_capture(const bool capture)
 {
@@ -1263,16 +1264,17 @@ void window::add_to_tab_order(widget* widget, int at)
 // 	handled = true;
 // }
 
-// void window::signal_handler_click_dismiss(const event::ui_event event,
-// 										   bool& handled,
-// 										   bool& halt,
-// 										   const int mouse_button_mask)
-// {
-// 	DBG_GUI_E << LOG_HEADER << ' ' << event << " mouse_button_mask "
-// 			  << static_cast<unsigned>(mouse_button_mask) << ".";
-
-// 	handled = halt = click_dismiss(mouse_button_mask);
-// }
+void window::signal_handler_click_dismiss(const event::ui_event event,
+										   bool& handled,
+										   bool& halt,
+										   const int mouse_button_mask)
+{
+	// DBG_GUI_E << LOG_HEADER << ' ' << event << " mouse_button_mask "
+	// 		  << static_cast<unsigned>(mouse_button_mask) << ".";
+	std::cout << LOG_HEADER << ' ' << event << " mouse_button_mask "
+			  << static_cast<unsigned>(mouse_button_mask) << "." << std::endl;
+	handled = halt = click_dismiss(mouse_button_mask);
+}
 
 // static bool is_active(const widget* wgt)
 // {
